@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>QG SuperSonoros — Guitarríssima</title>
+<title>SuperSonoros — Guitarríssima</title>
 <style>
   :root{
     --cream:#FBF6EA; --ink:#171512; --red:#E63946; --blue:#2C4E9B;
     --yellow:#F4C531; --purple:#8E5FC7; --gold:#D9A62B; --orange:#E8792B; --green:#3CB878;
-    --dark-red:#B8222E;
+    --whatsapp:#25D366;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -20,17 +20,22 @@
   body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1.6px, transparent 1.6px);background-size:16px 16px;pointer-events:none;}
   .stage{width:100%;max-width:460px;position:relative;z-index:1;}
 
-  .eyebrow{display:inline-block;font-weight:800;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:var(--ink);color:var(--yellow);padding:6px 14px;border-radius:999px;margin-bottom:10px;}
-  h1{font-size:26px;font-weight:900;text-transform:uppercase;line-height:1.08;color:var(--yellow);-webkit-text-stroke:1.5px var(--ink);text-shadow:2px 2px 0 var(--ink);margin:0 0 6px;}
-  p.lede{color:rgba(255,255,255,.92);font-size:14px;line-height:1.5;margin:0 0 16px;font-weight:600;}
+  /* ---- CABEÇALHO & LOGOS ---- */
+  .brand-header{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px;}
+  .logo-gta{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);background:#fff;}
+  .logo-super{width:180px;height:auto;filter:drop-shadow(3px 3px 0 var(--ink));}
 
-  .panel{background:var(--cream);border:4px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 var(--ink);padding:20px 18px;margin-bottom:16px;}
+  .eyebrow{display:inline-block;font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;background:var(--ink);color:var(--yellow);padding:6px 14px;border-radius:999px;margin-bottom:8px;}
+  h1{font-size:24px;font-weight:900;text-transform:uppercase;line-height:1.1;color:var(--yellow);-webkit-text-stroke:1.2px var(--ink);text-shadow:2px 2px 0 var(--ink);margin:0 0 6px;text-align:center;}
+  p.lede{color:rgba(255,255,255,.94);font-size:13.5px;line-height:1.5;margin:0 0 16px;font-weight:600;text-align:center;}
+
+  .panel{background:var(--cream);border:4px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);padding:18px 16px;margin-bottom:14px;}
 
   /* ---- TABS ---- */
-  .tabs{display:flex;gap:8px;margin-bottom:16px;}
+  .tabs{display:flex;gap:6px;margin-bottom:14px;}
   .tab{
-    flex:1;text-align:center;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;
-    background:#fff;border:3px solid var(--ink);border-radius:12px;padding:10px 4px;cursor:pointer;
+    flex:1;text-align:center;font-weight:900;font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;
+    background:#fff;border:3px solid var(--ink);border-radius:10px;padding:10px 4px;cursor:pointer;
     box-shadow:3px 3px 0 var(--ink); transition:transform .12s ease, box-shadow .12s ease;
   }
   .tab.active{background:var(--yellow);}
@@ -39,114 +44,183 @@
   .view{display:none;}
   .view.active{display:block;}
 
-  /* ---- HISTÓRIA & VILÕES ---- */
-  .story-card{background:#fff;border:3px solid var(--ink);border-radius:14px;padding:14px;margin-bottom:12px;}
-  .villain-box{background:#2a1b2e;color:#fff;border:3px solid var(--ink);border-radius:14px;padding:14px;margin-top:12px;}
-  .villain-title{color:#FF5A79;font-weight:900;font-size:15px;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+  /* ---- CARDS ---- */
+  .item-card{display:flex;align-items:center;gap:12px;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s ease, box-shadow .12s ease;}
+  .item-card:last-child{margin-bottom:0;}
+  .item-card:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
+  .item-dot{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:15px;border:3px solid var(--ink);}
+  .item-info{flex:1;}
+  .item-name{font-weight:900;font-size:15px;text-transform:uppercase;margin:0 0 2px;}
+  .item-meta{font-size:12px;color:#666;font-weight:700;}
+  .arrow{font-size:20px;font-weight:bold;}
 
-  /* ---- SESSION CARDS ---- */
-  .session-card{display:flex;align-items:center;gap:14px;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:14px 16px;margin-bottom:12px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s ease, box-shadow .12s ease;}
-  .session-card:last-child{margin-bottom:0;}
-  .session-card:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
-  .session-dot{width:46px;height:46px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;border:3px solid var(--ink);}
-  .session-info{flex:1;}
-  .session-name{font-weight:900;font-size:16px;text-transform:uppercase;margin:0 0 2px;}
-  .session-meta{font-size:12.5px;color:#6b6b6b;font-weight:700;}
-  .arrow{font-size:20px;}
+  /* ---- AVISO WHATSAPP ---- */
+  .notice-box{background:#FFF9E6;border:2.5px solid var(--ink);border-radius:12px;padding:12px;margin-bottom:14px;font-size:12.5px;line-height:1.45;font-weight:700;}
+  .btn-whats{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--whatsapp);color:#fff;font-weight:900;font-size:12px;text-transform:uppercase;padding:8px 12px;border-radius:8px;border:2px solid var(--ink);text-decoration:none;margin-top:8px;box-shadow:2px 2px 0 var(--ink);}
 
-  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:3px solid var(--ink);border-radius:12px;background:var(--yellow);color:var(--ink);font-weight:800;font-size:14.5px;text-transform:uppercase;letter-spacing:.4px;padding:13px 16px;cursor:pointer;box-shadow:5px 5px 0 var(--ink);transition:transform .12s ease, box-shadow .12s ease;text-decoration:none;}
-  .btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink);}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:3px solid var(--ink);border-radius:12px;background:var(--yellow);color:var(--ink);font-weight:900;font-size:13.5px;text-transform:uppercase;padding:12px 14px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);text-decoration:none;}
+  .btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
   .btn.ghost{background:#fff;}
 
-  .back-btn{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:#fff;font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:.5px;border:none;border-radius:999px;padding:8px 14px;margin-bottom:14px;cursor:pointer;}
+  .back-btn{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:#fff;font-weight:800;font-size:12px;text-transform:uppercase;border:none;border-radius:999px;padding:7px 14px;margin-bottom:12px;cursor:pointer;}
 
-  .section-title{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin:0 0 12px;}
+  .section-title{font-size:11.5px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin:0 0 10px;}
 
-  .lineup-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:2px dashed #e6e0d2;font-size:14px;font-weight:700;}
+  .lineup-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:2px dashed #e6e0d2;font-size:13.5px;font-weight:700;}
   .lineup-row:last-child{border-bottom:none;}
-  .lineup-order{color:var(--blue);font-weight:900;font-size:13px;white-space:nowrap;margin-left:10px;}
+  .lineup-order{color:var(--blue);font-weight:900;font-size:13px;white-space:nowrap;margin-left:8px;}
 
-  .info-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;font-size:14px;line-height:1.4;}
+  .info-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:13.5px;line-height:1.4;}
   .info-item:last-child{margin-bottom:0;}
-  .info-icon{font-size:18px;flex-shrink:0;}
+  .info-icon{font-size:17px;flex-shrink:0;}
 
-  .recap-box{background:#F4EFE1;border-left:4px solid var(--ink);border-radius:6px;padding:12px 14px;font-size:13.5px;line-height:1.55;color:#3a3a3a;}
-  .chip-list{display:flex;flex-wrap:wrap;gap:8px;}
-  .power-chip{font-size:11.5px;font-weight:800;text-transform:uppercase;color:#fff;padding:5px 11px;border-radius:999px;}
+  .recap-box{background:#F4EFE1;border-left:4px solid var(--ink);border-radius:6px;padding:12px;font-size:13px;line-height:1.5;color:#333;}
+  .chip-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .power-chip{font-size:11px;font-weight:900;text-transform:uppercase;color:#fff;padding:4px 10px;border-radius:999px;border:1.5px solid var(--ink);}
 
-  /* ---- PHOTOS ---- */
-  .ensaio-group{margin-bottom:20px;}
-  .ensaio-group:last-child{margin-bottom:0;}
-  .ensaio-title{font-weight:900;font-size:14px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-  .ensaio-badge{width:24px;height:24px;border-radius:50%;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid var(--ink);}
-  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  .photo-slot{aspect-ratio:1/1;background:#EFE9D8;border:2.5px dashed #c9c0a8;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;color:#9b927a;cursor:pointer;transition:background .2s;}
-  .photo-slot:hover{background:#e4dcc7;}
-  .photo-slot span{font-size:10px;font-weight:800;text-transform:uppercase;margin-top:2px;}
+  /* ---- SILHUETAS & VILÕES ---- */
+  .silhouette-card{display:flex;gap:14px;align-items:center;background:#171512;color:#fff;border-radius:14px;padding:12px 14px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);}
+  .silhouette-avatar{width:70px;height:84px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;border:2px solid var(--yellow);flex-shrink:0;padding:4px;overflow:hidden;}
+  .silhouette-img{max-width:100%;max-height:100%;object-fit:contain;}
 
-  /* ---- GAMES ---- */
-  .game-card{display:flex;align-items:center;gap:14px;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:14px;margin-bottom:12px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s ease, box-shadow .12s ease;}
-  .game-card:last-child{margin-bottom:0;}
-  .game-card:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
-  .game-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:3px solid var(--ink);}
-  .game-info{flex:1;}
-  .game-name{font-weight:900;font-size:15px;text-transform:uppercase;margin:0 0 2px;}
-  .game-desc{font-size:12px;color:#6b6b6b;font-weight:600;}
+  /* ---- FOTOS ---- */
+  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;}
+  .photo-slot{aspect-ratio:1/1;background:#EFE9D8;border:2px dashed #c9c0a8;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:16px;color:#9b927a;}
+  .photo-slot span{font-size:9px;font-weight:800;text-transform:uppercase;margin-top:2px;}
 
-  footer.credit{text-align:center;color:rgba(255,255,255,.85);font-size:12px;margin-top:10px;font-weight:700;}
+  /* ---- HISTÓRIA ---- */
+  .story-box{background:#fff;border:3px solid var(--ink);border-radius:12px;padding:12px;margin-bottom:10px;font-size:13px;line-height:1.5;}
+
+  footer.credit{text-align:center;color:rgba(255,255,255,.9);font-size:11.5px;margin-top:14px;font-weight:800;}
   .hidden{display:none;}
 
-  /* ---- GAME MODAL ---- */
+  /* ---- MODAL ---- */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;}
   .modal-overlay.show{display:flex;}
-  .modal-box{width:100%;max-width:460px;height:92vh;background:#fff;border-radius:18px;overflow:hidden;position:relative;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);}
-  .modal-close{position:absolute;top:10px;right:10px;z-index:5;background:var(--ink);color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;font-weight:bold;}
+  .modal-box{width:100%;max-width:440px;height:90vh;background:#fff;border-radius:18px;overflow:hidden;position:relative;border:4px solid var(--ink);}
+  .modal-close{position:absolute;top:8px;right:8px;z-index:5;background:var(--ink);color:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:15px;cursor:pointer;font-weight:bold;}
   .modal-box iframe{width:100%;height:100%;border:none;}
 </style>
 </head>
 <body id="body">
 <div class="stage">
 
-  <span class="eyebrow">⚡ Guitarríssima · Base de Operações</span>
-  <h1>QG SuperSonoros</h1>
-  <p class="lede">Acompanhe as sessões do show, confira a galeria de fotos e teste seus poderes na base de treino!</p>
-
-  <div class="tabs">
-    <div class="tab active" id="tabBtnSessoes" onclick="switchTab('sessoes')">Sessões</div>
-    <div class="tab" id="tabBtnHistoria" onclick="switchTab('historia')">Origem & Vilões</div>
-    <div class="tab" id="tabBtnFotos" onclick="switchTab('fotos')">Fotos</div>
-    <div class="tab" id="tabBtnJogos" onclick="switchTab('jogos')">Treino Heróico</div>
+  <!-- CABEÇALHO COM LOGOS -->
+  <div class="brand-header">
+    <img src="simbolo GTA fundo claro.jpg" alt="Logo Guitarríssima" class="logo-gta" onerror="this.style.display='none'" />
+    <img src="[217] Ação do dia dos pais - card.png" alt="SuperSonoros" class="logo-super" onerror="this.outerHTML='<h1 style=\'margin:0;\'>SUPERSONOROS</h1>'" />
   </div>
 
-  <!-- ===================== SESSÕES ===================== -->
-  <div id="view-sessoes" class="view active">
+  <div style="text-align:center;">
+    <span class="eyebrow">Guitarríssima · Espetaculo de final de ano</span>
+    <p class="lede">Acompanhe tudo sbre o universo supersonoros: Ensaios, sessões do show, fotos dos ensaios e os joguinhos da jornada — tudo num só lugar.</p>
+  </div>
 
-    <div id="view-home">
+  <!-- AVISO HORÁRIO DAS BANDAS GERAL -->
+  <div class="notice-box">
+    ⚠️ <strong>Atenção às bandas:</strong> Cada banda tem um horário específico de ensaio e apresentação. Confirme seu horário com a secretaria.
+    <div>
+      <a class="btn-whats" href="https://wa.me/5551999999999" target="_blank">📱 Falar com a Secretaria</a>
+    </div>
+  </div>
+
+  <!-- ABAS -->
+  <div class="tabs">
+    <div class="tab active" id="tabBtnEnsaios" onclick="switchTab('ensaios')">Ensaios</div>
+    <div class="tab" id="tabBtnSessoes" onclick="switchTab('sessoes')">Sessões</div>
+    <div class="tab" id="tabBtnJogos" onclick="switchTab('jogos')">Joguinhos</div>
+    <div class="tab" id="tabBtnHistoria" onclick="switchTab('historia')">História</div>
+  </div>
+
+  <!-- ===================== 1. ENSAIOS ===================== -->
+  <div id="view-ensaios" class="view active">
+    <div id="view-ensaios-home">
       <div class="panel">
-        <div class="section-title">⚡ Escolha a Missão (Sessão)</div>
+        <div class="section-title">📅 Grandes Ensaios da Liga</div>
+        <div id="ensaiosList"></div>
+      </div>
+    </div>
+
+    <div id="view-ensaio-detail" class="hidden">
+      <button class="back-btn" onclick="goEnsaiosHome()">← Voltar aos Ensaios</button>
+
+      <div class="panel">
+        <h1 id="ensTitle" style="font-size:22px;text-align:left;color:var(--ink);-webkit-text-stroke:0;text-shadow:none;margin-bottom:2px;">Ensaio 1</h1>
+        <p class="lede" style="color:#666;text-align:left;margin-bottom:12px;" id="ensDate">12/09 (sáb)</p>
+
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <span><strong>Local:</strong> Sede da Guitarríssima — Rua Coronel Corte Real, 889 - Petrópolis, Porto Alegre.</span>
+        </div>
+      </div>
+
+      <!-- DESENVOLVIMENTO & SILHUETA DO VILÃO -->
+      <div class="panel">
+        <div class="section-title">⚡ O que os alunos estarão desenvolvendo</div>
+        <p style="font-size:13.5px;line-height:1.45;margin:0 0 12px;" id="ensDev">Neste grande encontro, os heróis fortalecem seu superpoder sonoro e encaram um novo desafio.</p>
+        
+        <div class="silhouette-card">
+          <div class="silhouette-avatar">
+            <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
+          </div>
+          <div>
+            <div style="font-weight:900;font-size:14px;color:var(--yellow);text-transform:uppercase;" id="ensVillainTitle">Ameaça: Vilão 1</div>
+            <div style="font-size:11.5px;color:#ccc;line-height:1.4;margin-top:2px;">Identidade confidencial! Silhueta detectada nos radares da Guitarríssima.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVISO DE HORÁRIO INDIVIDUAL -->
+      <div class="notice-box">
+        🕒 <strong>Horário do seu ensaio:</strong> Lembre-se que cada banda ensaia em um horário escalonado ao longo do dia. Em caso de dúvidas, consulte a equipe.
+        <div>
+          <a class="btn-whats" href="https://wa.me/5551999999999" target="_blank">📱 Confirmar no WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- FOTOS DO ENSAIO -->
+      <div class="panel">
+        <div class="section-title">📸 Fotos deste Ensaio</div>
+        <div class="photo-grid">
+          <div class="photo-slot">📷<span>Foto 1</span></div>
+          <div class="photo-slot">📷<span>Foto 2</span></div>
+          <div class="photo-slot">📷<span>Foto 3</span></div>
+          <div class="photo-slot">📷<span>Foto 4</span></div>
+          <div class="photo-slot">📷<span>Foto 5</span></div>
+          <div class="photo-slot">📷<span>Foto 6</span></div>
+        </div>
+        <p style="font-size:11px;color:#888;font-style:italic;margin:6px 0 0;">As fotos serão adicionadas aqui após a realização do ensaio.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 2. SESSÕES ===================== -->
+  <div id="view-sessoes" class="view">
+    <div id="view-sessoes-home">
+      <div class="panel">
+        <div class="section-title">🎤 Sessões do Espetáculo</div>
         <div id="sessionList"></div>
       </div>
     </div>
 
     <div id="view-session" class="hidden">
-      <button class="back-btn" onclick="goHome()">← Voltar ao QG</button>
+      <button class="back-btn" onclick="goSessionHome()">← Voltar às Sessões</button>
 
       <div class="panel" style="margin-bottom:14px;">
-        <h1 id="sessTitle" style="font-size:22px;">Sessão 1</h1>
-        <p class="lede" style="color:#4a4a4a;margin-bottom:0;" id="sessSubtitle">24/10 · 16h</p>
+        <h1 id="sessTitle" style="font-size:22px;text-align:left;">Sessão 1</h1>
+        <p class="lede" style="color:#4a4a4a;margin-bottom:0;text-align:left;" id="sessSubtitle">24/10 · 16h</p>
       </div>
 
       <div class="panel">
-        <div class="section-title">🎤 Ordem de apresentação das bandas</div>
+        <div class="section-title">🎤 Ordem de apresentação</div>
         <div id="lineupList"></div>
-        <p style="font-size:11.5px;color:#9a9488;margin:10px 0 0;font-style:italic;">Os horários entre uma apresentação e outra podem variar — o horário de início e a sequência das bandas são fixos.</p>
       </div>
 
       <div class="panel">
-        <div class="section-title">🦸 Os 4 Superpoderes em Ação</div>
+        <div class="section-title">🦸 Recapitulando a jornada</div>
         <div class="recap-box">
-          A Liga conquistou os quatro poderes essenciais nos Grandes Ensaios para salvar a música:
-          <div class="chip-list" style="margin-top:10px;">
+          Até aqui, os SuperSonoros já conquistaram os quatro superpoderes nos Grandes Ensaios:
+          <div class="chip-list">
             <span class="power-chip" style="background:#8E5FC7;">Autenticidade</span>
             <span class="power-chip" style="background:#D9A62B;">Escuta</span>
             <span class="power-chip" style="background:#E8792B;">Disciplina</span>
@@ -157,159 +231,85 @@
       </div>
 
       <div class="panel">
-        <div class="section-title">📍 Informações da Base de Espetáculo</div>
-        <div class="info-item"><span class="info-icon">🗺️</span><span><strong>Local:</strong> Teatro Unisinos — [Endereço completo]. [Link do Google Maps]</span></div>
-        <div class="info-item"><span class="info-icon">🅿️</span><span><strong>Estacionamento:</strong> [Informações de acesso, vagas e tarifas].</span></div>
-        <div class="info-item"><span class="info-icon">🎒</span><span><strong>Check-in dos Artistas:</strong> Entregue seu herói no [LOCAL X] antes da sessão. Retirada logo após o encerramento em [LOCAL X].</span></div>
+        <div class="section-title">📍 Informações práticas</div>
+        <div class="info-item"><span class="info-icon">🗺️</span><span>Teatro Unisinos — [Endereço completo / Link Maps].</span></div>
+        <div class="info-item"><span class="info-icon">🅿️</span><span>Estacionamento: [informações de vagas / valor / local].</span></div>
+        <div class="info-item"><span class="info-icon">🎒</span><span>Deixe seu artista com a equipe responsável antes do espetáculo. Retirada ao final da sessão.</span></div>
       </div>
 
       <div class="panel">
-        <div class="section-title">📸 Sinalizador Heróico</div>
-        <p style="font-size:14px;line-height:1.5;margin:0 0 14px;">Publique os registros do show usando as frequências oficiais da Liga:</p>
+        <div class="section-title">📸 Compartilhe o momento</div>
+        <p style="font-size:13.5px;line-height:1.5;margin:0 0 10px;">Marque a Guitarríssima e use a hashtag oficial nos seus stories e posts do show!</p>
         <div class="chip-list">
           <span class="power-chip" style="background:var(--blue);">#SUPERSONOROS</span>
           <span class="power-chip" style="background:var(--red);">@guitarrissima</span>
         </div>
       </div>
 
-      <a class="btn ghost" href="#" style="margin-bottom:10px;">⭐ AVALIE O ESPETÁCULO</a>
+      <a class="btn ghost" href="#" style="margin-bottom:10px;">CLIQUE AQUI E AVALIE O ESPETÁCULO</a>
     </div>
   </div>
 
-  <!-- ===================== HISTÓRIA E VILÕES ===================== -->
-  <div id="view-historia" class="view">
-    <div class="panel">
-      <div class="section-title">📖 O Dossiê SuperSonoros</div>
-      <div class="story-card">
-        <h3 style="margin:0 0 6px;font-size:16px;text-transform:uppercase;color:var(--blue);">A Origem da Liga</h3>
-        <p style="font-size:13.5px;line-height:1.5;margin:0;color:#333;">
-          Em um mundo onde o barulho constante tenta apagar a criatividade, nasceu a <strong>Liga dos SuperSonoros</strong>. Formada por jovens músicos corajosos da Guitarríssima, cada integrante descobriu que fazer música em conjunto é o maior superpoder existente.
-        </p>
-      </div>
-
-      <div class="story-card">
-        <h3 style="margin:0 0 8px;font-size:15px;text-transform:uppercase;color:var(--ink);">Os 4 Pilares do Som</h3>
-        <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.6;color:#444;">
-          <li><strong>Autenticidade (Roxo):</strong> O poder de expressar sua identidade única sem medo de errar.</li>
-          <li><strong>Escuta (Dourado):</strong> A habilidade de ouvir os companheiros de banda e tocar em perfeita sintonia.</li>
-          <li><strong>Disciplina (Laranja):</strong> O treino constante que transforma esforço em pura magia sonora.</li>
-          <li><strong>Iniciativa (Verde):</strong> A coragem de dar o primeiro acorde e assumir o palco.</li>
-        </ul>
-      </div>
-
-      <div class="villain-box">
-        <div class="villain-title">👾 A Ameaça: O Devorador de Sons</div>
-        <p style="font-size:13px;line-height:1.5;margin:8px 0 0;color:#E0D4E7;">
-          Uma entidade sombria que se alimenta do silêncio, da timidez e do desânimo musical. Ele tenta roubar o ritmo e a harmonia das pessoas. A única força capaz de destruí-lo é a união dos acordes dos SuperSonoros ao vivo no palco!
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================== FOTOS ===================== -->
-  <div id="view-fotos" class="view">
-    <div class="panel">
-      <div class="section-title">📸 Arquivo Fotográfico da Liga</div>
-
-      <div class="ensaio-group">
-        <div class="ensaio-title"><span class="ensaio-badge" style="background:#8E5FC7;">1</span> Ensaio 1 · Autenticidade</div>
-        <div class="photo-grid">
-          <div class="photo-slot">📷<span>Foto 1</span></div>
-          <div class="photo-slot">📷<span>Foto 2</span></div>
-          <div class="photo-slot">📷<span>Foto 3</span></div>
-          <div class="photo-slot">📷<span>Foto 4</span></div>
-          <div class="photo-slot">📷<span>Foto 5</span></div>
-          <div class="photo-slot">📷<span>Foto 6</span></div>
-        </div>
-      </div>
-
-      <div class="ensaio-group">
-        <div class="ensaio-title"><span class="ensaio-badge" style="background:#D9A62B;">2</span> Ensaio 2 · Escuta</div>
-        <div class="photo-grid">
-          <div class="photo-slot">📷<span>Foto 1</span></div>
-          <div class="photo-slot">📷<span>Foto 2</span></div>
-          <div class="photo-slot">📷<span>Foto 3</span></div>
-          <div class="photo-slot">📷<span>Foto 4</span></div>
-          <div class="photo-slot">📷<span>Foto 5</span></div>
-          <div class="photo-slot">📷<span>Foto 6</span></div>
-        </div>
-      </div>
-
-      <div class="ensaio-group">
-        <div class="ensaio-title"><span class="ensaio-badge" style="background:#E8792B;">3</span> Ensaio 3 · Disciplina</div>
-        <div class="photo-grid">
-          <div class="photo-slot">📷<span>Foto 1</span></div>
-          <div class="photo-slot">📷<span>Foto 2</span></div>
-          <div class="photo-slot">📷<span>Foto 3</span></div>
-          <div class="photo-slot">📷<span>Foto 4</span></div>
-          <div class="photo-slot">📷<span>Foto 5</span></div>
-          <div class="photo-slot">📷<span>Foto 6</span></div>
-        </div>
-      </div>
-
-      <div class="ensaio-group">
-        <div class="ensaio-title"><span class="ensaio-badge" style="background:#3CB878;">4</span> Ensaio 4 · Iniciativa</div>
-        <div class="photo-grid">
-          <div class="photo-slot">📷<span>Foto 1</span></div>
-          <div class="photo-slot">📷<span>Foto 2</span></div>
-          <div class="photo-slot">📷<span>Foto 3</span></div>
-          <div class="photo-slot">📷<span>Foto 4</span></div>
-          <div class="photo-slot">📷<span>Foto 5</span></div>
-          <div class="photo-slot">📷<span>Foto 6</span></div>
-        </div>
-      </div>
-
-      <div class="ensaio-group">
-        <div class="ensaio-title"><span class="ensaio-badge" style="background:var(--red);">★</span> Bastidores do Grande Show</div>
-        <div class="photo-grid">
-          <div class="photo-slot">🎸<span>Palco</span></div>
-          <div class="photo-slot">🎤<span>Camarim</span></div>
-          <div class="photo-slot">⚡<span>Equipe</span></div>
-        </div>
-      </div>
-
-      <p style="font-size:12px;color:#9a9488;font-style:italic;margin:6px 0 0;">As fotos oficiais serão atualizadas pela equipe Guitarríssima ao término de cada missão.</p>
-    </div>
-  </div>
-
-  <!-- ===================== JOGUINHOS ===================== -->
+  <!-- ===================== 3. JOGUINHOS ===================== -->
   <div id="view-jogos" class="view">
     <div class="panel">
-      <div class="section-title">🎮 Simuladores de Treino Heróico</div>
+      <div class="section-title">🎮 Joguinhos da Jornada</div>
 
-      <div class="game-card" onclick="openGame('quiz')">
-        <div class="game-icon" style="background:var(--purple);color:#fff;">❓</div>
-        <div class="game-info">
-          <div class="game-name">Qual é seu 1º Desafio?</div>
-          <div class="game-desc">Descubra o seu superpoder dominante</div>
+      <div class="item-card" onclick="openGame('quiz')">
+        <div class="item-dot" style="background:var(--purple);">❓</div>
+        <div class="item-info">
+          <div class="item-name">Qual é seu 1º desafio?</div>
+          <div class="item-meta">Quiz interativo da Liga</div>
         </div>
         <div class="arrow">›</div>
       </div>
 
-      <div class="game-card" onclick="openGame('insignia')">
-        <div class="game-icon" style="background:var(--gold);color:#fff;">🛡️</div>
-        <div class="game-info">
-          <div class="game-name">Laboratório de Insígnias</div>
-          <div class="game-desc">Personalize seu brasão, símbolo e codinome</div>
+      <div class="item-card" onclick="openGame('insignia')">
+        <div class="item-dot" style="background:var(--gold);">⭐</div>
+        <div class="item-info">
+          <div class="item-name">Monte sua insígnia</div>
+          <div class="item-meta">Crie seu brasão e codinome</div>
         </div>
         <div class="arrow">›</div>
       </div>
 
-      <div class="game-card" onclick="openGame('batalha')">
-        <div class="game-icon" style="background:var(--red);color:#fff;">⚡</div>
-        <div class="game-info">
-          <div class="game-name">Batalha: Devorador de Sons</div>
-          <div class="game-desc">Use os 4 poderes para salvar a música!</div>
+      <div class="item-card" onclick="openGame('batalha')">
+        <div class="item-dot" style="background:var(--red);">⚡</div>
+        <div class="item-info">
+          <div class="item-name">Batalha Musical</div>
+          <div class="item-meta">Enfrente o Devorador de Sons</div>
         </div>
         <div class="arrow">›</div>
       </div>
     </div>
   </div>
 
-  <footer class="credit">⚡ Ser único é o seu maior superpoder.</footer>
+  <!-- ===================== 4. HISTÓRIA ===================== -->
+  <div id="view-historia" class="view">
+    <div class="panel">
+      <div class="section-title">📖 O Universo SuperSonoros</div>
+      
+      <div class="story-box">
+        <h3 style="margin:0 0 6px;font-size:15px;text-transform:uppercase;color:var(--blue);">A Liga dos Artistas</h3>
+        <p style="margin:0;color:#333;">SuperSonoros é a liga dos artistas da Guitarríssima. Ser um herói do som não significa possuir poderes mágicos, mas sim desenvolver atitudes diárias que transformam qualquer músico em um artista extraordinário.</p>
+      </div>
+
+      <div class="story-box">
+        <h3 style="margin:0 0 6px;font-size:15px;text-transform:uppercase;color:var(--ink);">Os 4 Superpoderes</h3>
+        <p style="margin:0;color:#444;">• <strong>Autenticidade:</strong> Ser único e valorizar a própria voz.<br>• <strong>Escuta:</strong> Tocar junto e respeitar o som do grupo.<br>• <strong>Disciplina:</strong> O Repeteco que constrói segurança.<br>• <strong>Iniciativa:</strong> A coragem de dar o primeiro acorde.</p>
+      </div>
+
+      <div class="story-box" style="background:#171512;color:#fff;">
+        <h3 style="margin:0 0 6px;font-size:15px;text-transform:uppercase;color:var(--yellow);">A Grande Batalha</h3>
+        <p style="margin:0;color:#ddd;">Cada ensaio revela um novo comportamento a ser superado. No palco, a união de todos os acordes derrotará a grande ameaça que tenta apagar a música!</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="credit">Guitarríssima · Ser único é o seu superpoder.</footer>
 </div>
 
-<!-- ===================== MODAL DE JOGO ===================== -->
+<!-- MODAL -->
 <div class="modal-overlay" id="gameModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeGame()">✕</button>
@@ -325,10 +325,64 @@
     document.getElementById("view-"+name).classList.add("active");
     const tabBtn = document.getElementById("tabBtn"+name.charAt(0).toUpperCase()+name.slice(1));
     if(tabBtn) tabBtn.classList.add("active");
-    if(name==="sessoes") goHome();
+    if(name==="ensaios") goEnsaiosHome();
+    if(name==="sessoes") goSessionHome();
   }
 
-  /* ---------------- SESSÕES ATUALIZADAS ---------------- */
+  /* ---------------- DADOS DOS ENSAIOS COM SILHUETAS ---------------- */
+  const ENSAIOS = [
+    { id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Vilão 1", img:"Silhueta_Copiao (1).png",
+      dev:"Desenvolvimento do poder da **Autenticidade**: descobrir a própria voz, criar identidade e resistir à cópia sem alma." },
+    { id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Vilão 2", img:"Silhueta_Decibeis (1).png",
+      dev:"Desenvolvimento do poder da **Escuta**: perceber o volume, dialogar com a banda e equilibrar os instrumentos." },
+    { id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"Vilão 3", img:"Silhueta_O_Ensaiador (1).png",
+      dev:"Desenvolvimento do poder da **Disciplina**: o método do Repeteco, dedicação e transformar treino em confiança." },
+    { id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Vilão 4", img:"Vespera_silhueta (1).png",
+      dev:"Desenvolvimento do poder da **Iniciativa**: coragem para dar o primeiro acorde, entrar no palco e agir apesar do frio na barriga." }
+  ];
+
+  function renderEnsaios(){
+    const list = document.getElementById("ensaiosList");
+    list.innerHTML = "";
+    ENSAIOS.forEach(e=>{
+      const card = document.createElement("div");
+      card.className = "item-card";
+      card.onclick = ()=>openEnsaio(e.id);
+      card.innerHTML =
+        '<div class="item-dot" style="background:'+e.color+';">E'+e.id+'</div>'+
+        '<div class="item-info"><div class="item-name">'+e.name+'</div>'+
+        '<div class="item-meta">'+e.date+' · Sede Guitarríssima</div></div>'+
+        '<div class="arrow">›</div>';
+      list.appendChild(card);
+    });
+  }
+
+  function openEnsaio(id){
+    const e = ENSAIOS.find(x=>x.id===id);
+    document.getElementById("ensTitle").textContent = e.name;
+    document.getElementById("ensDate").textContent = e.date + " · Sede Guitarríssima";
+    document.getElementById("ensDev").innerHTML = e.dev;
+    document.getElementById("ensVillainTitle").textContent = "Ameaça: " + e.villain;
+    
+    const vImg = document.getElementById("ensVillainImg");
+    vImg.src = e.img;
+    vImg.alt = "Silhueta " + e.villain;
+
+    document.getElementById("body").style.background = e.color;
+
+    document.getElementById("view-ensaios-home").classList.add("hidden");
+    document.getElementById("view-ensaio-detail").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+
+  function goEnsaiosHome(){
+    document.getElementById("body").style.background = "#E63946";
+    document.getElementById("view-ensaio-detail").classList.add("hidden");
+    document.getElementById("view-ensaios-home").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+
+  /* ---------------- DADOS DAS SESSÕES ---------------- */
   const SESSIONS = [
     { id:1, name:"Sessão 1", date:"24/10 (sáb)", time:"16h", color:"#8E5FC7",
       lineup:["[Banda 1]","[Banda 2]","[Intermezzo]","[Banda 3]","[Banda 4]"] },
@@ -340,17 +394,17 @@
       lineup:["[Banda 13]","[Banda 14]","[Intermezzo]","[Banda 15]","[Banda 16]"] },
   ];
 
-  function renderHome(){
+  function renderSessions(){
     const list = document.getElementById("sessionList");
     list.innerHTML = "";
     SESSIONS.forEach(s=>{
       const card = document.createElement("div");
-      card.className = "session-card";
+      card.className = "item-card";
       card.onclick = ()=>openSession(s.id);
       card.innerHTML =
-        '<div class="session-dot" style="background:'+s.color+';">S'+s.id+'</div>'+
-        '<div class="session-info"><div class="session-name">'+s.name+'</div>'+
-        '<div class="session-meta">'+s.date+' · Início às '+s.time+'</div></div>'+
+        '<div class="item-dot" style="background:'+s.color+';">S'+s.id+'</div>'+
+        '<div class="item-info"><div class="item-name">'+s.name+'</div>'+
+        '<div class="item-meta">'+s.date+' · '+s.time+'</div></div>'+
         '<div class="arrow">›</div>';
       list.appendChild(card);
     });
@@ -367,34 +421,34 @@
     s.lineup.forEach((band,i)=>{
       const row = document.createElement("div");
       row.className = "lineup-row";
-      row.innerHTML = "<span>"+band+"</span><span class=\"lineup-order\">"+(i+1)+"º no palco</span>";
+      row.innerHTML = "<span>"+band+"</span><span class=\"lineup-order\">"+(i+1)+"º</span>";
       box.appendChild(row);
     });
 
-    document.getElementById("view-home").classList.add("hidden");
+    document.getElementById("view-sessoes-home").classList.add("hidden");
     document.getElementById("view-session").classList.remove("hidden");
     window.scrollTo(0,0);
   }
 
-  function goHome(){
+  function goSessionHome(){
     document.getElementById("body").style.background = "#E63946";
     document.getElementById("view-session").classList.add("hidden");
-    document.getElementById("view-home").classList.remove("hidden");
+    document.getElementById("view-sessoes-home").classList.remove("hidden");
     window.scrollTo(0,0);
   }
 
-  /* ---------------- JOGUINHOS ---------------- */
+  /* ---------------- JOGOS ---------------- */
   const GAMES = {
     quiz: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
-      body{font-family:Arial,sans-serif;background:#2C4E9B;color:#171512;margin:0;padding:20px;min-height:100vh;}
-      .panel{background:#FBF6EA;border:4px solid #171512;border-radius:16px;box-shadow:6px 6px 0 #171512;padding:20px;text-align:center;max-width:400px;margin:0 auto;}
-      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:20px;text-align:center;margin-top:0;}
-      .dot{width:24px;height:24px;border-radius:50%;border:2px solid #171512;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;background:#fff;margin:0 3px;}
+      body{font-family:Arial,sans-serif;background:#2C4E9B;color:#171512;margin:0;padding:16px;min-height:100vh;}
+      .panel{background:#FBF6EA;border:4px solid #171512;border-radius:16px;box-shadow:5px 5px 0 #171512;padding:16px;text-align:center;max-width:400px;margin:0 auto;}
+      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:18px;text-align:center;margin-top:0;}
+      .dot{width:22px;height:22px;border-radius:50%;border:2px solid #171512;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;background:#fff;margin:0 2px;}
       .dot.done{background:#E63946;color:#fff;}
-      .opt{text-align:left;background:#fff;border:2px solid #171512;border-radius:10px;padding:12px;margin-bottom:8px;font-weight:600;font-size:13.5px;cursor:pointer;transition:background .1s;}
+      .opt{text-align:left;background:#fff;border:2px solid #171512;border-radius:10px;padding:10px;margin-bottom:8px;font-weight:600;font-size:13px;cursor:pointer;}
       .opt:active{background:#F4C531;}
-      .btn{width:100%;padding:14px;font-weight:bold;border:3px solid #171512;border-radius:10px;background:#F4C531;cursor:pointer;font-size:14px;text-transform:uppercase;margin-top:10px;}
-      .badge{width:80px;height:80px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#fff;border:3px solid #171512;}
+      .btn{width:100%;padding:12px;font-weight:bold;border:3px solid #171512;border-radius:10px;background:#F4C531;cursor:pointer;font-size:13px;text-transform:uppercase;margin-top:8px;}
+      .badge{width:70px;height:70px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;border:3px solid #171512;}
     </style></head><body>
     <h1>QUAL É O SEU<br>SUPERPODER?</h1>
     <div class="panel" id="app"></div>
@@ -407,17 +461,17 @@
         {t:"Qual frase parece mais com você?",o:[["Tento de novo até sair certo","disciplina"],["Escuto antes de falar","escuta"],["Faço diferente de todo mundo","autenticidade"],["Começo logo, mesmo com dúvida","iniciativa"]]},
       ];
       const R={
-        autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1",d:"Seu superpoder: confiar na própria voz e ter a coragem de ser único no palco!"},
-        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2",d:"Seu superpoder: perceber tudo ao redor — a banda, a harmonia e o tempo perfeito."},
-        disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3",d:"Seu superpoder: foco e dedicação para transformar qualquer nota em maestria."},
-        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4",d:"Seu superpoder: a energia de dar o primeiro passo e incendiar o espetáculo!"},
+        autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1",d:"Seu superpoder: confiar na própria voz e ter a coragem de ser você mesmo!"},
+        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2",d:"Seu superpoder: perceber tudo ao redor — a harmonia, a banda e o tempo perfeito."},
+        disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3",d:"Seu superpoder: treino e repeteco para transformar dedicação em segurança."},
+        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4",d:"Seu superpoder: a coragem de agir e tocar o primeiro acorde no palco!"},
       };
       let cur=0, sc={autenticidade:0,escuta:0,disciplina:0,iniciativa:0};
       function dots(){let h="";for(let i=0;i<Q.length;i++){h+='<span class="dot'+(i<cur?" done":"")+'">'+(i+1)+"</span>";}return h;}
       function renderQ(){
         const q=Q[cur];
         document.getElementById("app").innerHTML =
-          '<div>'+dots()+'</div><h3 style="font-size:16px;margin:14px 0;">'+q.t+'</h3>'+
+          '<div>'+dots()+'</div><h3 style="font-size:15px;margin:12px 0;">'+q.t+'</h3>'+
           q.o.map(o=>'<div class="opt" onclick="pick(\\''+o[1]+'\\')">'+o[0]+'</div>').join('');
       }
       function pick(k){
@@ -430,9 +484,9 @@
         const r=R[w];
         document.getElementById("app").innerHTML =
           '<div class="badge" style="background:'+r.c+';">'+r.n[0]+'</div>'+
-          '<h2>'+r.n+'</h2><p style="color:#888;font-weight:bold;font-size:13px;">Poder revelado no '+r.e+'</p>'+
-          '<p style="text-align:left;background:#F4EFE1;padding:12px;border-radius:8px;border-left:4px solid #171512;font-size:13.5px;line-height:1.4;">'+r.d+'</p>'+
-          '<button class="btn" onclick="restart()">Descobrir de novo</button>';
+          '<h2 style="margin:4px 0;">'+r.n+'</h2><p style="color:#666;font-weight:bold;font-size:12px;margin:0 0 10px;">Trabalhado no '+r.e+'</p>'+
+          '<p style="text-align:left;background:#F4EFE1;padding:10px;border-radius:8px;border-left:4px solid #171512;font-size:13px;line-height:1.4;">'+r.d+'</p>'+
+          '<button class="btn" onclick="restart()">Refazer Quiz</button>';
       }
       function restart(){cur=0;sc={autenticidade:0,escuta:0,disciplina:0,iniciativa:0};renderQ();}
       renderQ();
@@ -440,46 +494,45 @@
     </body></html>`,
 
     insignia: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
-      body{font-family:Arial,sans-serif;background:#E8792B;color:#171512;margin:0;padding:16px;min-height:100vh;}
-      .panel{background:#FBF6EA;border:4px solid #171512;border-radius:16px;box-shadow:5px 5px 0 #171512;padding:16px;text-align:center;max-width:400px;margin:0 auto 12px;}
-      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:20px;text-align:center;margin-top:0;}
-      .badgeWrap{width:140px;height:140px;margin:0 auto 6px;}
-      .row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
-      .chip{width:32px;height:32px;border-radius:50%;border:2px solid #171512;cursor:pointer;}
+      body{font-family:Arial,sans-serif;background:#E8792B;color:#171512;margin:0;padding:14px;min-height:100vh;}
+      .panel{background:#FBF6EA;border:4px solid #171512;border-radius:14px;box-shadow:4px 4px 0 #171512;padding:14px;text-align:center;max-width:380px;margin:0 auto 10px;}
+      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:18px;text-align:center;margin-top:0;}
+      .badgeWrap{width:120px;height:120px;margin:0 auto 4px;}
+      .row{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-start;margin-bottom:8px;}
+      .chip{width:28px;height:28px;border-radius:50%;border:2px solid #171512;cursor:pointer;}
       .chip.sel{outline:3px solid #171512;transform:scale(1.1);}
-      .item-btn{padding:6px 10px;background:#fff;border:2px solid #171512;border-radius:8px;font-weight:bold;font-size:12px;cursor:pointer;}
+      .item-btn{padding:5px 8px;background:#fff;border:2px solid #171512;border-radius:6px;font-weight:bold;font-size:11px;cursor:pointer;}
       .item-btn.sel{background:#F4C531;}
-      input{width:90%;padding:10px;border:2px solid #171512;border-radius:8px;font-size:14px;text-align:center;font-weight:bold;margin-top:4px;}
-      .name{font-weight:900;font-size:16px;text-transform:uppercase;margin-top:4px;color:var(--ink);}
-      .lbl{font-weight:900;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#777;margin:8px 0 4px;}
+      input{width:90%;padding:8px;border:2px solid #171512;border-radius:8px;font-size:13px;text-align:center;font-weight:bold;}
+      .name{font-weight:900;font-size:15px;text-transform:uppercase;margin-top:4px;color:var(--ink);}
+      .lbl{font-weight:900;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;margin:6px 0 3px;}
     </style></head><body>
-    <h1>LABORATÓRIO DE INSÍGNIAS</h1>
+    <h1>MONTE SUA INSÍGNIA</h1>
     <div class="panel">
       <div class="badgeWrap" id="badgeSvg"></div>
       <div class="name" id="nameOut">HERÓI DO SOM</div>
     </div>
     <div class="panel" style="text-align:left;">
       <div class="lbl">1. FORMATO DO BRASÃO</div>
-      <div class="row" style="justify-content:flex-start;">
+      <div class="row">
         <button class="item-btn sel" onclick="setShape('star',this)">⭐ Estrela</button>
         <button class="item-btn" onclick="setShape('shield',this)">🛡️ Escudo</button>
-        <button class="item-btn" onclick="setShape('circle',this)">⭕ Brasão</button>
+        <button class="item-btn" onclick="setShape('circle',this)">⭕ Círculo</button>
       </div>
 
       <div class="lbl">2. SÍMBOLO CENTRAL</div>
-      <div class="row" style="justify-content:flex-start;">
+      <div class="row">
         <button class="item-btn sel" onclick="setIcon('⚡',this)">⚡ Raio</button>
         <button class="item-btn" onclick="setIcon('🎸',this)">🎸 Guitarra</button>
         <button class="item-btn" onclick="setIcon('🎧',this)">🎧 Fone</button>
         <button class="item-btn" onclick="setIcon('🎵',this)">🎵 Nota</button>
-        <button class="item-btn" onclick="setIcon('🔥',this)">🔥 Fogo</button>
       </div>
 
       <div class="lbl">3. COR DA LIGA</div>
-      <div class="row" id="colorsBox" style="justify-content:flex-start;"></div>
+      <div class="row" id="colorsBox"></div>
 
-      <div class="lbl">4. CODINOME DE PALCO</div>
-      <input type="text" id="heroName" placeholder="Digite seu nome heróico" maxlength="18">
+      <div class="lbl">4. CODINOME</div>
+      <input type="text" id="heroName" placeholder="Seu nome heróico" maxlength="16">
     </div>
     <script>
       const COLORS=["#E63946","#2C4E9B","#8E5FC7","#D9A62B","#E8792B","#3CB878","#171512"];
@@ -492,7 +545,7 @@
         } else if(curShape==='shield'){
           path='<path d="M100 10 L180 40 L180 120 Q180 180 100 196 Q20 180 20 120 L20 40 Z" fill="'+curColor+'" stroke="#171512" stroke-width="8"/>';
         } else {
-          path='<circle cx="100" cy="100" r="90" fill="'+curColor+'" stroke="#171512" stroke-width="8"/><circle cx="100" cy="100" r="75" fill="none" stroke="#fff" stroke-dasharray="8 6" stroke-width="4"/>';
+          path='<circle cx="100" cy="100" r="90" fill="'+curColor+'" stroke="#171512" stroke-width="8"/>';
         }
         document.getElementById("badgeSvg").innerHTML =
           '<svg viewBox="0 0 200 200" width="100%" height="100%">' + path +
@@ -518,11 +571,7 @@
           const d=document.createElement("div");
           d.className="chip"+(c===curColor?" sel":"");
           d.style.background=c;
-          d.onclick=()=>{
-            curColor=c;
-            renderColors();
-            renderBadge();
-          };
+          d.onclick=()=>{curColor=c;renderColors();renderBadge();};
           box.appendChild(d);
         });
       }
@@ -534,23 +583,22 @@
     </body></html>`,
 
     batalha: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
-      body{font-family:Arial,sans-serif;background:#171512;color:#fff;margin:0;padding:16px;text-align:center;}
-      .box{background:#23201d;border:4px solid #F4C531;border-radius:16px;padding:16px;max-width:400px;margin:0 auto;}
-      h1{color:#FF5A79;font-size:18px;margin-top:0;text-transform:uppercase;}
-      .hp-bar{background:#444;border-radius:10px;height:18px;overflow:hidden;margin-bottom:12px;border:2px solid #fff;}
+      body{font-family:Arial,sans-serif;background:#171512;color:#fff;margin:0;padding:14px;text-align:center;}
+      .box{background:#23201d;border:4px solid #F4C531;border-radius:14px;padding:14px;max-width:380px;margin:0 auto;}
+      h1{color:#FF5A79;font-size:16px;margin-top:0;text-transform:uppercase;}
+      .hp-bar{background:#444;border-radius:10px;height:16px;overflow:hidden;margin-bottom:10px;border:2px solid #fff;}
       .hp-fill{background:#E63946;height:100%;width:100%;transition:width .2s;}
-      .boss-sprite{font-size:56px;margin:10px 0;}
-      .prompt{background:#fff;color:#171512;padding:10px;border-radius:10px;font-weight:900;font-size:14px;margin-bottom:14px;}
-      .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-      .btn-atk{padding:12px 6px;border:3px solid #171512;border-radius:10px;font-weight:900;font-size:12px;cursor:pointer;text-transform:uppercase;color:#fff;}
-      .btn-atk:active{transform:scale(0.96);}
-      .status{font-size:13px;font-weight:bold;margin-top:10px;min-height:20px;color:#F4C531;}
+      .boss-sprite{font-size:48px;margin:6px 0;}
+      .prompt{background:#fff;color:#171512;padding:8px;border-radius:8px;font-weight:900;font-size:13px;margin-bottom:12px;}
+      .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+      .btn-atk{padding:10px 4px;border:2px solid #171512;border-radius:8px;font-weight:900;font-size:11px;cursor:pointer;text-transform:uppercase;color:#fff;}
+      .status{font-size:12px;font-weight:bold;margin-top:8px;min-height:18px;color:#F4C531;}
     </style></head><body>
     <div class="box">
       <h1>Devorador de Sons</h1>
       <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
       <div class="boss-sprite" id="boss">👾</div>
-      <div class="prompt" id="prompt">Pressione o poder correto!</div>
+      <div class="prompt" id="prompt">Use o poder correto!</div>
       <div class="grid">
         <button class="btn-atk" style="background:#8E5FC7;" onclick="attack('autenticidade')">Autenticidade</button>
         <button class="btn-atk" style="background:#D9A62B;" onclick="attack('escuta')">Escuta</button>
@@ -563,15 +611,15 @@
       let bossHp=100, curNeeded="";
       const TARGETS=[
         {need:"autenticidade",text:"O vilão tenta fazer você copiar os outros!"},
-        {need:"escuta",text:"O vilão desafinou a banda! Ouça o ritmo!"},
-        {need:"disciplina",text:"O solo é difícil! Use seu treino constante!"},
+        {need:"escuta",text:"A banda perdeu a sintonia! Escute o grupo!"},
+        {need:"disciplina",text:"Solo difícil! Treine com repeteco!"},
         {need:"iniciativa",text:"O palco está silencioso! Dê o primeiro acorde!"},
       ];
       function nextTurn(){
         if(bossHp<=0){
           document.getElementById("boss").textContent="💥🎉";
           document.getElementById("prompt").textContent="VITÓRIA! O SOM FOI SALVO!";
-          document.getElementById("status").textContent="Os SuperSonoros venceram o espetáculo!";
+          document.getElementById("status").textContent="Os SuperSonoros venceram!";
           return;
         }
         const t=TARGETS[Math.floor(Math.random()*TARGETS.length)];
@@ -584,11 +632,11 @@
           bossHp-=25;
           if(bossHp<0) bossHp=0;
           document.getElementById("hp").style.width=bossHp+"%";
-          document.getElementById("status").textContent="ACORDE PERFEITO! Dano no vilão!";
+          document.getElementById("status").textContent="ACORDE PERFEITO! -25% HP";
           document.getElementById("boss").textContent="⚡👾⚡";
           setTimeout(()=>{ if(bossHp>0) document.getElementById("boss").textContent="👾"; },300);
         } else {
-          document.getElementById("status").textContent="O som falhou! Tente outro poder!";
+          document.getElementById("status").textContent="Nota errada! Tente outro poder!";
         }
         setTimeout(nextTurn, 500);
       }
@@ -606,7 +654,9 @@
     document.getElementById("gameFrame").srcdoc = "";
   }
 
-  renderHome();
+  /* Inicialização */
+  renderEnsaios();
+  renderSessions();
 </script>
 </body>
 </html>
