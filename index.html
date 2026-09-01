@@ -107,8 +107,8 @@
 
   <!-- CABEÇALHO COM LOGOS -->
   <div class="brand-header">
-    <img src="simbolo GTA fundo claro.jpg" alt="Logo Guitarríssima" class="logo-gta" onerror="this.style.display='none'" />
-    <img src="[217] Ação do dia dos pais - card.png" alt="SuperSonoros" class="logo-super" onerror="this.outerHTML='<h1 style=\'margin:0;\'>SUPERSONOROS</h1>'" />
+    <img src="logo-gta.jpg" alt="Logo Guitarríssima" class="logo-gta" onerror="this.style.display='none'" />
+    <img src="logo-super.png" alt="SuperSonoros" class="logo-super" onerror="this.outerHTML='<h1 style=\'margin:0;\'>SUPERSONOROS</h1>'" />
   </div>
 
   <div style="text-align:center;">
@@ -157,11 +157,11 @@
       <!-- DESENVOLVIMENTO & SILHUETA DO VILÃO -->
       <div class="panel">
         <div class="section-title">⚡ O que os alunos estarão desenvolvendo</div>
-        <p style="font-size:13.5px;line-height:1.45;margin:0 0 12px;" id="ensDev">Neste grande encontro, os heróis fortalecem seu superpoder sonoro e encaram um novo desafio.</p>
+        <p style="font-size:13.5px;line-height:1.45;margin:0 0 12px;" id="ensDev"></p>
         
         <div class="silhouette-card">
           <div class="silhouette-avatar">
-            <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
+            <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23171512\' stroke-width=\'2\'><circle cx=\'12\' cy=\'8\' r=\'5\'/><path d=\'M20 21a8 8 0 1 0-16 0\'/></svg>'" />
           </div>
           <div>
             <div style="font-weight:900;font-size:14px;color:var(--yellow);text-transform:uppercase;" id="ensVillainTitle">Ameaça: Vilão 1</div>
@@ -331,14 +331,14 @@
 
   /* ---------------- DADOS DOS ENSAIOS COM SILHUETAS ---------------- */
   const ENSAIOS = [
-    { id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Vilão 1", img:"Silhueta_Copiao (1).png",
-      dev:"Desenvolvimento do poder da **Autenticidade**: descobrir a própria voz, criar identidade e resistir à cópia sem alma." },
-    { id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Vilão 2", img:"Silhueta_Decibeis (1).png",
-      dev:"Desenvolvimento do poder da **Escuta**: perceber o volume, dialogar com a banda e equilibrar os instrumentos." },
-    { id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"Vilão 3", img:"Silhueta_O_Ensaiador (1).png",
-      dev:"Desenvolvimento do poder da **Disciplina**: o método do Repeteco, dedicação e transformar treino em confiança." },
-    { id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Vilão 4", img:"Vespera_silhueta (1).png",
-      dev:"Desenvolvimento do poder da **Iniciativa**: coragem para dar o primeiro acorde, entrar no palco e agir apesar do frio na barriga." }
+    { id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Vilão 1", img:"vilao1.png",
+      dev:"Desenvolvimento do poder da <strong>Autenticidade</strong>: descobrir a própria voz, criar identidade e resistir à cópia sem alma." },
+    { id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Vilão 2", img:"vilao2.png",
+      dev:"Desenvolvimento do poder da <strong>Escuta</strong>: perceber o volume, dialogar com a banda e equilibrar os instrumentos." },
+    { id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"Vilão 3", img:"vilao3.png",
+      dev:"Desenvolvimento do poder da <strong>Disciplina</strong>: o método do Repeteco, dedicação e transformar treino em confiança." },
+    { id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Vilão 4", img:"vilao4.png",
+      dev:"Desenvolvimento do poder da <strong>Iniciativa</strong>: coragem para dar o primeiro acorde, entrar no palco e agir apesar do frio na barriga." }
   ];
 
   function renderEnsaios(){
