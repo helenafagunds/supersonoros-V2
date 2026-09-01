@@ -20,13 +20,16 @@
   body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1.6px, transparent 1.6px);background-size:16px 16px;pointer-events:none;}
   .stage{width:100%;max-width:460px;position:relative;z-index:1;}
 
-  /* ---- CABEÇALHO & LOGOS ---- */
-  .brand-header{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px;}
-  .logo-gta{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);background:#fff;}
-  .logo-super{width:180px;height:auto;filter:drop-shadow(3px 3px 0 var(--ink));}
+  /* ---- HEADER DE LOGOS ---- */
+  .brand-banner{
+    background:#fff; border:3.5px solid var(--ink); border-radius:18px;
+    box-shadow:6px 6px 0 var(--ink); padding:14px 18px; margin-bottom:14px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .logo-gta{height:46px; width:auto; max-width:48%; object-fit:contain;}
+  .logo-super{height:58px; width:auto; max-width:50%; object-fit:contain;}
 
   .eyebrow{display:inline-block;font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;background:var(--ink);color:var(--yellow);padding:6px 14px;border-radius:999px;margin-bottom:8px;}
-  h1{font-size:24px;font-weight:900;text-transform:uppercase;line-height:1.1;color:var(--yellow);-webkit-text-stroke:1.2px var(--ink);text-shadow:2px 2px 0 var(--ink);margin:0 0 6px;text-align:center;}
   p.lede{color:rgba(255,255,255,.94);font-size:13.5px;line-height:1.5;margin:0 0 16px;font-weight:600;text-align:center;}
 
   .panel{background:var(--cream);border:4px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);padding:18px 16px;margin-bottom:14px;}
@@ -54,7 +57,7 @@
   .item-meta{font-size:12px;color:#666;font-weight:700;}
   .arrow{font-size:20px;font-weight:bold;}
 
-  /* ---- AVISO WHATSAPP ---- */
+  /* ---- AVISO DE ENSAIO ---- */
   .notice-box{background:#FFF9E6;border:2.5px solid var(--ink);border-radius:12px;padding:12px;margin-bottom:14px;font-size:12.5px;line-height:1.45;font-weight:700;}
   .btn-whats{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--whatsapp);color:#fff;font-weight:900;font-size:12px;text-transform:uppercase;padding:8px 12px;border-radius:8px;border:2px solid var(--ink);text-decoration:none;margin-top:8px;box-shadow:2px 2px 0 var(--ink);}
 
@@ -79,9 +82,14 @@
   .power-chip{font-size:11px;font-weight:900;text-transform:uppercase;color:#fff;padding:4px 10px;border-radius:999px;border:1.5px solid var(--ink);}
 
   /* ---- SILHUETAS & VILÕES ---- */
-  .silhouette-card{display:flex;gap:14px;align-items:center;background:#171512;color:#fff;border-radius:14px;padding:12px 14px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);}
+  .silhouette-card{display:flex;gap:14px;align-items:center;background:#171512;color:#fff;border-radius:14px;padding:12px 14px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);margin-top:10px;}
   .silhouette-avatar{width:70px;height:84px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;border:2px solid var(--yellow);flex-shrink:0;padding:4px;overflow:hidden;}
   .silhouette-img{max-width:100%;max-height:100%;object-fit:contain;}
+
+  /* ---- LISTA DO QUE FAREMOS ---- */
+  .agenda-list{margin:0;padding-left:18px;font-size:13px;line-height:1.55;color:#333;}
+  .agenda-list li{margin-bottom:6px;}
+  .agenda-sublist{margin:4px 0 6px;padding-left:16px;list-style-type:circle;}
 
   /* ---- FOTOS ---- */
   .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;}
@@ -105,23 +113,15 @@
 <body id="body">
 <div class="stage">
 
-  <!-- CABEÇALHO COM LOGOS -->
-  <div class="brand-header">
-    <img src="logo-gta.jpg" alt="Logo Guitarríssima" class="logo-gta" onerror="this.style.display='none'" />
-    <img src="logo-super.png" alt="SuperSonoros" class="logo-super" onerror="this.outerHTML='<h1 style=\'margin:0;\'>SUPERSONOROS</h1>'" />
+  <!-- BANNER COM AS DUAS LOGOS PROPORCIONAIS -->
+  <div class="brand-banner">
+    <img src="logo-gta.png" alt="Guitarríssima" class="logo-gta" onerror="this.src='LOGO VERTICAL - GTA (1).png'" />
+    <img src="logo-super.png" alt="SuperSonoros" class="logo-super" onerror="this.src='LOGOTIPO_SPLASH_AZUL_HORIZONTAL.png'" />
   </div>
 
   <div style="text-align:center;">
-    <span class="eyebrow">Guitarríssima · Espetaculo de final de ano</span>
-    <p class="lede">Acompanhe tudo sbre o universo supersonoros: Ensaios, sessões do show, fotos dos ensaios e os joguinhos da jornada — tudo num só lugar.</p>
-  </div>
-
-  <!-- AVISO HORÁRIO DAS BANDAS GERAL -->
-  <div class="notice-box">
-    ⚠️ <strong>Atenção às bandas:</strong> Cada banda tem um horário específico de ensaio e apresentação. Confirme seu horário com a secretaria.
-    <div>
-      <a class="btn-whats" href="https://wa.me/5551999999999" target="_blank">📱 Falar com a Secretaria</a>
-    </div>
+    <span class="eyebrow">Guitarríssima · Espetáculo de final de ano</span>
+    <p class="lede">Acompanhe tudo sobre o universo supersonoros: Ensaios, sessões do show, fotos dos ensaios e os joguinhos da jornada — tudo num só lugar.</p>
   </div>
 
   <!-- ABAS -->
@@ -134,9 +134,18 @@
 
   <!-- ===================== 1. ENSAIOS ===================== -->
   <div id="view-ensaios" class="view active">
+    
+    <!-- AVISO VISÍVEL EXCLUSIVAMENTE NA ABA ENSAIOS -->
+    <div class="notice-box">
+      <strong>Atenção às bandas:</strong> Cada banda tem um horário específico de ensaio. Confirme seu horário com a secretaria.
+      <div>
+        <a class="btn-whats" href="https://wa.me/5551999999999" target="_blank">Falar com a Secretaria</a>
+      </div>
+    </div>
+
     <div id="view-ensaios-home">
       <div class="panel">
-        <div class="section-title">📅 Grandes Ensaios da Liga</div>
+        <div class="section-title">Grandes Ensaios da Liga</div>
         <div id="ensaiosList"></div>
       </div>
     </div>
@@ -145,7 +154,7 @@
       <button class="back-btn" onclick="goEnsaiosHome()">← Voltar aos Ensaios</button>
 
       <div class="panel">
-        <h1 id="ensTitle" style="font-size:22px;text-align:left;color:var(--ink);-webkit-text-stroke:0;text-shadow:none;margin-bottom:2px;">Ensaio 1</h1>
+        <h1 id="ensTitle" style="font-size:22px;text-align:left;color:var(--ink);margin:0 0 2px;">Ensaio 1</h1>
         <p class="lede" style="color:#666;text-align:left;margin-bottom:12px;" id="ensDate">12/09 (sáb)</p>
 
         <div class="info-item">
@@ -154,14 +163,14 @@
         </div>
       </div>
 
-      <!-- DESENVOLVIMENTO & SILHUETA DO VILÃO -->
+      <!-- DESENVOLVIMENTO, O QUE FAREMOS & VILÃO -->
       <div class="panel">
-        <div class="section-title">⚡ O que os alunos estarão desenvolvendo</div>
-        <p style="font-size:13.5px;line-height:1.45;margin:0 0 12px;" id="ensDev"></p>
-        
+        <div class="section-title">O que faremos no ensaio</div>
+        <div id="ensAgendaBox"></div>
+
         <div class="silhouette-card">
           <div class="silhouette-avatar">
-            <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23171512\' stroke-width=\'2\'><circle cx=\'12\' cy=\'8\' r=\'5\'/><path d=\'M20 21a8 8 0 1 0-16 0\'/></svg>'" />
+            <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
           </div>
           <div>
             <div style="font-weight:900;font-size:14px;color:var(--yellow);text-transform:uppercase;" id="ensVillainTitle">Ameaça: Vilão 1</div>
@@ -170,17 +179,9 @@
         </div>
       </div>
 
-      <!-- AVISO DE HORÁRIO INDIVIDUAL -->
-      <div class="notice-box">
-        🕒 <strong>Horário do seu ensaio:</strong> Lembre-se que cada banda ensaia em um horário escalonado ao longo do dia. Em caso de dúvidas, consulte a equipe.
-        <div>
-          <a class="btn-whats" href="https://wa.me/5551999999999" target="_blank">📱 Confirmar no WhatsApp</a>
-        </div>
-      </div>
-
       <!-- FOTOS DO ENSAIO -->
       <div class="panel">
-        <div class="section-title">📸 Fotos deste Ensaio</div>
+        <div class="section-title">Fotos deste Ensaio</div>
         <div class="photo-grid">
           <div class="photo-slot">📷<span>Foto 1</span></div>
           <div class="photo-slot">📷<span>Foto 2</span></div>
@@ -198,7 +199,7 @@
   <div id="view-sessoes" class="view">
     <div id="view-sessoes-home">
       <div class="panel">
-        <div class="section-title">🎤 Sessões do Espetáculo</div>
+        <div class="section-title">Sessões do Espetáculo</div>
         <div id="sessionList"></div>
       </div>
     </div>
@@ -207,17 +208,17 @@
       <button class="back-btn" onclick="goSessionHome()">← Voltar às Sessões</button>
 
       <div class="panel" style="margin-bottom:14px;">
-        <h1 id="sessTitle" style="font-size:22px;text-align:left;">Sessão 1</h1>
+        <h1 id="sessTitle" style="font-size:22px;text-align:left;color:var(--yellow);-webkit-text-stroke:1.2px var(--ink);text-shadow:2px 2px 0 var(--ink);">Sessão 1</h1>
         <p class="lede" style="color:#4a4a4a;margin-bottom:0;text-align:left;" id="sessSubtitle">24/10 · 16h</p>
       </div>
 
       <div class="panel">
-        <div class="section-title">🎤 Ordem de apresentação</div>
+        <div class="section-title">Ordem de apresentação</div>
         <div id="lineupList"></div>
       </div>
 
       <div class="panel">
-        <div class="section-title">🦸 Recapitulando a jornada</div>
+        <div class="section-title">Recapitulando a jornada</div>
         <div class="recap-box">
           Até aqui, os SuperSonoros já conquistaram os quatro superpoderes nos Grandes Ensaios:
           <div class="chip-list">
@@ -231,14 +232,14 @@
       </div>
 
       <div class="panel">
-        <div class="section-title">📍 Informações práticas</div>
+        <div class="section-title">Informações práticas</div>
         <div class="info-item"><span class="info-icon">🗺️</span><span>Teatro Unisinos — [Endereço completo / Link Maps].</span></div>
         <div class="info-item"><span class="info-icon">🅿️</span><span>Estacionamento: [informações de vagas / valor / local].</span></div>
         <div class="info-item"><span class="info-icon">🎒</span><span>Deixe seu artista com a equipe responsável antes do espetáculo. Retirada ao final da sessão.</span></div>
       </div>
 
       <div class="panel">
-        <div class="section-title">📸 Compartilhe o momento</div>
+        <div class="section-title">Compartilhe o momento</div>
         <p style="font-size:13.5px;line-height:1.5;margin:0 0 10px;">Marque a Guitarríssima e use a hashtag oficial nos seus stories e posts do show!</p>
         <div class="chip-list">
           <span class="power-chip" style="background:var(--blue);">#SUPERSONOROS</span>
@@ -253,7 +254,7 @@
   <!-- ===================== 3. JOGUINHOS ===================== -->
   <div id="view-jogos" class="view">
     <div class="panel">
-      <div class="section-title">🎮 Joguinhos da Jornada</div>
+      <div class="section-title">Joguinhos da Jornada</div>
 
       <div class="item-card" onclick="openGame('quiz')">
         <div class="item-dot" style="background:var(--purple);">❓</div>
@@ -287,7 +288,7 @@
   <!-- ===================== 4. HISTÓRIA ===================== -->
   <div id="view-historia" class="view">
     <div class="panel">
-      <div class="section-title">📖 O Universo SuperSonoros</div>
+      <div class="section-title">O Universo SuperSonoros</div>
       
       <div class="story-box">
         <h3 style="margin:0 0 6px;font-size:15px;text-transform:uppercase;color:var(--blue);">A Liga dos Artistas</h3>
@@ -329,16 +330,61 @@
     if(name==="sessoes") goSessionHome();
   }
 
-  /* ---------------- DADOS DOS ENSAIOS COM SILHUETAS ---------------- */
+  /* ---------------- DADOS DOS ENSAIOS ---------------- */
   const ENSAIOS = [
-    { id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Vilão 1", img:"vilao1.png",
-      dev:"Desenvolvimento do poder da <strong>Autenticidade</strong>: descobrir a própria voz, criar identidade e resistir à cópia sem alma." },
-    { id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Vilão 2", img:"vilao2.png",
-      dev:"Desenvolvimento do poder da <strong>Escuta</strong>: perceber o volume, dialogar com a banda e equilibrar os instrumentos." },
-    { id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"Vilão 3", img:"vilao3.png",
-      dev:"Desenvolvimento do poder da <strong>Disciplina</strong>: o método do Repeteco, dedicação e transformar treino em confiança." },
-    { id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Vilão 4", img:"vilao4.png",
-      dev:"Desenvolvimento do poder da <strong>Iniciativa</strong>: coragem para dar o primeiro acorde, entrar no palco e agir apesar do frio na barriga." }
+    { 
+      id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Vilão 1", img:"vilao1.png",
+      power:"Autenticidade (descobrir a própria voz e criar identidade)",
+      agenda: `
+        <p style="margin:0 0 8px;font-size:13px;"><strong>Superpoder trabalhado:</strong> Autenticidade</p>
+        <ul class="agenda-list">
+          <li><strong>Integração do grupo:</strong> A professora de performance se apresenta e conduz uma dinâmica rápida de entrosamento entre os alunos.</li>
+          <li><strong>Nome da banda:</strong> Definição oficial do nome do grupo logo após a apresentação.</li>
+          <li><strong>Escolha da música:</strong> Alinhamento da música que o grupo vai tocar, combinando com a identidade e o estilo da banda.</li>
+        </ul>
+      `
+    },
+    { 
+      id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Vilão 2", img:"vilao2.png",
+      power:"Escuta (tocar junto e equilibrar o som do grupo)",
+      agenda: `
+        <p style="margin:0 0 8px;font-size:13px;"><strong>Superpoder trabalhado:</strong> Escuta</p>
+        <ul class="agenda-list">
+          <li><strong>Definições da banda:</strong> Finalizar o que tiver ficado pendente sobre o nome do grupo.</li>
+          <li><strong>Planejamento do figurino:</strong> Conversar sobre a mensagem da música e combinar as ideias de visual que combinem com a banda.</li>
+          <li><strong>Definir o que usar no show:</strong>
+            <ul class="agenda-sublist">
+              <li>Roupas e calçados (parte de cima e de baixo).</li>
+              <li>Acessórios pessoais (pulseiras, chapéu, colares, etc.).</li>
+              <li>Adereços para os instrumentos ou palco (adesivos, luzes, cartazes, panos decorativos, bichinhos).</li>
+            </ul>
+          </li>
+          <li><strong>Foto oficial:</strong> Registro da foto individual de cada aluno.</li>
+        </ul>
+      `
+    },
+    { 
+      id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"Vilão 3", img:"vilao3.png",
+      power:"Disciplina (o método do Repeteco)",
+      agenda: `
+        <p style="margin:0 0 8px;font-size:13px;"><strong>Superpoder trabalhado:</strong> Disciplina</p>
+        <ul class="agenda-list">
+          <li><strong>Treino intensivo:</strong> Prática com o método do Repeteco para consolidar as passagens da música.</li>
+          <li><strong>Alinhamento dinâmico:</strong> Ajustes de entradas, finalizações e postura de palco.</li>
+        </ul>
+      `
+    },
+    { 
+      id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Vilão 4", img:"vilao4.png",
+      power:"Iniciativa (coragem para subir ao palco)",
+      agenda: `
+        <p style="margin:0 0 8px;font-size:13px;"><strong>Superpoder trabalhado:</strong> Iniciativa</p>
+        <ul class="agenda-list">
+          <li><strong>Passagem geral:</strong> Ensaio corrido simulando as condições reais do palco do espetáculo.</li>
+          <li><strong>Preparação final:</strong> Ajustes finais com a equipe e orientações para o grande dia.</li>
+        </ul>
+      `
+    }
   ];
 
   function renderEnsaios(){
@@ -361,7 +407,7 @@
     const e = ENSAIOS.find(x=>x.id===id);
     document.getElementById("ensTitle").textContent = e.name;
     document.getElementById("ensDate").textContent = e.date + " · Sede Guitarríssima";
-    document.getElementById("ensDev").innerHTML = e.dev;
+    document.getElementById("ensAgendaBox").innerHTML = e.agenda;
     document.getElementById("ensVillainTitle").textContent = "Ameaça: " + e.villain;
     
     const vImg = document.getElementById("ensVillainImg");
