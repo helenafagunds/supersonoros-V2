@@ -47,6 +47,7 @@
     height:clamp(80px, 10vw, 120px);
     width:auto; max-width:85%; object-fit:contain;
     filter:drop-shadow(4px 4px 0 var(--ink));
+    transition:transform .2s ease;
   }
 
   .header-intro{text-align:center; margin-bottom:24px;}
@@ -311,9 +312,9 @@
 <body id="body">
 <div class="stage">
 
-  <!-- LOGO DO TOPO (EXCLUSIVA SUPERSONOROS) -->
+  <!-- LOGO DO TOPO (COM TROCA DINÂMICA DE CONTRASTE) -->
   <div class="brand-banner-single">
-    <img src="logo-super.png" alt="SuperSonoros" class="logo-super" />
+    <img id="mainLogo" src="logo-super.png" alt="SuperSonoros" class="logo-super" />
   </div>
 
   <div class="header-intro">
@@ -530,6 +531,19 @@
 </div>
 
 <script>
+  /* ---------------- CONTROLE DA LOGO DINÂMICA ---------------- */
+  function updateBrandLogo(color) {
+    const logo = document.getElementById("mainLogo");
+    if (!logo) return;
+    
+    // Troca para a logo vermelha quando o fundo for roxo, verde ou azul
+    if (color === "#8E5FC7" || color === "#3CB878" || color === "#2C4E9B") {
+      logo.src = "logo-super-vermelho.png";
+    } else {
+      logo.src = "logo-super.png";
+    }
+  }
+
   /* ---------------- TABS ---------------- */
   function switchTab(name){
     document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
@@ -627,6 +641,8 @@
     vImg.alt = "Silhueta " + e.villain;
 
     document.getElementById("body").style.background = e.color;
+    updateBrandLogo(e.color);
+
     document.getElementById("view-ensaios-home").classList.add("hidden");
     document.getElementById("view-ensaio-detail").classList.remove("hidden");
     window.scrollTo(0,0);
@@ -634,6 +650,8 @@
 
   function goEnsaiosHome(){
     document.getElementById("body").style.background = "#E63946";
+    updateBrandLogo("#E63946");
+
     document.getElementById("view-ensaio-detail").classList.add("hidden");
     document.getElementById("view-ensaios-home").classList.remove("hidden");
     window.scrollTo(0,0);
@@ -671,7 +689,9 @@
     const s = SESSIONS.find(x=>x.id===id);
     document.getElementById("sessTitle").textContent = s.name;
     document.getElementById("sessSubtitle").textContent = s.date + " · Início às " + s.time + " · Teatro Unisinos";
+    
     document.getElementById("body").style.background = s.color;
+    updateBrandLogo(s.color);
 
     const box = document.getElementById("lineupList");
     box.innerHTML = "";
@@ -689,6 +709,8 @@
 
   function goSessionHome(){
     document.getElementById("body").style.background = "#E63946";
+    updateBrandLogo("#E63946");
+
     document.getElementById("view-session").classList.add("hidden");
     document.getElementById("view-sessoes-home").classList.remove("hidden");
     window.scrollTo(0,0);
@@ -763,7 +785,7 @@
       *{box-sizing:border-box;}
       body{font-family:Arial,sans-serif;background:#E8792B;color:#171512;margin:0;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;}
       .box-wrap{width:100%;max-width:380px;text-align:center;}
-      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:18px;margin:0 0 8px;}
+      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:18px;margin:0 0 8px;text-transform:uppercase;}
       .panel{background:#FBF6EA;border:3.5px solid #171512;border-radius:14px;box-shadow:4px 4px 0 #171512;padding:12px;text-align:center;margin-bottom:8px;}
       .badgeWrap{width:140px;height:140px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;}
       .badgeImg{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));}
@@ -851,11 +873,9 @@
         var heroText = document.getElementById("nameOut").textContent;
         var imgSource = document.getElementById("badgeImg");
 
-        /* 1. Fundo estilizado */
         ctx.fillStyle = curInsignia.color;
         ctx.fillRect(0, 0, 900, 900);
 
-        /* Padrão de pontos */
         ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
         for (var x = 20; x < 900; x += 30) {
           for (var y = 20; y < 900; y += 30) {
@@ -865,32 +885,27 @@
           }
         }
 
-        /* 2. Moldura estilo quadrinhos */
         ctx.lineWidth = 18;
         ctx.strokeStyle = "#171512";
         ctx.strokeRect(9, 9, 882, 882);
 
-        /* 3. Desenhar a insígnia */
         try {
           var imgSize = 560;
           ctx.drawImage(imgSource, (900 - imgSize) / 2, 90, imgSize, imgSize);
         } catch(e){}
 
-        /* 4. Caixa de texto com sombra */
         ctx.fillStyle = "#FBF6EA";
         ctx.lineWidth = 10;
         ctx.strokeStyle = "#171512";
         ctx.fillRect(100, 680, 700, 110);
         ctx.strokeRect(100, 680, 700, 110);
 
-        /* 5. Nome do Herói */
         ctx.fillStyle = "#171512";
         ctx.font = "bold 52px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(heroText, 450, 735);
 
-        /* 6. Crédito da Liga */
         ctx.fillStyle = "#F4C531";
         ctx.font = "bold 26px Arial, sans-serif";
         ctx.shadowColor = "#171512";
@@ -899,7 +914,6 @@
         ctx.fillText("SUPERSONOROS · GUITARRÍSSIMA", 450, 835);
         ctx.shadowColor = "transparent";
 
-        /* 7. Disparar Compartilhamento ou Download */
         canvas.toBlob(function(blob){
           var safeName = heroText.toLowerCase().replace(/[^a-z0-9]/g, "-");
           var file = new File([blob], "insignia-" + safeName + ".png", { type: "image/png" });
