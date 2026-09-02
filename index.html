@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SuperSonoros — Guitarríssima</title>
 
+<!-- GOOGLE FONTS: Bangers & Comic Neue (Bold) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
@@ -310,6 +311,7 @@
 <body id="body">
 <div class="stage">
 
+  <!-- LOGO DO TOPO (EXCLUSIVA SUPERSONOROS) -->
   <div class="brand-banner-single">
     <img src="logo-super.png" alt="SuperSonoros" class="logo-super" />
   </div>
@@ -319,6 +321,7 @@
     <p class="lede">Acompanhe tudo sobre o universo supersonoros: Ensaios, sessões do show, fotos dos ensaios e os joguinhos da jornada — tudo num só lugar.</p>
   </div>
 
+  <!-- ABAS -->
   <div class="tabs">
     <div class="tab active" id="tabBtnEnsaios" onclick="switchTab('ensaios')">Ensaios</div>
     <div class="tab" id="tabBtnSessoes" onclick="switchTab('sessoes')">Sessões</div>
@@ -326,6 +329,7 @@
     <div class="tab" id="tabBtnHistoria" onclick="switchTab('historia')">História</div>
   </div>
 
+  <!-- ===================== 1. ENSAIOS ===================== -->
   <div id="view-ensaios" class="view active">
     
     <div class="notice-box">
@@ -386,6 +390,7 @@
     </div>
   </div>
 
+  <!-- ===================== 2. SESSÕES ===================== -->
   <div id="view-sessoes" class="view">
     <div id="view-sessoes-home">
       <div class="panel">
@@ -445,6 +450,7 @@
     </div>
   </div>
 
+  <!-- ===================== 3. JOGUINHOS ===================== -->
   <div id="view-jogos" class="view">
     <div class="panel">
       <div class="section-title">Joguinhos da Jornada</div>
@@ -480,6 +486,7 @@
     </div>
   </div>
 
+  <!-- ===================== 4. HISTÓRIA ===================== -->
   <div id="view-historia" class="view">
     <div class="panel">
       <div class="section-title">O Universo SuperSonoros</div>
@@ -503,6 +510,7 @@
     </div>
   </div>
 
+  <!-- RODAPÉ INSTITUCIONAL (REALIZADO POR: GUITARRÍSSIMA) -->
   <footer class="footer-signature">
     <div class="footer-label">Realizado por:</div>
     <div class="footer-logo-card">
@@ -513,6 +521,7 @@
 
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="gameModal">
   <div class="modal-box" id="modalBox">
     <button class="modal-close" onclick="closeGame()">✕</button>
@@ -790,6 +799,7 @@
       </div>
     </div>
 
+    <!-- CANVAS OCULTO PARA EXPORTAR ARTE -->
     <canvas id="exportCanvas" width="900" height="900"></canvas>
 
     <script>
@@ -841,9 +851,11 @@
         var heroText = document.getElementById("nameOut").textContent;
         var imgSource = document.getElementById("badgeImg");
 
+        /* 1. Fundo estilizado */
         ctx.fillStyle = curInsignia.color;
         ctx.fillRect(0, 0, 900, 900);
 
+        /* Padrão de pontos */
         ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
         for (var x = 20; x < 900; x += 30) {
           for (var y = 20; y < 900; y += 30) {
@@ -853,27 +865,32 @@
           }
         }
 
+        /* 2. Moldura estilo quadrinhos */
         ctx.lineWidth = 18;
         ctx.strokeStyle = "#171512";
         ctx.strokeRect(9, 9, 882, 882);
 
+        /* 3. Desenhar a insígnia */
         try {
           var imgSize = 560;
           ctx.drawImage(imgSource, (900 - imgSize) / 2, 90, imgSize, imgSize);
         } catch(e){}
 
+        /* 4. Caixa de texto com sombra */
         ctx.fillStyle = "#FBF6EA";
         ctx.lineWidth = 10;
         ctx.strokeStyle = "#171512";
         ctx.fillRect(100, 680, 700, 110);
         ctx.strokeRect(100, 680, 700, 110);
 
+        /* 5. Nome do Herói */
         ctx.fillStyle = "#171512";
         ctx.font = "bold 52px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(heroText, 450, 735);
 
+        /* 6. Crédito da Liga */
         ctx.fillStyle = "#F4C531";
         ctx.font = "bold 26px Arial, sans-serif";
         ctx.shadowColor = "#171512";
@@ -882,6 +899,7 @@
         ctx.fillText("SUPERSONOROS · GUITARRÍSSIMA", 450, 835);
         ctx.shadowColor = "transparent";
 
+        /* 7. Disparar Compartilhamento ou Download */
         canvas.toBlob(function(blob){
           var safeName = heroText.toLowerCase().replace(/[^a-z0-9]/g, "-");
           var file = new File([blob], "insignia-" + safeName + ".png", { type: "image/png" });
@@ -915,4 +933,86 @@
       .boss-sprite{font-size:44px;margin:4px 0;}
       .prompt{background:#fff;color:#171512;padding:8px 10px;border-radius:8px;font-weight:900;font-size:12.5px;margin-bottom:10px;}
       .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-      .btn-atk{padding:9px 4px;border
+      .btn-atk{padding:9px 4px;border:2px solid #171512;border-radius:8px;font-weight:900;font-size:11px;cursor:pointer;text-transform:uppercase;color:#fff;}
+      .status{font-size:12px;font-weight:bold;margin-top:8px;min-height:16px;color:#F4C531;}
+    </style></head><body>
+    <div class="box">
+      <h1>Devorador de Sons</h1>
+      <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
+      <div class="boss-sprite" id="boss">👾</div>
+      <div class="prompt" id="prompt">Use o poder correto!</div>
+      <div class="grid">
+        <button class="btn-atk" style="background:#8E5FC7;" onclick="attack('autenticidade')">Autenticidade</button>
+        <button class="btn-atk" style="background:#D9A62B;" onclick="attack('escuta')">Escuta</button>
+        <button class="btn-atk" style="background:#E8792B;" onclick="attack('disciplina')">Disciplina</button>
+        <button class="btn-atk" style="background:#3CB878;" onclick="attack('iniciativa')">Iniciativa</button>
+      </div>
+      <div class="status" id="status">Prepare seus acordes!</div>
+    </div>
+    <script>
+      let bossHp=100, curNeeded="", lastIndex=-1;
+      const TARGETS=[
+        {need:"autenticidade",text:"O vilão tenta fazer você copiar os outros!"},
+        {need:"escuta",text:"A banda perdeu a sintonia! Escute o grupo!"},
+        {need:"disciplina",text:"Solo difícil! Treine com repeteco!"},
+        {need:"iniciativa",text:"O palco está silencioso! Dê o primeiro acorde!"}
+      ];
+      function nextTurn(){
+        if(bossHp<=0){
+          document.getElementById("boss").textContent="💥🎉";
+          document.getElementById("prompt").textContent="VITÓRIA! O SOM FOI SALVO!";
+          document.getElementById("status").textContent="Os SuperSonoros venceram!";
+          return;
+        }
+        let nextIdx;
+        do {
+          nextIdx = Math.floor(Math.random() * TARGETS.length);
+        } while (nextIdx === lastIndex);
+        lastIndex = nextIdx;
+
+        const t = TARGETS[nextIdx];
+        curNeeded = t.need;
+        document.getElementById("prompt").textContent = t.text;
+      }
+      function attack(p){
+        if(bossHp<=0) return;
+        if(p===curNeeded){
+          bossHp-=25;
+          if(bossHp<0) bossHp=0;
+          document.getElementById("hp").style.width=bossHp+"%";
+          document.getElementById("status").textContent="ACORDE PERFEITO! -25% HP";
+          document.getElementById("boss").textContent="⚡👾⚡";
+          setTimeout(()=>{ if(bossHp>0) document.getElementById("boss").textContent="👾"; },250);
+        } else {
+          document.getElementById("status").textContent="Nota errada! Tente outro poder!";
+        }
+        setTimeout(nextTurn, 450);
+      }
+      nextTurn();
+    <\/script>
+    </body></html>`
+  };
+
+  function openGame(key){
+    const frame = document.getElementById("gameFrame");
+    if(key === 'quiz') {
+      frame.style.height = "380px";
+    } else if(key === 'insignia') {
+      frame.style.height = "520px";
+    } else {
+      frame.style.height = "440px";
+    }
+    frame.srcdoc = GAMES[key];
+    document.getElementById("gameModal").classList.add("show");
+  }
+  function closeGame(){
+    document.getElementById("gameModal").classList.remove("show");
+    document.getElementById("gameFrame").srcdoc = "";
+  }
+
+  /* Inicialização */
+  renderEnsaios();
+  renderSessions();
+</script>
+</body>
+</html>
