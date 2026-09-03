@@ -38,7 +38,7 @@
     z-index:1;
   }
 
-  /* ---- LOGO TOPO (SUPERSONOROS AMPLIADA) ---- */
+  /* ---- LOGO TOPO ---- */
   .brand-banner-single{
     display:flex; align-items:center; justify-content:center;
     margin-bottom:24px; padding:8px 0;
@@ -90,7 +90,7 @@
   .view{display:none;}
   .view.active{display:block;}
 
-  /* ---- ESTILOS VISUAIS HQ COM IMAGENS (HISTÓRIA) ---- */
+  /* ---- ESTRUTURA HISTÓRIA ---- */
   .comic-prologue-card{
     background:#fff; border:3.5px solid var(--ink); border-radius:18px; padding:18px;
     box-shadow:5px 5px 0 var(--ink); margin-bottom:24px; position:relative;
@@ -122,29 +122,55 @@
     padding:4px 16px; border-radius:999px; box-shadow:3px 3px 0 var(--ink); margin-bottom:4px;
   }
 
-  /* CARDS VISUAIS DE VILÕES CLICÁVEIS */
+  /* ---- CARDS DOS VILÕES EM ESTILO PASTA/DOSSIÊ ---- */
   .comic-villain-strip{
-    display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:24px;
+    display:grid; grid-template-columns:1fr; gap:22px; margin-bottom:24px;
   }
   @media(min-width:720px){
     .comic-villain-strip{
       grid-template-columns:repeat(2, 1fr);
-      gap:18px;
+      gap:22px;
     }
   }
-  .comic-villain-card{
-    background:#fff; border:3.5px solid var(--ink); border-radius:18px; padding:16px;
-    box-shadow:5px 5px 0 var(--ink); display:flex; gap:16px; align-items:center;
-    cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
+  
+  .folder-card-wrap{
     position:relative;
+    padding-top:14px;
+    cursor:pointer;
+    transition:transform .12s ease;
   }
-  .comic-villain-card:hover{
+  .folder-card-wrap:hover{
     transform:translate(-2px, -2px);
+  }
+  .folder-card-wrap:hover .comic-villain-card{
     box-shadow:7px 7px 0 var(--ink);
   }
-  .comic-villain-card:active{
+  .folder-card-wrap:active{
     transform:translate(2px, 2px);
-    box-shadow:2px 2px 0 var(--ink);
+  }
+
+  .folder-tab{
+    position:absolute;
+    top:0;
+    left:16px;
+    height:18px;
+    padding:2px 14px 0;
+    background:#fff;
+    border:3px solid var(--ink);
+    border-bottom:none;
+    border-radius:10px 10px 0 0;
+    font-family:'Bangers', cursive;
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--ink);
+    z-index:2;
+  }
+
+  .comic-villain-card{
+    background:#fff; border:3.5px solid var(--ink); border-radius:0 18px 18px 18px; padding:16px;
+    box-shadow:5px 5px 0 var(--ink); display:flex; gap:16px; align-items:center;
+    position:relative; z-index:1;
   }
   .villain-avatar-box{
     width:88px; height:120px; background:#171512; border:3px solid var(--ink); border-radius:14px;
@@ -153,21 +179,20 @@
   }
   .villain-silhouette{width:100%; height:100%; object-fit:contain; filter:invert(1);}
   .villain-body-box{flex:1;}
-  .villain-threat-badge{
-    font-family:'Bangers', cursive; font-size:12.5px; letter-spacing:.8px; text-transform:uppercase;
-    color:#fff; padding:2px 8px; border-radius:999px; border:2px solid var(--ink); display:inline-block; margin-bottom:4px;
-  }
   .villain-comic-phrase{
     font-family:'Comic Neue', cursive; font-style:italic; font-size:13.5px; color:#222;
     background:#FBF6EA; border-left:3.5px solid var(--ink); padding:6px 10px; border-radius:4px;
     margin:6px 0 0; line-height:1.35;
   }
   .click-hint{
-    display:inline-flex; align-items:center; gap:4px; font-family:'Bangers', cursive; font-size:11px;
-    letter-spacing:0.8px; text-transform:uppercase; color:var(--red); margin-top:4px;
+    display:inline-flex; align-items:center; gap:6px; font-family:'Bangers', cursive; font-size:12px;
+    letter-spacing:0.8px; text-transform:uppercase; color:var(--red); margin-top:8px;
+  }
+  .icon-lupa{
+    width:14px; height:14px; object-fit:contain; display:inline-block; vertical-align:middle;
   }
 
-  /* CARD DO DEVORADOR CLICÁVEL */
+  /* ---- CHEFÃO FINAL CLICÁVEL ---- */
   .clickable-boss{
     cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
   }
@@ -389,29 +414,56 @@
   .hidden{display:none !important;}
 
   /* ---- MODAL DE JOGOS & VILÕES ---- */
-  .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center; justify-content:center; z-index:50; padding:16px;}
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.75); display:none;
+    align-items:center; justify-content:center; z-index:50; padding:16px;
+  }
   .modal-overlay.show{display:flex;}
   .modal-box{width:100%; max-width:440px; max-height:92vh; background:transparent; border-radius:20px; position:relative;}
-  .modal-close{position:absolute; top:-12px; right:-12px; z-index:10; background:var(--ink); color:#fff; border:2px solid #fff; border-radius:50%; width:34px; height:34px; font-size:16px; cursor:pointer; font-weight:bold;}
+  .modal-close{
+    position:absolute; top:-12px; right:-12px; z-index:10; background:var(--ink); color:#fff;
+    border:2px solid #fff; border-radius:50%; width:34px; height:34px; font-size:16px;
+    cursor:pointer; font-weight:bold;
+  }
   .modal-box iframe{width:100%; height:540px; border:4px solid var(--ink); border-radius:20px; background:#fff; display:block;}
 
-  /* MODAL TEMÁTICO DE VILÕES */
-  .villain-modal-box{
-    width:100%; max-width:540px; max-height:90vh; overflow-y:auto;
-    background:var(--cream); border:4px solid var(--ink); border-radius:20px;
-    box-shadow:8px 8px 0 var(--ink); padding:24px; position:relative;
+  /* ---- MODAL DOSSIÊ COM FUNDO RETICULADO VERMELHO ---- */
+  .villain-dossier-modal-box{
+    width:100%; max-width:580px; max-height:90vh; overflow-y:auto;
+    background:var(--red);
+    border:4px solid var(--ink); border-radius:22px;
+    box-shadow:8px 8px 0 var(--ink); padding:24px 20px; position:relative;
   }
-  .villain-modal-header{
+  .villain-dossier-modal-box::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.22) 1.6px, transparent 1.6px);
+    background-size:16px 16px;pointer-events:none;
+    border-radius:18px;
+  }
+
+  /* FOLHA INTERNA ESTILO DOCUMENTO */
+  .dossier-paper{
+    position:relative; z-index:1; background:#fff;
+    border:3px solid var(--ink); border-radius:14px;
+    padding:22px; box-shadow:5px 5px 0 var(--ink);
+  }
+  .dossier-stamp{
+    display:inline-block; font-family:'Bangers', cursive; font-size:12.5px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--red); border:2px dashed var(--red); padding:2px 8px;
+    border-radius:4px; margin-bottom:10px; transform:rotate(-2deg);
+  }
+  .dossier-header{
     display:flex; gap:16px; align-items:center; margin-bottom:16px;
+    border-bottom:2px dashed #ddd; padding-bottom:12px;
   }
-  .villain-modal-avatar{
+  .dossier-avatar{
     width:84px; height:110px; background:#171512; border:3px solid var(--ink); border-radius:12px;
     display:flex; align-items:center; justify-content:center; padding:4px; flex-shrink:0;
   }
-  .villain-detail-section{
-    margin-bottom:14px; font-size:14px; line-height:1.5; color:#222;
+  .dossier-section{
+    margin-bottom:14px; font-size:14px; line-height:1.55; color:#000000;
   }
-  .villain-detail-title{
+  .dossier-section-title{
     font-family:'Bangers', cursive; font-size:16px; letter-spacing:1px;
     text-transform:uppercase; margin-bottom:4px;
   }
@@ -438,108 +490,126 @@
     <div class="tab" id="tabBtnJogos" onclick="switchTab('jogos')">Joguinhos</div>
   </div>
 
-  <!-- ===================== 1. HISTÓRIA (NARRATIVA COM INÍCIO, MEIO E FIM + CARDS CLICÁVEIS) ===================== -->
+  <!-- ===================== 1. HISTÓRIA ===================== -->
   <div id="view-historia" class="view active">
     
     <div class="panel">
       
-      <!-- INÍCIO: O CHAMADO DA LIGA -->
+      <!-- INÍCIO: TEXTOS EM PRETO ABSOLUTO -->
       <div class="comic-prologue-card">
         <span class="comic-tag">Início · O Chamado da Liga</span>
         <div class="prologue-img-wrap">
           <img src="insigniavermelha.png" alt="Brasão SuperSonoros" class="prologue-img" />
         </div>
         <div style="flex:1;">
-          <h2 style="font-family:'Bangers', cursive; font-size:23px; color:var(--red); margin:0 0 8px; text-transform:uppercase;">Ninguém Nasce Pronto: A Arte de se Tornar Herói</h2>
-          <p style="margin:0 0 8px; color:#222; font-size:14.5px; line-height:1.5;">SuperSonoros é a liga dos artistas da Guitarríssima. Este espetáculo não é sobre heróis com poderes mágicos, mas sobre <strong>como artistas se tornam super-heróis</strong>.</p>
-          <p style="margin:0; color:#444; font-size:14px; line-height:1.5;">Essa jornada nasceu do festival <em>Mundo Estranho</em> ("Ser estranho é ser único") e evoluiu para o nosso lema: <strong>Ser único é o seu superpoder</strong>. O superpoder não está na técnica fria ou velocidade dos dedos, mas nas atitudes e hábitos repetidos dia após dia.</p>
+          <h2 style="font-family:'Bangers', cursive; font-size:23px; color:#000000; margin:0 0 8px; text-transform:uppercase;">Ninguém Nasce Pronto: A Arte de se Tornar Herói</h2>
+          <p style="margin:0 0 8px; color:#000000; font-size:14.5px; line-height:1.5;">SuperSonoros é a liga dos artistas da Guitarríssima[cite: 1]. Este espetáculo não é sobre heróis com poderes mágicos, mas sobre como artistas se tornam super-heróis[cite: 1].</p>
+          <p style="margin:0; color:#000000; font-size:14px; line-height:1.5;">Essa jornada nasceu do festival Mundo Estranho ("Ser estranho é ser único") e evoluiu para o nosso lema: Ser único é o seu superpoder[cite: 1]. O superpoder não está na técnica fria ou velocidade dos dedos, mas nas atitudes e hábitos repetidos dia após dia[cite: 1].</p>
         </div>
       </div>
 
-      <!-- MEIO: A JORNADA CONTRA OS COMPORTAMENTOS (VILÕES CLICÁVEIS) -->
+      <!-- AS 4 AMEAÇAS COM FORMATO DE PASTA/DOSSIÊ -->
       <div class="comic-act-header">
-        <span class="comic-badge-act">Meio · As 4 Ameaças Invisíveis</span>
-        <p style="font-size:13px; color:#555; margin:6px 0 0;">Eles não roubam instrumentos nem quebram palcos. Clique no card de cada vilão para investigar seu plano pedagógico:</p>
+        <span class="comic-badge-act">As 4 Ameaças</span>
+        <p style="font-size:13.5px; color:#000000; margin:6px 0 0;">Eles não roubam instrumentos nem quebram palcos[cite: 1]. Clique no card de cada vilão para investigar seu plano:</p>
       </div>
 
       <div class="comic-villain-strip">
         
-        <!-- COPIÃO -->
-        <div class="comic-villain-card" style="border-top:8px solid var(--purple);" onclick="openVillainModal('copiao')">
-          <div class="villain-avatar-box">
-            <img src="vilao1.png" alt="Copião" class="villain-silhouette" />
-          </div>
-          <div class="villain-body-box">
-            <span class="villain-threat-badge" style="background:var(--purple);">Desperta: Autenticidade</span>
-            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--purple); margin:3px 0 2px;">Copião <span style="font-size:13px; color:#888;">(Ensaio 1)</span></div>
-            <div style="font-size:13px; color:#555; line-height:1.35;">Não cria nada próprio. Tenta transformar inspiração sadia em imitação vazia.</div>
-            <div class="villain-comic-phrase">"Copiar é mais fácil. Se deu certo com ele, faz igual!"</div>
-            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
-          </div>
-        </div>
-
-        <!-- DECI & BEL -->
-        <div class="comic-villain-card" style="border-top:8px solid var(--gold);" onclick="openVillainModal('decibel')">
-          <div class="villain-avatar-box">
-            <img src="vilao2.png" alt="Deci & Bel" class="villain-silhouette" />
-          </div>
-          <div class="villain-body-box">
-            <span class="villain-threat-badge" style="background:var(--gold);">Desperta: Escuta Coletiva</span>
-            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--gold); margin:3px 0 2px;">Deci & Bel <span style="font-size:13px; color:#888;">(Ensaio 2)</span></div>
-            <div style="font-size:13px; color:#555; line-height:1.35;">Duas irmãs barulhentas que transformam ensaios em disputas individuais de volume.</div>
-            <div class="villain-comic-phrase">"Se eu tocar mais alto, vão me ouvir! O importante é aparecer!"</div>
-            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+        <!-- VILÃO 1 -->
+        <div class="folder-card-wrap" onclick="openVillainModal('copiao')">
+          <div class="folder-tab" style="border-top:3px solid var(--purple);">Dossiê #01</div>
+          <div class="comic-villain-card" style="border-top:5px solid var(--purple);">
+            <div class="villain-avatar-box">
+              <img src="vilao1.png" alt="Vilão 1" class="villain-silhouette" />
+            </div>
+            <div class="villain-body-box">
+              <div style="font-family:'Bangers', cursive; font-size:22px; color:var(--purple); margin:0 0 2px;">Vilão 1</div>
+              <div style="font-size:13px; color:#333; line-height:1.35;">Não cria nada próprio[cite: 1]. Tenta transformar inspiração sadia em imitação vazia[cite: 1].</div>
+              <div class="villain-comic-phrase">"Copiar é mais fácil. Se deu certo com ele, faz igual!"[cite: 1]</div>
+              <div class="click-hint">
+                <img src="lupa.png" class="icon-lupa" alt="Lupa" /> Investigar Dossiê ›
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- O ENSAIADOR -->
-        <div class="comic-villain-card" style="border-top:8px solid var(--orange);" onclick="openVillainModal('ensaiador')">
-          <div class="villain-avatar-box">
-            <img src="vilao3.png" alt="O Ensaiador" class="villain-silhouette" />
-          </div>
-          <div class="villain-body-box">
-            <span class="villain-threat-badge" style="background:var(--orange);">Desperta: Disciplina / Repeteco</span>
-            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--orange); margin:3px 0 2px;">O Ensaiador <span style="font-size:13px; color:#888;">(Ensaio 3)</span></div>
-            <div style="font-size:13px; color:#555; line-height:1.35;">Gosta do "quase". Transforma um pequeno acerto na ilusão de que já basta.</div>
-            <div class="villain-comic-phrase">"Uma vez basta! Já tá bom, no palco a sorte resolve!"</div>
-            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+        <!-- VILÃO 2 -->
+        <div class="folder-card-wrap" onclick="openVillainModal('decibel')">
+          <div class="folder-tab" style="border-top:3px solid var(--gold);">Dossiê #02</div>
+          <div class="comic-villain-card" style="border-top:5px solid var(--gold);">
+            <div class="villain-avatar-box">
+              <img src="vilao2.png" alt="Vilão 2" class="villain-silhouette" />
+            </div>
+            <div class="villain-body-box">
+              <div style="font-family:'Bangers', cursive; font-size:22px; color:var(--gold); margin:0 0 2px;">Vilão 2</div>
+              <div style="font-size:13px; color:#333; line-height:1.35;">Uma dupla barulhenta que transforma ensaios em disputas individuais de volume[cite: 1].</div>
+              <div class="villain-comic-phrase">"Se eu tocar mais alto, vão me ouvir! O importante é aparecer!"[cite: 1]</div>
+              <div class="click-hint">
+                <img src="lupa.png" class="icon-lupa" alt="Lupa" /> Investigar Dossiê ›
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- VÉSPERA -->
-        <div class="comic-villain-card" style="border-top:8px solid var(--green);" onclick="openVillainModal('vespera')">
-          <div class="villain-avatar-box">
-            <img src="vilao4.png" alt="Véspera" class="villain-silhouette" />
+        <!-- VILÃO 3 -->
+        <div class="folder-card-wrap" onclick="openVillainModal('ensaiador')">
+          <div class="folder-tab" style="border-top:3px solid var(--orange);">Dossiê #03</div>
+          <div class="comic-villain-card" style="border-top:5px solid var(--orange);">
+            <div class="villain-avatar-box">
+              <img src="vilao3.png" alt="Vilão 3" class="villain-silhouette" />
+            </div>
+            <div class="villain-body-box">
+              <div style="font-family:'Bangers', cursive; font-size:22px; color:var(--orange); margin:0 0 2px;">Vilão 3</div>
+              <div style="font-size:13px; color:#333; line-height:1.35;">Gosta do "quase"[cite: 1]. Transforma um pequeno acerto na ilusão de que já basta[cite: 1].</div>
+              <div class="villain-comic-phrase">"Uma vez basta! Já tá bom, no palco a sorte resolve!"[cite: 1]</div>
+              <div class="click-hint">
+                <img src="lupa.png" class="icon-lupa" alt="Lupa" /> Investigar Dossiê ›
+              </div>
+            </div>
           </div>
-          <div class="villain-body-box">
-            <span class="villain-threat-badge" style="background:var(--green);">Desperta: Iniciativa</span>
-            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--green); margin:3px 0 2px;">Véspera <span style="font-size:13px; color:#888;">(Ensaio 4)</span></div>
-            <div style="font-size:13px; color:#555; line-height:1.35;">Surge silenciosa no segundo antes da ação, plantando a dúvida paralisante.</div>
-            <div class="villain-comic-phrase">"Será que você está pronto? E se der branco? Melhor deixar pra depois..."</div>
-            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+        </div>
+
+        <!-- VILÃO 4 -->
+        <div class="folder-card-wrap" onclick="openVillainModal('vespera')">
+          <div class="folder-tab" style="border-top:3px solid var(--green);">Dossiê #04</div>
+          <div class="comic-villain-card" style="border-top:5px solid var(--green);">
+            <div class="villain-avatar-box">
+              <img src="vilao4.png" alt="Vilão 4" class="villain-silhouette" />
+            </div>
+            <div class="villain-body-box">
+              <div style="font-family:'Bangers', cursive; font-size:22px; color:var(--green); margin:0 0 2px;">Vilão 4</div>
+              <div style="font-size:13px; color:#333; line-height:1.35;">Surge silenciosa no segundo antes da ação, plantando a dúvida paralisante[cite: 1].</div>
+              <div class="villain-comic-phrase">"Será que você está pronto? E se der branco? Melhor deixar pra depois..."[cite: 1]</div>
+              <div class="click-hint">
+                <img src="lupa.png" class="icon-lupa" alt="Lupa" /> Investigar Dossiê ›
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
 
-      <!-- FIM PARTE 1: A REVELAÇÃO DA HIERARQUIA & O DEVORADOR -->
-      <div class="panel clickable-boss" style="background:#171512; color:#fff; border-color:var(--yellow); box-shadow:none; margin:0 0 20px; padding:20px;" onclick="openVillainModal('devorador')">
+      <!-- CHEFÃO FINAL: TEXTOS TOTALMENTE EM BRANCO -->
+      <div class="panel clickable-boss" style="background:#171512; border-color:var(--yellow); box-shadow:none; margin:0 0 20px; padding:20px;" onclick="openVillainModal('devorador')">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <span style="background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:13.5px; letter-spacing:1px; padding:3px 12px; border-radius:999px; text-transform:uppercase;">Fim · A Conexão Sombria</span>
-          <span style="color:var(--yellow); font-size:11.5px; font-family:'Bangers', cursive; letter-spacing:1px;">🔍 CLIQUE PARA ABRIR O DOSSIÊ</span>
+          <span style="background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:13.5px; letter-spacing:1px; padding:3px 12px; border-radius:999px; text-transform:uppercase;">A Conexão Sombria</span>
+          <span style="color:#FFFFFF; font-size:12px; font-family:'Bangers', cursive; letter-spacing:1px; display:inline-flex; align-items:center; gap:6px;">
+            <img src="lupa.png" class="icon-lupa" style="filter:invert(1);" alt="Lupa" /> ABRIR ARQUIVO SECRETO
+          </span>
         </div>
-        <h3 style="font-family:'Bangers', cursive; font-size:23px; letter-spacing:1.2px; color:var(--yellow); margin:0 0 8px; text-transform:uppercase;">O Chefão Final: O Devorador de Sons</h3>
-        <p style="margin:0 0 10px; color:#ddd; font-size:14px; line-height:1.55;">Os quatro vilões nunca foram ataques isolados. Eles trabalhavam para preparar um banquete: músicas frágeis, sem identidade e desatentas — o alimento perfeito que fortalece a Grande Criatura!</p>
-        <p style="margin:0; color:#fff; font-size:14px; line-height:1.55;"><strong>O Golpe de Mestre da Liga:</strong> No palco, os SuperSonoros reúnem <strong>Autenticidade, Escuta, Disciplina e Iniciativa</strong> simultaneamente. A música boa, viva e autêntica é indigesta para a sombra e a desfaz por completo.</p>
+        <h3 style="font-family:'Bangers', cursive; font-size:23px; letter-spacing:1.2px; color:#FFFFFF; margin:0 0 8px; text-transform:uppercase;">O Chefão Final:</h3>
+        <p style="margin:0 0 10px; color:#FFFFFF; font-size:14px; line-height:1.55;">Os quatro vilões nunca foram ataques isolados[cite: 1]. Eles trabalhavam para preparar um banquete: músicas frágeis, sem identidade e desatentas — o alimento perfeito que fortalece a Grande Criatura[cite: 1]!</p>
+        <p style="margin:0; color:#FFFFFF; font-size:14px; line-height:1.55;">O Golpe de Mestre da Liga: No palco, os SuperSonoros reúnem Autenticidade, Escuta, Disciplina e Iniciativa simultaneamente[cite: 1]. A música boa, viva e autêntica é indigesta para a sombra e a desfaz por completo[cite: 1].</p>
       </div>
 
-      <!-- FIM PARTE 2: A VERDADEIRA VITÓRIA -->
+      <!-- EPÍLOGO: TOM DE SUSPENSE E PREPARAÇÃO PRÉ-SHOW -->
       <div class="comic-prologue-card" style="background:#FFF9E6; border-color:var(--ink); margin-bottom:0; text-align:center; justify-content:center;">
         <div style="max-width:800px; margin:0 auto;">
-          <span class="comic-tag" style="background:var(--red); color:#fff;">Epílogo · A Revelação da Vitória</span>
-          <h2 style="font-family:'Bangers', cursive; font-size:24px; color:var(--ink); margin:6px 0 8px; text-transform:uppercase;">Você Não Vence no Palco. Você Apenas Celebra!</h2>
-          <p style="margin:0 0 12px; color:#333; font-size:14.5px; line-height:1.55;">A batalha de um artista não ocorre sob os holofotes. Ela ocorre no quarto ao praticar mais uma vez, na sala de aula ao ouvir o colega e na coragem de tocar a primeira nota. No palco, os SuperSonoros apenas descobrem que já haviam vencido!</p>
-          <div style="font-family:'Bangers', cursive; font-size:24px; letter-spacing:1px; color:var(--red); text-transform:uppercase; text-shadow:1px 1px 0 rgba(0,0,0,0.15);">SER ÚNICO É O SEU SUPERPODER!</div>
+          <span class="comic-tag" style="background:var(--red); color:#fff;">Epílogo · O Palco da Decisão</span>
+          <h2 style="font-family:'Bangers', cursive; font-size:24px; color:var(--ink); margin:6px 0 8px; text-transform:uppercase;">A Batalha Não Começa no Palco. Ela Termina Lá!</h2>
+          <p style="margin:0 0 12px; color:#000000; font-size:14.5px; line-height:1.55;">A preparação de um artista não acontece sob os holofotes. Ela foi construída no quarto ao praticar mais uma vez, nos ensaios ao ouvir atentamente cada colega e na coragem de sustentar a primeira nota[cite: 1]. No palco, a Liga dos SuperSonoros enfrentará o teste final para provar que a união da sua música é mais forte que qualquer ameaça.</p>
+          <div style="font-family:'Bangers', cursive; font-size:24px; letter-spacing:1px; color:var(--red); text-transform:uppercase; text-shadow:1px 1px 0 rgba(0,0,0,0.15);">SER ÚNICO É O SEU SUPERPODER![cite: 1]</div>
         </div>
       </div>
 
@@ -573,8 +643,8 @@
       <button class="back-btn" onclick="goEnsaiosHome()">← Voltar aos Ensaios</button>
 
       <div class="panel">
-        <h1 id="ensTitle" style="font-size:30px;text-align:left;color:var(--yellow);margin:0 0 4px;">Ensaio 1</h1>
-        <p class="lede" style="color:#666;text-align:left;margin-bottom:14px;max-width:none;" id="ensDate">12/09 (sáb)</p>
+        <h1 id="ensTitle" style="font-size:30px;text-align:left;color:var(--yellow);margin:0 0 4px;">Ensaio 1[cite: 1]</h1>
+        <p class="lede" style="color:#666;text-align:left;margin-bottom:14px;max-width:none;" id="ensDate">12/09 (sáb)[cite: 1]</p>
 
         <div class="info-item">
           <span><strong>Local:</strong> Sede da Guitarríssima — Rua Coronel Corte Real, 889 - Petrópolis, Porto Alegre.</span>
@@ -590,8 +660,8 @@
               <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
             </div>
             <div>
-              <div style="font-family:'Bangers', cursive; font-size:19px; letter-spacing:1px; color:var(--yellow); text-transform:uppercase;" id="ensVillainTitle">Ameaça: Vilão 1</div>
-              <div style="font-size:13px; color:#ccc; line-height:1.45; margin-top:3px;">Identidade revelada no álbum de figurinhas! Derrote esta atitude no ensaio.</div>
+              <div style="font-family:'Bangers', cursive; font-size:19px; letter-spacing:1px; color:var(--yellow); text-transform:uppercase;" id="ensVillainTitle">Ameaça: Vilão 1[cite: 1]</div>
+              <div style="font-size:13px; color:#ccc; line-height:1.45; margin-top:3px;">Identidade confidencial! Silhueta detectada nos radares da Guitarríssima.</div>
             </div>
           </div>
 
@@ -628,8 +698,8 @@
       <button class="back-btn" onclick="goSessionHome()">← Voltar às Sessões</button>
 
       <div class="panel">
-        <h1 id="sessTitle" style="font-size:30px;text-align:left;margin:0 0 4px;">Sessão 1</h1>
-        <p class="lede" style="color:#555;margin-bottom:0;text-align:left;max-width:none;" id="sessSubtitle">24/10 · 16h</p>
+        <h1 id="sessTitle" style="font-size:30px;text-align:left;margin:0 0 4px;">Sessão 1[cite: 1]</h1>
+        <p class="lede" style="color:#555;margin-bottom:0;text-align:left;max-width:none;" id="sessSubtitle">24/10 · 16h[cite: 1]</p>
       </div>
 
       <div class="grid-detail-cols" style="margin-bottom:20px;">
@@ -641,14 +711,14 @@
         <div class="panel" style="margin-bottom:0;">
           <div class="section-title">Recapitulando a jornada</div>
           <div class="recap-box">
-            Até aqui, os SuperSonoros já conquistaram os quatro superpoderes nos Grandes Ensaios:
+            Até aqui, os SuperSonoros já conquistaram os quatro superpoderes nos Grandes Ensaios[cite: 1]:
             <div class="chip-list">
               <span class="power-chip" style="background:#8E5FC7;">Autenticidade</span>
               <span class="power-chip" style="background:#D9A62B;">Escuta</span>
               <span class="power-chip" style="background:#E8792B;">Disciplina</span>
               <span class="power-chip" style="background:#3CB878;">Iniciativa</span>
             </div>
-            <p style="margin:14px 0 0;">No palco, a integração total dessas atitudes destrói o Devorador de Sons!</p>
+            <p style="margin:14px 0 0;">No palco, a união de toda essa energia sonora será liberada para vencer o confronto final!</p>
           </div>
         </div>
       </div>
@@ -656,9 +726,9 @@
       <div class="grid-detail-cols">
         <div class="panel" style="margin-bottom:0;">
           <div class="section-title">Informações práticas</div>
-          <div class="info-item"><strong>Local:</strong> Teatro Unisinos — Av. Dr. Nilo Peçanha, 1600 - Boa Vista, Porto Alegre.</div>
-          <div class="info-item"><strong>Estacionamento:</strong> No local (estacionamento terceirizado da Unisinos).</div>
-          <div class="info-item"><strong>Check-in de alunos:</strong> Deixe seu artista com a equipe responsável com 40 minutos de antecedência.</div>
+          <div class="info-item"><strong>Local:</strong> Teatro Unisinos — [Endereço completo / Link Maps].</div>
+          <div class="info-item"><strong>Estacionamento:</strong> [informações de vagas / valor / local].</div>
+          <div class="info-item"><strong>Check-in de alunos:</strong> Deixe seu artista com a equipe responsável antes do espetáculo. Retirada ao final da sessão.</div>
         </div>
 
         <div class="panel" style="margin-bottom:0;">
@@ -730,11 +800,11 @@
   </div>
 </div>
 
-<!-- MODAL DE DETALHES DO VILÃO (DOSSIÊ CLICÁVEL) -->
+<!-- MODAL DOSSIÊ DOS VILÕES (ESTILO ARQUIVO CONFIDENCIAL COM RETÍCULA VERMELHA) -->
 <div class="modal-overlay" id="villainModal">
-  <div class="villain-modal-box" id="villainModalContent">
+  <div class="villain-dossier-modal-box" id="villainModalContent">
     <button class="modal-close" onclick="closeVillainModal()">✕</button>
-    <div id="villainModalBody"></div>
+    <div class="dossier-paper" id="villainModalBody"></div>
   </div>
 </div>
 
@@ -765,107 +835,103 @@
     }
   }
 
-  /* ---------------- DOSSIÊ COMPLETO DOS VILÕES (BASEADO NO CONCEITUAL) ---------------- */
-  const VILOES_DATA = {
+  /* ---------------- DOSSIÊ ANÔNIMO DOS VILÕES ---------------- */
+  const VILOES_ANONIMOS = {
     copiao: {
-      name: "Copião",
-      arquetipo: "Apelido · Ensaio 1",
+      code: "VILÃO 1",
+      arquetipo: "Arquétipo: Apelido",
       color: "#8E5FC7",
       img: "vilao1.png",
-      quem: "Representa a perda da autenticidade. O verdadeiro artista aprende observando e se inspirando, mas o Copião substitui a identidade pela pura imitação. Ele não cria, apenas reproduz.",
-      motivacao: "Não suporta que exista algo único e original que ele mesmo não consiga inventar. Seu objetivo é fazer tantas cópias idênticas que todas as músicas pareçam iguais.",
-      prejuizo: "Estimula comparações impossíveis: querer tocar ou cantar exatamente igual a outro artista, apagando a história, o timbre e a personalidade de quem está no palco.",
+      quem: "Representa a perda da originalidade. Ele não cria, apenas reproduz. Convence o artista de que copiar outra pessoa é mais fácil do que descobrir e assumir sua própria voz.",
+      motivacao: "Sente atração por tudo aquilo que é único porque é incapaz de criar algo seu. Seu plano é espalhar tantas imitações que todas as músicas fiquem idênticas.",
       posturas: ["'Copiar é mais fácil.'", "'Se já deu certo com ele, faz igual.'", "'Não inventa moda.'", "'O objetivo é ficar idêntico ao original.'"],
-      derrota: "Fazendo escolhas próprias. O Copião pode copiar uma nota ou um solo, mas nunca consegue copiar a alma e a história de quem está tocando!",
-      superpoder: "Autenticidade (Ser único é o seu superpoder)."
+      derrota: "Fazendo escolhas próprias! Uma nota ou solo podem ser imitados, mas ninguém consegue copiar a história e a sensibilidade de quem você é.",
+      superpoder: "A Autenticidade de ser quem você é."
     },
     decibel: {
-      name: "Deci & Bel (As Irmãs Decibel)",
-      arquetipo: "Dupla · Ensaio 2",
+      code: "VILÃO 2",
+      arquetipo: "Arquétipo: Dupla",
       color: "#D9A62B",
       img: "vilao2.png",
-      quem: "Duas irmãs inseparáveis inspiradas nos decibéis. Deci é impulsiva e aumenta o volume antes de ouvir; Bel é competitiva e sempre responde ainda mais alto. Nenhuma escuta ninguém.",
-      motivacao: "Acreditam que o músico mais importante é aquele que toca mais alto e abafa os outros. Odeiam bandas com dinâmica equilibrada e sensibilidade coletiva.",
-      prejuizo: "Transformam grupos em ringues de disputa de volume. A clareza some e a música se torna um ruído caótico onde ninguém se entende.",
-      posturas: ["'Se eu tocar mais alto, vão me ouvir.'", "'O importante é você aparecer sozinho.'", "'Toca mais forte, não precisa prestar atenção nos outros.'"],
-      derrota: "Escutando. Percebendo quando é hora de solar, de acompanhar, de sustentar ou de fazer silêncio. Fazer música em grupo é conversar, não competir.",
-      superpoder: "Escuta (Tocar junto e transformar música em diálogo)."
+      quem: "Uma dupla inseparável onde uma é impulsiva e toca antes de entender, e a outra é competitiva e responde sempre mais forte. Nenhuma sabe ouvir.",
+      motivacao: "Acreditam que o músico mais importante é aquele que toca mais alto e ocupa mais espaço. Detestam quando um grupo toca em harmonia.",
+      posturas: ["'Se eu tocar mais alto, vão me ouvir.'", "'O importante é aparecer sozinho.'", "'Toca mais forte, não precisa prestar atenção nos outros.'"],
+      derrota: "Escutando! Percebendo que fazer música em grupo não é disputar volume, mas conversar, respeitar os espaços e construir algo coletivo.",
+      superpoder: "A Escuta atenta e o cuidado com o som."
     },
     ensaiador: {
-      name: "O Ensaiador",
-      arquetipo: "Função / Profissão · Ensaio 3",
+      code: "VILÃO 3",
+      arquetipo: "Arquétipo: Função",
       color: "#E8792B",
       img: "vilao3.png",
-      quem: "Representa a falsa sensação de preparo. Ele nunca manda desistir, apenas convence o aluno de que acertar uma única vez por sorte já é o bastante.",
-      motivacao: "Acredita em atalhos e prega que talento puro substitui a prática. Quer provar que dedicação e repetição consciente são perdas de tempo.",
-      prejuizo: "Produz artistas frágeis. Quem depende da sorte se desestabiliza diante do público ou de qualquer imprevisto que surja no palco.",
+      quem: "Representa a falsa sensação de preparo. Ele nunca diz para abandonar o treino, apenas afirma que acertar uma única vez por acaso já é o suficiente.",
+      motivacao: "Acredita em atalhos e tenta provar que talento substitui a dedicação, porque o esforço dos alunos expõe sua própria falta de disciplina.",
       posturas: ["'Uma vez basta.'", "'Já tá bom, você já sabe.'", "'No palco sai na hora!'", "'Quem tem talento não precisa ensaiar tanto.'"],
-      derrota: "Com o método do Repeteco! Repetir com intenção até que a segurança substitua a sorte e dê verdadeira liberdade no palco.",
-      superpoder: "Disciplina (Construir confiança pela prática consciente)."
+      derrota: "Com o Repeteco! Repetir com atenção e consciência até que a execução deixe de depender da sorte e se torne segurança real.",
+      superpoder: "A Disciplina consciente da prática."
     },
     vespera: {
-      name: "Véspera",
-      arquetipo: "Nome Próprio Enigmático · Ensaio 4",
+      code: "VILÃO 4",
+      arquetipo: "Arquétipo: Nome Próprio Enigmático",
       color: "#3CB878",
       img: "vilao4.png",
-      quem: "Representa o autoboicote silencioso. Ela habita os momentos anteriores à ação: a véspera de subir no palco, o segundo antes de tocar a primeira nota ou de mostrar uma música.",
-      motivacao: "Sente inveja de quem realiza. Vive presa ao instante do medo e tenta paralisar o artista antes que ele dê o passo definitivo.",
-      prejuizo: "Não precisa estragar o ensaio todo; basta plantar uma semente de dúvida segundos antes de começar para fazer o artista travar ou desistir.",
-      posturas: ["'Será que você está realmente pronto?'", "'E se esquecer a letra na frente de todo mundo?'", "'E se der branco? Melhor nem subir hoje...'"],
-      derrota: "Dando o primeiro passo! Tocando a primeira nota. A confiança não aparece antes da ação: ela nasce enquanto agimos, mesmo com frio na barriga.",
-      superpoder: "Iniciativa (Coragem não é não ter medo, é agir apesar dele)."
+      quem: "Representa a dúvida e o autoboicote. Ela não ataca durante os meses de treino; espera a fração de segundo antes da primeira nota para plantar a desconfiança.",
+      motivacao: "Sente inveja de quem tem a coragem de realizar. Vive presa ao instante anterior à ação e tenta paralisar o artista antes da entrada no palco.",
+      posturas: ["'Será que você está pronto?'", "'E se você esquecer a letra?'", "'E se der branco na frente de todos? Melhor não tocar hoje...'"],
+      derrota: "Começando! A confiança não precisa existir 100% antes da ação. Quando o artista respira fundo e toca a primeira nota, ela já começa a perder.",
+      superpoder: "A Iniciativa de agir apesar do medo."
     },
     devorador: {
-      name: "O Devorador de Sons",
-      arquetipo: "Criatura / Chefão Final · O Grande Show",
+      code: "CHEFÃO FINAL",
+      arquetipo: "Arquétipo: Criatura",
       color: "#E63946",
       img: "vilao1.png",
-      quem: "A personificação da consequência de todos os outros vilões reunidos. É o silêncio vazio, o desinteresse e a ausência do brilho artístico.",
-      motivacao: "Alimenta-se de música descuidada, sem identidade e desorganizada. Quanto mais músicas vazias são produzidas, mais forte ele se torna.",
-      prejuizo: "Comanda secretamente os quatro vilões para esvaziar a arte dos alunos da Guitarríssima e transformá-la em banquete fácil.",
-      posturas: ["Alimenta-se da falta de identidade, da falta de escuta, da preguiça e do medo de agir."],
-      derrota: "Música de qualidade autêntica! Ele não é derrotado com socos, mas com a união simultânea dos quatro superpoderes executados no palco.",
-      superpoder: "Integração (Todos os 4 superpoderes unidos no mesmo acorde)."
+      quem: "A ameaça oculta por trás de todos os comportamentos. Ele se fortalece e cresce quando a música se torna vazia, sem escuta, descuidada ou paralisada pela dúvida.",
+      motivacao: "Descobriu que músicas sem identidade são muito mais fáceis de devorar. Por isso, comandava as quatro ameaças para preparar seu banquete.",
+      posturas: ["Alimenta-se do descuido, da imitação sem alma e da desistência diante do palco."],
+      derrota: "Música de qualidade verdadeira! Ele é derrotado quando os quatro superpoderes são reunidos em um único acorde no grande espetáculo.",
+      superpoder: "A Integração de todas as atitudes juntas."
     }
   };
 
   function openVillainModal(key){
-    const v = VILOES_DATA[key];
+    const v = VILOES_ANONIMOS[key];
     const body = document.getElementById("villainModalBody");
     
     let posturasHtml = v.posturas.map(p => `<li>${p}</li>`).join("");
 
     body.innerHTML = `
-      <div class="villain-modal-header">
-        <div class="villain-modal-avatar">
-          <img src="${v.img}" alt="${v.name}" style="width:100%;height:100%;object-fit:contain;filter:invert(1);" />
+      <div class="dossier-stamp">ARQUIVO CONFIDENCIAL // LIGA SUPERSONOROS</div>
+      <div class="dossier-header">
+        <div class="dossier-avatar">
+          <img src="${v.img}" alt="${v.code}" style="width:100%;height:100%;object-fit:contain;filter:invert(1);" />
         </div>
         <div>
-          <span style="background:${v.color};color:#fff;font-family:'Bangers',cursive;font-size:12px;padding:2px 8px;border-radius:999px;border:2px solid var(--ink);text-transform:uppercase;">${v.arquetipo}</span>
-          <h2 style="font-family:'Bangers',cursive;font-size:26px;margin:4px 0 2px;color:${v.color};-webkit-text-stroke:0.5px var(--ink);">${v.name}</h2>
-          <div style="font-size:12.5px;color:#666;">Dossiê Pedagógico Guitarríssima</div>
+          <span style="background:${v.color};color:#fff;font-family:'Bangers',cursive;font-size:11px;padding:2px 8px;border-radius:999px;border:1.5px solid var(--ink);text-transform:uppercase;">${v.arquetipo}</span>
+          <h2 style="font-family:'Bangers',cursive;font-size:26px;margin:4px 0 2px;color:${v.color};-webkit-text-stroke:0.5px var(--ink);">${v.code}</h2>
+          <div style="font-size:12px;color:#666;">Status: Identidade sob sigilo</div>
         </div>
       </div>
 
-      <div class="villain-detail-section">
-        <div class="villain-detail-title" style="color:var(--ink);">Quem é o vilão:</div>
+      <div class="dossier-section">
+        <div class="dossier-section-title" style="color:var(--ink);">Comportamento Detectado:</div>
         <p style="margin:0;">${v.quem}</p>
       </div>
 
-      <div class="villain-detail-section">
-        <div class="villain-detail-title" style="color:var(--red);">A Motivação Secreta:</div>
+      <div class="dossier-section">
+        <div class="dossier-section-title" style="color:var(--red);">A Motivação Oculta:</div>
         <p style="margin:0;">${v.motivacao}</p>
       </div>
 
-      <div class="villain-detail-section">
-        <div class="villain-detail-title" style="color:#555;">Frases que ele sussurra:</div>
-        <ul style="margin:4px 0;padding-left:20px;font-style:italic;">${posturasHtml}</ul>
+      <div class="dossier-section">
+        <div class="dossier-section-title" style="color:#555;">Frases que tenta espalhar:</div>
+        <ul style="margin:4px 0;padding-left:18px;font-style:italic;">${posturasHtml}</ul>
       </div>
 
-      <div class="villain-detail-section" style="background:#FFF9E6;border-left:4px solid ${v.color};padding:10px 12px;border-radius:6px;">
-        <div class="villain-detail-title" style="color:${v.color};">Como os SuperSonoros o derrotam:</div>
+      <div class="dossier-section" style="background:#FFF9E6;border-left:4px solid ${v.color};padding:10px 12px;border-radius:6px;">
+        <div class="dossier-section-title" style="color:${v.color};">Como enfraquecer esta ameaça:</div>
         <p style="margin:0 0 6px;">${v.derrota}</p>
-        <div style="font-size:13px;font-weight:900;color:var(--ink);">Superpoder Conquistado: <span style="color:${v.color};">${v.superpoder}</span></div>
+        <div style="font-size:13px;font-weight:900;color:var(--ink);">Atitude Desenvolvida: <span style="color:${v.color};">${v.superpoder}</span></div>
       </div>
     `;
 
@@ -879,7 +945,7 @@
   /* ---------------- DADOS DOS ENSAIOS ---------------- */
   const ENSAIOS = [
     { 
-      id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Copião", 
+      id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Vilão 1", 
       img:"vilao1.png",
       agenda: `
         <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Autenticidade (descobrir a própria voz e criar identidade)</p>
@@ -892,7 +958,7 @@
       `
     },
     { 
-      id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Deci & Bel", 
+      id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Vilão 2", 
       img:"vilao2.png",
       agenda: `
         <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Escuta (tocar junto e equilibrar o som do grupo)</p>
@@ -911,7 +977,7 @@
       `
     },
     { 
-      id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"O Ensaiador", 
+      id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"Vilão 3", 
       img:"vilao3.png",
       agenda: `
         <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Disciplina (o método do Repeteco)</p>
@@ -922,7 +988,7 @@
       `
     },
     { 
-      id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Véspera", 
+      id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Vilão 4", 
       img:"vilao4.png",
       agenda: `
         <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Iniciativa (coragem para subir ao palco)</p>
@@ -1063,14 +1129,14 @@
         {t:"Você trava numa parte difícil da música. O que faz?",o:[["Repito com calma até sair com segurança","disciplina"],["Pergunto pro colega e alinho com ele","escuta"],["Coloco meu jeito próprio e adapto a ideia","autenticidade"],["Toco mesmo com receio de errar","iniciativa"]]},
         {t:"Na hora de criar ou tocar junto, você prefere...",o:[["Equilibrar os instrumentos com a banda","escuta"],["Inventar algo original que é a sua cara","autenticidade"],["Praticar com o Repeteco antes","disciplina"],["Apresentar logo sem adiar","iniciativa"]]},
         {t:"Antes de subir no palco pela primeira vez, você pensa...",o:[["Vou dar o primeiro passo agora mesmo","iniciativa"],["Já repeti bastante, confio no treino","disciplina"],["Vou colocar minha identidade nessa canção","autenticidade"],["Vou ouvir atentamente a banda","escuta"]]},
-        {t:"O Copião tenta te convencer a imitar um ídolo. Você diz:",o:[["Eu prefiro colocar a minha própria voz","autenticidade"],["O que importa é repetir com dedicação","disciplina"],["Vou ouvir os colegas pra criar junto","escuta"],["Não tenho medo de ser eu mesmo","iniciativa"]]},
+        {t:"Tentam te convencer a apenas imitar outra pessoa. Você diz:",o:[["Eu prefiro colocar a minha própria voz","autenticidade"],["O que importa é repetir com dedicação","disciplina"],["Vou ouvir os colegas pra criar junto","escuta"],["Não tenho medo de ser eu mesmo","iniciativa"]]},
         {t:"Qual frase resume sua atitude?",o:[["Repito até a música não depender da sorte","disciplina"],["Fazer música é conversar e escutar","escuta"],["Ser único é o meu verdadeiro superpoder","autenticidade"],["A confiança aparece depois que eu começo","iniciativa"]]}
       ];
       var R={
-        autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1 (vs Copião)",d:"Seu superpoder: confiar na própria identidade e nunca apagar quem você é para virar uma cópia!"},
-        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2 (vs Deci & Bel)",d:"Seu superpoder: perceber tudo ao redor — tocar junto com generosidade e transformar som em conversa."},
-        disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3 (vs Ensaiador)",d:"Seu superpoder: o Repeteco consciente que transforma esforço diário em segurança real."},
-        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4 (vs Véspera)",d:"Seu superpoder: coragem para dar o primeiro acorde e agir apesar de qualquer dúvida!"}
+        autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1",d:"Seu superpoder: confiar na própria identidade e nunca apagar quem você é para virar uma cópia!"},
+        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2",d:"Seu superpoder: perceber tudo ao redor — tocar junto com generosidade e transformar som em conversa."},
+        disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3",d:"Seu superpoder: o Repeteco consciente que transforma esforço diário em segurança real."},
+        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4",d:"Seu superpoder: coragem para dar o primeiro acorde e agir apesar de qualquer dúvida!"}
       };
       var cur=0, sc={autenticidade:0,escuta:0,disciplina:0,iniciativa:0};
       function dots(){var h="";for(var i=0;i<Q.length;i++){h+='<span class="dot'+(i<cur?" done":"")+'">'+(i+1)+'</span>';}return h;}
@@ -1093,7 +1159,7 @@
         var r=R[w];
         document.getElementById("app").innerHTML =
           '<div class="badge" style="background:'+r.c+';">'+r.n.charAt(0)+'</div>'+
-          '<h2 style="margin:2px 0 4px;font-size:18px;">'+r.n+'</h2><p style="color:#666;font-weight:bold;font-size:11.5px;margin:0 0 8px;">Trabalhado no '+r.e+'</p>'+
+          '<h2 style="margin:2px 0 4px;font-size:18px;">'+r.n+'</h2><p style="color:#666;font-weight:bold;font-size:11.5px;margin:0 0 8px;">Desenvolvido no '+r.e+'</p>'+
           '<p style="text-align:left;background:#F4EFE1;padding:8px 10px;border-radius:6px;border-left:3px solid #171512;font-size:12.5px;line-height:1.4;margin:0;">'+r.d+'</p>'+
           '<button class="btn" onclick="restart()">Refazer Quiz</button>';
       }
@@ -1142,7 +1208,6 @@
       </div>
     </div>
 
-    <!-- CANVAS OCULTO PARA EXPORTAR ARTE -->
     <canvas id="exportCanvas" width="900" height="900"></canvas>
 
     <script>
@@ -1270,7 +1335,7 @@
       .status{font-size:12px;font-weight:bold;margin-top:8px;min-height:16px;color:#F4C531;}
     </style></head><body>
     <div class="box">
-      <h1>Devorador de Sons</h1>
+      <h1>Chefão Final</h1>
       <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
       <div class="boss-sprite" id="boss">👾</div>
       <div class="prompt" id="prompt">Use o poder correto!</div>
@@ -1285,9 +1350,9 @@
     <script>
       let bossHp=100, curNeeded="", lastIndex=-1;
       const TARGETS=[
-        {need:"autenticidade",text:"O vilão tenta fazer você copiar os outros!"},
-        {need:"escuta",text:"A banda perdeu a sintonia! Escute o grupo!"},
-        {need:"disciplina",text:"Solo difícil! Treine com repeteco!"},
+        {need:"autenticidade",text:"A ameaça tenta fazer você apenas copiar os outros!"},
+        {need:"escuta",text:"A banda perdeu o equilíbrio! Escute o grupo!"},
+        {need:"disciplina",text:"Solo difícil! Treine com o Repeteco!"},
         {need:"iniciativa",text:"O palco está silencioso! Dê o primeiro acorde!"}
       ];
       function nextTurn(){
