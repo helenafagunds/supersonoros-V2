@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SuperSonoros — Guitarríssima (Opção A: Abas Hero)</title>
+<title>SuperSonoros — Guitarríssima</title>
+
+<!-- GOOGLE FONTS: Bangers & Comic Neue (Bold) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --cream:#F8F6F0; --ink:#171512; --red:#FE0E31; --blue:#0383EC;
-    --yellow:#FDD12E; --purple:#AF7AD4; --orange:#FE7C02; --green:#019742;
+    --cream:#FBF6EA; --ink:#171512; --red:#E63946; --blue:#2C4E9B;
+    --yellow:#F4C531; --purple:#8E5FC7; --gold:#D9A62B; --orange:#E8792B; --green:#3CB878;
     --whatsapp:#25D366;
   }
   *{box-sizing:border-box;}
@@ -20,249 +22,1338 @@
     font-family:'Comic Neue', cursive, sans-serif;
     font-weight:700;
     background:var(--red); color:var(--ink); min-height:100vh;
-    display:flex; justify-content:center; padding:32px 16px 60px;
+    display:flex; justify-content:center; padding:32px 20px 60px;
     transition:background .4s ease;
   }
   body::before{
     content:"";position:fixed;inset:0;
-    background-image:radial-gradient(rgba(255,255,255,.18) 1.6px, transparent 1.6px);
+    background-image:radial-gradient(rgba(255,255,255,.14) 1.6px, transparent 1.6px);
     background-size:16px 16px;pointer-events:none;
   }
-  .stage{width:100%; max-width:1140px; position:relative; z-index:1;}
+  
+  .stage{
+    width:100%;
+    max-width:1180px;
+    position:relative;
+    z-index:1;
+  }
 
-  .brand-banner{display:flex; align-items:center; justify-content:center; margin-bottom:20px;}
-  .logo-super{height:clamp(100px, 12vw, 150px); width:auto; filter:drop-shadow(4px 4px 0 rgba(0,0,0,0.15));}
+  /* ---- LOGO TOPO (SUPERSONOROS AMPLIADA) ---- */
+  .brand-banner-single{
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:24px; padding:8px 0;
+  }
+  .logo-super{
+    height:clamp(110px, 14vw, 170px);
+    width:auto; max-width:92%; object-fit:contain;
+    filter:drop-shadow(5px 5px 0 var(--ink));
+    transition:transform .2s ease;
+  }
 
-  /* ABAS ESTILO BIG HERO (MODERNAS E LEVES) */
+  .header-intro{text-align:center; margin-bottom:24px;}
+  .eyebrow{
+    display:inline-block; font-family:'Bangers', cursive; font-size:clamp(13px, 1.5vw, 16px); letter-spacing:1px;
+    text-transform:uppercase; background:var(--ink); color:var(--yellow); padding:6px 20px;
+    border-radius:999px; margin-bottom:12px; text-shadow:1.5px 1.5px 0 rgba(0,0,0,0.4);
+  }
+  h1{
+    font-family:'Bangers', cursive; font-size:clamp(28px, 3.5vw, 40px); letter-spacing:1.5px;
+    text-transform:uppercase; line-height:1.15; color:var(--yellow);
+    -webkit-text-stroke:1.5px var(--ink); text-shadow:3px 3px 0 var(--ink);
+    margin:0 0 8px; text-align:center;
+  }
+  p.lede{
+    color:rgba(255,255,255,.96); font-size:clamp(14px, 1.4vw, 17px); line-height:1.5;
+    margin:0 auto; max-width:760px; text-align:center;
+  }
+
+  /* ---- PAINÉIS ---- */
+  .panel{
+    background:var(--cream); border:4px solid var(--ink); border-radius:20px;
+    box-shadow:7px 7px 0 var(--ink); padding:clamp(18px, 2.5vw, 28px); margin-bottom:20px;
+  }
+
+  /* ---- ABAS ---- */
   .tabs{
-    display:flex; gap:10px; margin:0 auto 24px; max-width:680px; width:100%;
+    display:flex; gap:10px; margin:0 auto 22px;
+    max-width:720px; width:100%;
   }
   .tab{
-    flex:1; text-align:center; font-family:'Bangers', cursive; font-size:18px; letter-spacing:1px;
-    text-transform:uppercase; background:rgba(255,255,255,0.9); border:3px solid var(--ink); border-radius:14px;
-    padding:10px 4px; cursor:pointer; box-shadow:3px 3px 0 var(--ink); transition:all .15s ease;
+    flex:1; text-align:center; font-family:'Bangers', cursive; font-size:clamp(15px, 1.8vw, 19px); letter-spacing:1px;
+    text-transform:uppercase; background:#fff; border:3px solid var(--ink); border-radius:12px;
+    padding:11px 6px; cursor:pointer; box-shadow:3px 3px 0 var(--ink);
+    transition:transform .12s ease, box-shadow .12s ease;
   }
-  .tab.active{background:var(--yellow); transform:translateY(-2px); box-shadow:4px 4px 0 var(--ink);}
+  .tab.active{background:var(--yellow);}
+  .tab:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink);}
 
   .view{display:none;}
   .view.active{display:block;}
 
-  /* CARD PRINCIPAL (LIGHT & CLEAN) */
-  .hero-stage-card{
-    background:var(--cream); border:4px solid var(--ink); border-radius:24px;
-    box-shadow:7px 7px 0 var(--ink); overflow:hidden; padding:clamp(20px, 3vw, 36px);
+  /* ---- ESTILOS VISUAIS HQ COM IMAGENS (HISTÓRIA) ---- */
+  .comic-prologue-card{
+    background:#fff; border:3.5px solid var(--ink); border-radius:18px; padding:18px;
+    box-shadow:5px 5px 0 var(--ink); margin-bottom:24px; position:relative;
+    display:flex; flex-direction:column; gap:16px; align-items:center;
+  }
+  @media(min-width:720px){
+    .comic-prologue-card{
+      flex-direction:row; padding:22px; gap:24px;
+    }
+  }
+  .prologue-img-wrap{
+    width:130px; height:130px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background:#FFF9E6; border:3px solid var(--ink); border-radius:18px; box-shadow:3px 3px 0 var(--ink);
+    padding:6px;
+  }
+  .prologue-img{width:100%; height:100%; object-fit:contain; filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));}
+  .comic-tag{
+    position:absolute; top:-13px; left:18px; background:var(--ink); color:var(--yellow);
+    font-family:'Bangers', cursive; font-size:13.5px; letter-spacing:1.5px; padding:3px 14px;
+    border-radius:6px; text-transform:uppercase;
+  }
+
+  .comic-act-header{
+    text-align:center; margin:16px 0 18px;
+  }
+  .comic-badge-act{
+    display:inline-block; font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
+    text-transform:uppercase; background:var(--red); color:#fff; border:2.5px solid var(--ink);
+    padding:4px 16px; border-radius:999px; box-shadow:3px 3px 0 var(--ink); margin-bottom:4px;
+  }
+
+  /* CARDS VISUAIS DE VILÕES CLICÁVEIS */
+  .comic-villain-strip{
+    display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:24px;
+  }
+  @media(min-width:720px){
+    .comic-villain-strip{
+      grid-template-columns:repeat(2, 1fr);
+      gap:18px;
+    }
+  }
+  .comic-villain-card{
+    background:#fff; border:3.5px solid var(--ink); border-radius:18px; padding:16px;
+    box-shadow:5px 5px 0 var(--ink); display:flex; gap:16px; align-items:center;
+    cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
     position:relative;
   }
-
-  /* SELETOR ESTILO DISNEY / MARVEL */
-  .hero-selector-bar{
-    display:flex; justify-content:center; gap:12px; margin-bottom:24px; flex-wrap:wrap;
+  .comic-villain-card:hover{
+    transform:translate(-2px, -2px);
+    box-shadow:7px 7px 0 var(--ink);
   }
-  .hero-thumb{
-    width:62px; height:62px; border-radius:16px; border:3px solid var(--ink);
-    background:#fff; cursor:pointer; overflow:hidden; padding:4px;
-    box-shadow:3px 3px 0 var(--ink); transition:all .2s ease;
+  .comic-villain-card:active{
+    transform:translate(2px, 2px);
+    box-shadow:2px 2px 0 var(--ink);
   }
-  .hero-thumb img{width:100%; height:100%; object-fit:contain;}
-  .hero-thumb.active{
-    transform:scale(1.15) translateY(-4px); border-color:var(--ink);
+  .villain-avatar-box{
+    width:88px; height:120px; background:#171512; border:3px solid var(--ink); border-radius:14px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:6px;
+    box-shadow:3px 3px 0 var(--ink);
   }
-
-  /* PALCO DO PERSONAGEM (IMAGEM GRANDE VAZADA) */
-  .character-display{
-    display:grid; grid-template-columns:1fr; gap:24px; align-items:center;
+  .villain-silhouette{width:100%; height:100%; object-fit:contain; filter:invert(1);}
+  .villain-body-box{flex:1;}
+  .villain-threat-badge{
+    font-family:'Bangers', cursive; font-size:12.5px; letter-spacing:.8px; text-transform:uppercase;
+    color:#fff; padding:2px 8px; border-radius:999px; border:2px solid var(--ink); display:inline-block; margin-bottom:4px;
   }
-  @media(min-width:768px){
-    .character-display{grid-template-columns:1.1fr 1fr;}
+  .villain-comic-phrase{
+    font-family:'Comic Neue', cursive; font-style:italic; font-size:13.5px; color:#222;
+    background:#FBF6EA; border-left:3.5px solid var(--ink); padding:6px 10px; border-radius:4px;
+    margin:6px 0 0; line-height:1.35;
   }
-  .char-art-wrap{
-    position:relative; display:flex; align-items:center; justify-content:center;
-    min-height:360px;
-  }
-  .char-glow-bg{
-    position:absolute; width:280px; height:280px; border-radius:50%;
-    background:rgba(255,255,255,0.8); filter:blur(40px); z-index:0;
-  }
-  .char-cutout{
-    position:relative; z-index:1; max-height:420px; width:auto; max-width:100%;
-    object-fit:contain; filter:drop-shadow(0 14px 20px rgba(0,0,0,0.18));
-    animation:floatSlow 4s ease-in-out infinite alternate;
-  }
-  @keyframes floatSlow{
-    0%{transform:translateY(0);}
-    100%{transform:translateY(-10px);}
+  .click-hint{
+    display:inline-flex; align-items:center; gap:4px; font-family:'Bangers', cursive; font-size:11px;
+    letter-spacing:0.8px; text-transform:uppercase; color:var(--red); margin-top:4px;
   }
 
-  .char-info{position:relative; z-index:2;}
-  .char-badge{
-    display:inline-block; font-family:'Bangers', cursive; font-size:14px; letter-spacing:1px;
-    text-transform:uppercase; color:#fff; padding:4px 14px; border-radius:999px;
-    border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); margin-bottom:8px;
+  /* CARD DO DEVORADOR CLICÁVEL */
+  .clickable-boss{
+    cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
   }
-  .char-title{
-    font-family:'Bangers', cursive; font-size:clamp(32px, 4vw, 44px); letter-spacing:1px;
-    text-transform:uppercase; margin:0 0 10px; line-height:1.05;
+  .clickable-boss:hover{
+    transform:translate(-2px, -2px);
+    box-shadow:6px 6px 0 var(--yellow) !important;
   }
-  .char-quote{
-    font-size:16px; font-style:italic; background:#fff; border:2.5px solid var(--ink);
-    border-radius:12px; padding:12px 16px; box-shadow:3px 3px 0 var(--ink); margin-bottom:14px;
-  }
-  .char-text{font-size:15px; line-height:1.6; color:#333; margin:0 0 16px;}
 
-  /* PAINÉIS DE ENSAIOS E SESSÕES */
-  .grid-2-even{display:grid; grid-template-columns:1fr; gap:14px;}
-  @media(min-width:720px){.grid-2-even{grid-template-columns:repeat(2,1fr); gap:18px;}}
+  /* ---- AVISO DE ENSAIO COM WHATSAPP ---- */
+  .notice-box{
+    background:#FFF9E6; border:3px solid var(--ink); border-radius:16px;
+    padding:14px 20px; margin-bottom:20px; font-size:14.5px; line-height:1.5;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  @media (min-width: 720px) {
+    .notice-box{
+      flex-direction:row; align-items:center; justify-content:space-between;
+    }
+  }
+  .btn-whats{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--whatsapp); color:#fff;
+    font-family:'Bangers', cursive; font-size:16px; letter-spacing:1px; text-transform:uppercase;
+    padding:9px 18px; border-radius:10px; border:2.5px solid var(--ink); text-decoration:none;
+    box-shadow:3px 3px 0 var(--ink); text-shadow:1px 1px 0 rgba(0,0,0,0.4); flex-shrink:0;
+  }
+  .btn-whats svg{
+    width:20px; height:20px; fill:#fff; flex-shrink:0; display:block;
+  }
+
+  /* ---- GRIDS ---- */
+  .grid-2-even{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  @media (min-width: 720px) {
+    .grid-2-even{
+      grid-template-columns:repeat(2, 1fr);
+      gap:18px;
+    }
+  }
+
+  .grid-3-games{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  @media (min-width: 768px) {
+    .grid-3-games{
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+    .grid-3-games .item-card{
+      flex-direction:column; text-align:center; padding:26px 18px;
+    }
+    .grid-3-games .item-card .arrow{display:none;}
+    .grid-3-games .item-dot{margin-bottom:8px; width:54px; height:54px; font-size:22px;}
+  }
+
+  .grid-detail-cols{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+    align-items:start;
+  }
+  @media (min-width: 840px) {
+    .grid-detail-cols{
+      grid-template-columns:1.15fr 0.85fr;
+      gap:22px;
+    }
+  }
+
+  /* ---- CARDS DE LISTA ---- */
   .item-card{
-    display:flex; align-items:center; gap:14px; background:#fff; border:3px solid var(--ink);
-    border-radius:16px; padding:16px 18px; cursor:pointer; box-shadow:4px 4px 0 var(--ink);
+    display:flex; align-items:center; gap:14px; background:#fff;
+    border:3px solid var(--ink); border-radius:16px; padding:16px 18px;
+    cursor:pointer; box-shadow:4px 4px 0 var(--ink);
+    transition:transform .12s ease, box-shadow .12s ease;
   }
+  .item-card:active{transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink);}
+  
   .item-dot{
-    width:48px; height:48px; border-radius:50%; flex-shrink:0; display:flex;
-    align-items:center; justify-content:center; color:#fff; font-family:'Bangers';
-    font-size:20px; border:3px solid var(--ink);
+    width:48px; height:48px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Bangers', cursive; font-size:20px; letter-spacing:.5px;
+    border:3px solid var(--ink); text-shadow:1.5px 1.5px 0 var(--ink);
+  }
+  .item-info{flex:1;}
+  .item-name{font-family:'Bangers', cursive; font-size:21px; letter-spacing:.8px; text-transform:uppercase; margin:0 0 3px;}
+  .item-meta{font-size:13.5px; color:#555; line-height:1.35;}
+  .arrow{font-size:22px; font-weight:bold; color:var(--ink);}
+
+  /* ---- BOTÕES E AÇÕES ---- */
+  .btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%; border:3px solid var(--ink); border-radius:14px;
+    background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:18px; letter-spacing:1.2px;
+    text-transform:uppercase; padding:13px 18px; cursor:pointer; box-shadow:4px 4px 0 var(--ink); text-decoration:none;
+  }
+  .btn:active{transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink);}
+  .btn.ghost{background:#fff;}
+
+  .back-btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff;
+    font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px; text-transform:uppercase;
+    border:none; border-radius:999px; padding:8px 20px; margin-bottom:16px; cursor:pointer;
+  }
+
+  .section-title{
+    font-family:'Bangers', cursive; font-size:20px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--red); margin:0 0 16px;
+    text-shadow:1px 1px 0 rgba(0,0,0,0.1);
+  }
+
+  /* ---- ORDEM DE APRESENTAÇÃO ---- */
+  .lineup-row{
+    display:flex; align-items:center; gap:14px; padding:10px 0; border-bottom:2px dashed #e6e0d2; font-size:15px;
+  }
+  .lineup-row:last-child{border-bottom:none;}
+  .lineup-order{
+    font-family:'Bangers', cursive;
+    background:var(--blue);
+    color:#fff;
+    border:2px solid var(--ink);
+    border-radius:999px;
+    padding:2px 8px;
+    font-size:15px;
+    letter-spacing:0.5px;
+    box-shadow:2px 2px 0 var(--ink);
+    flex-shrink:0;
+    width:36px;
+    height:22px;
+    box-sizing:border-box;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    line-height:1;
+  }
+  .lineup-name{
+    flex:1;
+    font-size:15px;
+    font-weight:700;
+  }
+
+  .info-item{display:block; margin-bottom:10px; font-size:14.5px; line-height:1.45;}
+  .info-item:last-child{margin-bottom:0;}
+
+  .recap-box{background:#F4EFE1; border-left:4px solid var(--ink); border-radius:8px; padding:16px 18px; font-size:14.5px; line-height:1.55; color:#333;}
+  .chip-list{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .power-chip{
+    font-family:'Bangers', cursive; font-size:15px; letter-spacing:.6px; text-transform:uppercase;
+    color:#fff; padding:5px 15px; border-radius:999px; border:2px solid var(--ink);
+    text-shadow:1px 1px 0 rgba(0,0,0,0.35);
+  }
+
+  /* ---- SILHUETAS & VILÕES (NOS ENSAIOS) ---- */
+  .silhouette-card{
+    display:flex; gap:16px; align-items:center; background:#171512; color:#fff;
+    border-radius:16px; padding:16px 18px; border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink);
+    margin-bottom:20px;
+  }
+  .silhouette-avatar{
+    width:76px; height:92px; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    border:2.5px solid var(--yellow); flex-shrink:0; padding:6px; overflow:hidden;
+  }
+  .silhouette-img{width:100%; height:100%; object-fit:contain; display:block;}
+
+  /* ---- LISTAS PEDAGÓGICAS ---- */
+  .agenda-list{margin:0; padding-left:22px; font-size:14.5px; line-height:1.65; color:#333;}
+  .agenda-list li{margin-bottom:8px;}
+  .agenda-list li:last-child{margin-bottom:0;}
+  .agenda-sublist{margin:6px 0 6px; padding-left:18px; list-style-type:circle;}
+  .agenda-sublist li{margin-bottom:4px;}
+
+  /* ---- FOTOS ---- */
+  .photo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px;}
+  .photo-slot{
+    aspect-ratio:1/1; background:#EFE9D8; border:2px dashed #c9c0a8; border-radius:12px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:20px; color:#9b927a;
+  }
+  .photo-slot span{font-family:'Bangers', cursive; font-size:13px; letter-spacing:.5px; text-transform:uppercase; margin-top:4px;}
+
+  /* ---- RODAPÉ INSTITUCIONAL ---- */
+  .footer-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 36px;
+  }
+  .footer-label {
+    font-family: 'Bangers', cursive;
+    font-size: 15px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.5);
+  }
+  .footer-logo-card {
+    background: #FFFFFF;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 3px 3px 0 var(--ink);
+    padding: 8px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-gta-footer {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+  }
+  .footer-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+
+  .hidden{display:none !important;}
+
+  /* ---- MODAL DE JOGOS & VILÕES ---- */
+  .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center; justify-content:center; z-index:50; padding:16px;}
+  .modal-overlay.show{display:flex;}
+  .modal-box{width:100%; max-width:440px; max-height:92vh; background:transparent; border-radius:20px; position:relative;}
+  .modal-close{position:absolute; top:-12px; right:-12px; z-index:10; background:var(--ink); color:#fff; border:2px solid #fff; border-radius:50%; width:34px; height:34px; font-size:16px; cursor:pointer; font-weight:bold;}
+  .modal-box iframe{width:100%; height:540px; border:4px solid var(--ink); border-radius:20px; background:#fff; display:block;}
+
+  /* MODAL TEMÁTICO DE VILÕES */
+  .villain-modal-box{
+    width:100%; max-width:540px; max-height:90vh; overflow-y:auto;
+    background:var(--cream); border:4px solid var(--ink); border-radius:20px;
+    box-shadow:8px 8px 0 var(--ink); padding:24px; position:relative;
+  }
+  .villain-modal-header{
+    display:flex; gap:16px; align-items:center; margin-bottom:16px;
+  }
+  .villain-modal-avatar{
+    width:84px; height:110px; background:#171512; border:3px solid var(--ink); border-radius:12px;
+    display:flex; align-items:center; justify-content:center; padding:4px; flex-shrink:0;
+  }
+  .villain-detail-section{
+    margin-bottom:14px; font-size:14px; line-height:1.5; color:#222;
+  }
+  .villain-detail-title{
+    font-family:'Bangers', cursive; font-size:16px; letter-spacing:1px;
+    text-transform:uppercase; margin-bottom:4px;
   }
 </style>
 </head>
 <body id="body">
 <div class="stage">
 
-  <div class="brand-banner">
+  <!-- LOGO DO TOPO -->
+  <div class="brand-banner-single">
     <img id="mainLogo" src="logo-super.png" alt="SuperSonoros" class="logo-super" />
   </div>
 
+  <div class="header-intro">
+    <span class="eyebrow">Espetáculo de final de ano</span>
+    <p class="lede">Acompanhe tudo sobre o universo SuperSonoros: Ensaios, sessões do show, fotos dos ensaios e os joguinhos da jornada — tudo num só lugar.</p>
+  </div>
+
+  <!-- ABAS -->
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('historia')">História</div>
-    <div class="tab" onclick="switchTab('ensaios')">Ensaios</div>
-    <div class="tab" onclick="switchTab('sessoes')">Sessões</div>
-    <div class="tab" onclick="switchTab('jogos')">Joguinhos</div>
+    <div class="tab active" id="tabBtnHistoria" onclick="switchTab('historia')">História</div>
+    <div class="tab" id="tabBtnEnsaios" onclick="switchTab('ensaios')">Ensaios</div>
+    <div class="tab" id="tabBtnSessoes" onclick="switchTab('sessoes')">Sessões</div>
+    <div class="tab" id="tabBtnJogos" onclick="switchTab('jogos')">Joguinhos</div>
   </div>
 
-  <!-- ABA HISTÓRIA: SHOWCASE DE PERSONAGENS -->
+  <!-- ===================== 1. HISTÓRIA (NARRATIVA COM INÍCIO, MEIO E FIM + CARDS CLICÁVEIS) ===================== -->
   <div id="view-historia" class="view active">
-    <div class="hero-stage-card">
+    
+    <div class="panel">
       
-      <!-- MINIATURAS DOS HERÓIS / VILÕES -->
-      <div class="hero-selector-bar">
-        <div class="hero-thumb active" id="thumb-0" onclick="selectHero(0)">
-          <img src="insigniavermelha.png" alt="O Chamado" />
+      <!-- INÍCIO: O CHAMADO DA LIGA -->
+      <div class="comic-prologue-card">
+        <span class="comic-tag">Início · O Chamado da Liga</span>
+        <div class="prologue-img-wrap">
+          <img src="insigniavermelha.png" alt="Brasão SuperSonoros" class="prologue-img" />
         </div>
-        <div class="hero-thumb" id="thumb-1" onclick="selectHero(1)">
-          <img src="vilao1.png" alt="Ameaça 1" />
-        </div>
-        <div class="hero-thumb" id="thumb-2" onclick="selectHero(2)">
-          <img src="vilao2.png" alt="Ameaça 2" />
-        </div>
-        <div class="hero-thumb" id="thumb-3" onclick="selectHero(3)">
-          <img src="vilao3.png" alt="Ameaça 3" />
-        </div>
-        <div class="hero-thumb" id="thumb-4" onclick="selectHero(4)">
-          <img src="vilao4.png" alt="Ameaça 4" />
+        <div style="flex:1;">
+          <h2 style="font-family:'Bangers', cursive; font-size:23px; color:var(--red); margin:0 0 8px; text-transform:uppercase;">Ninguém Nasce Pronto: A Arte de se Tornar Herói</h2>
+          <p style="margin:0 0 8px; color:#222; font-size:14.5px; line-height:1.5;">SuperSonoros é a liga dos artistas da Guitarríssima. Este espetáculo não é sobre heróis com poderes mágicos, mas sobre <strong>como artistas se tornam super-heróis</strong>.</p>
+          <p style="margin:0; color:#444; font-size:14px; line-height:1.5;">Essa jornada nasceu do festival <em>Mundo Estranho</em> ("Ser estranho é ser único") e evoluiu para o nosso lema: <strong>Ser único é o seu superpoder</strong>. O superpoder não está na técnica fria ou velocidade dos dedos, mas nas atitudes e hábitos repetidos dia após dia.</p>
         </div>
       </div>
 
-      <!-- PAINEL DINÂMICO -->
-      <div class="character-display">
-        <div class="char-art-wrap">
-          <div class="char-glow-bg" id="charGlow"></div>
-          <img id="charImg" src="insigniavermelha.png" class="char-cutout" alt="Destaque" />
+      <!-- MEIO: A JORNADA CONTRA OS COMPORTAMENTOS (VILÕES CLICÁVEIS) -->
+      <div class="comic-act-header">
+        <span class="comic-badge-act">Meio · As 4 Ameaças Invisíveis</span>
+        <p style="font-size:13px; color:#555; margin:6px 0 0;">Eles não roubam instrumentos nem quebram palcos. Clique no card de cada vilão para investigar seu plano pedagógico:</p>
+      </div>
+
+      <div class="comic-villain-strip">
+        
+        <!-- COPIÃO -->
+        <div class="comic-villain-card" style="border-top:8px solid var(--purple);" onclick="openVillainModal('copiao')">
+          <div class="villain-avatar-box">
+            <img src="vilao1.png" alt="Copião" class="villain-silhouette" />
+          </div>
+          <div class="villain-body-box">
+            <span class="villain-threat-badge" style="background:var(--purple);">Desperta: Autenticidade</span>
+            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--purple); margin:3px 0 2px;">Copião <span style="font-size:13px; color:#888;">(Ensaio 1)</span></div>
+            <div style="font-size:13px; color:#555; line-height:1.35;">Não cria nada próprio. Tenta transformar inspiração sadia em imitação vazia.</div>
+            <div class="villain-comic-phrase">"Copiar é mais fácil. Se deu certo com ele, faz igual!"</div>
+            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+          </div>
         </div>
-        <div class="char-info">
-          <span class="char-badge" id="charBadge" style="background:var(--red);">Capítulo 1</span>
-          <h2 class="char-title" id="charTitle" style="color:var(--red);">O Chamado da Liga</h2>
-          <div class="char-quote" id="charQuote">"Ser único é o seu superpoder."</div>
-          <p class="char-text" id="charDesc">SuperSonoros é a liga dos artistas da Guitarríssima. Nenhum músico nasce herói por mágica: a verdadeira jornada é construída na atitude de cada ensaio.</p>
+
+        <!-- DECI & BEL -->
+        <div class="comic-villain-card" style="border-top:8px solid var(--gold);" onclick="openVillainModal('decibel')">
+          <div class="villain-avatar-box">
+            <img src="vilao2.png" alt="Deci & Bel" class="villain-silhouette" />
+          </div>
+          <div class="villain-body-box">
+            <span class="villain-threat-badge" style="background:var(--gold);">Desperta: Escuta Coletiva</span>
+            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--gold); margin:3px 0 2px;">Deci & Bel <span style="font-size:13px; color:#888;">(Ensaio 2)</span></div>
+            <div style="font-size:13px; color:#555; line-height:1.35;">Duas irmãs barulhentas que transformam ensaios em disputas individuais de volume.</div>
+            <div class="villain-comic-phrase">"Se eu tocar mais alto, vão me ouvir! O importante é aparecer!"</div>
+            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+          </div>
+        </div>
+
+        <!-- O ENSAIADOR -->
+        <div class="comic-villain-card" style="border-top:8px solid var(--orange);" onclick="openVillainModal('ensaiador')">
+          <div class="villain-avatar-box">
+            <img src="vilao3.png" alt="O Ensaiador" class="villain-silhouette" />
+          </div>
+          <div class="villain-body-box">
+            <span class="villain-threat-badge" style="background:var(--orange);">Desperta: Disciplina / Repeteco</span>
+            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--orange); margin:3px 0 2px;">O Ensaiador <span style="font-size:13px; color:#888;">(Ensaio 3)</span></div>
+            <div style="font-size:13px; color:#555; line-height:1.35;">Gosta do "quase". Transforma um pequeno acerto na ilusão de que já basta.</div>
+            <div class="villain-comic-phrase">"Uma vez basta! Já tá bom, no palco a sorte resolve!"</div>
+            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+          </div>
+        </div>
+
+        <!-- VÉSPERA -->
+        <div class="comic-villain-card" style="border-top:8px solid var(--green);" onclick="openVillainModal('vespera')">
+          <div class="villain-avatar-box">
+            <img src="vilao4.png" alt="Véspera" class="villain-silhouette" />
+          </div>
+          <div class="villain-body-box">
+            <span class="villain-threat-badge" style="background:var(--green);">Desperta: Iniciativa</span>
+            <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--green); margin:3px 0 2px;">Véspera <span style="font-size:13px; color:#888;">(Ensaio 4)</span></div>
+            <div style="font-size:13px; color:#555; line-height:1.35;">Surge silenciosa no segundo antes da ação, plantando a dúvida paralisante.</div>
+            <div class="villain-comic-phrase">"Será que você está pronto? E se der branco? Melhor deixar pra depois..."</div>
+            <div class="click-hint">🔍 Clique para ver o dossiê completo ›</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FIM PARTE 1: A REVELAÇÃO DA HIERARQUIA & O DEVORADOR -->
+      <div class="panel clickable-boss" style="background:#171512; color:#fff; border-color:var(--yellow); box-shadow:none; margin:0 0 20px; padding:20px;" onclick="openVillainModal('devorador')">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:13.5px; letter-spacing:1px; padding:3px 12px; border-radius:999px; text-transform:uppercase;">Fim · A Conexão Sombria</span>
+          <span style="color:var(--yellow); font-size:11.5px; font-family:'Bangers', cursive; letter-spacing:1px;">🔍 CLIQUE PARA ABRIR O DOSSIÊ</span>
+        </div>
+        <h3 style="font-family:'Bangers', cursive; font-size:23px; letter-spacing:1.2px; color:var(--yellow); margin:0 0 8px; text-transform:uppercase;">O Chefão Final: O Devorador de Sons</h3>
+        <p style="margin:0 0 10px; color:#ddd; font-size:14px; line-height:1.55;">Os quatro vilões nunca foram ataques isolados. Eles trabalhavam para preparar um banquete: músicas frágeis, sem identidade e desatentas — o alimento perfeito que fortalece a Grande Criatura!</p>
+        <p style="margin:0; color:#fff; font-size:14px; line-height:1.55;"><strong>O Golpe de Mestre da Liga:</strong> No palco, os SuperSonoros reúnem <strong>Autenticidade, Escuta, Disciplina e Iniciativa</strong> simultaneamente. A música boa, viva e autêntica é indigesta para a sombra e a desfaz por completo.</p>
+      </div>
+
+      <!-- FIM PARTE 2: A VERDADEIRA VITÓRIA -->
+      <div class="comic-prologue-card" style="background:#FFF9E6; border-color:var(--ink); margin-bottom:0; text-align:center; justify-content:center;">
+        <div style="max-width:800px; margin:0 auto;">
+          <span class="comic-tag" style="background:var(--red); color:#fff;">Epílogo · A Revelação da Vitória</span>
+          <h2 style="font-family:'Bangers', cursive; font-size:24px; color:var(--ink); margin:6px 0 8px; text-transform:uppercase;">Você Não Vence no Palco. Você Apenas Celebra!</h2>
+          <p style="margin:0 0 12px; color:#333; font-size:14.5px; line-height:1.55;">A batalha de um artista não ocorre sob os holofotes. Ela ocorre no quarto ao praticar mais uma vez, na sala de aula ao ouvir o colega e na coragem de tocar a primeira nota. No palco, os SuperSonoros apenas descobrem que já haviam vencido!</p>
+          <div style="font-family:'Bangers', cursive; font-size:24px; letter-spacing:1px; color:var(--red); text-transform:uppercase; text-shadow:1px 1px 0 rgba(0,0,0,0.15);">SER ÚNICO É O SEU SUPERPODER!</div>
         </div>
       </div>
 
     </div>
+
   </div>
 
-  <!-- ABA ENSAIOS -->
+  <!-- ===================== 2. ENSAIOS ===================== -->
   <div id="view-ensaios" class="view">
-    <div class="hero-stage-card">
-      <h2 style="font-family:'Bangers';font-size:28px;margin:0 0 16px;color:var(--red);">Grandes Ensaios da Liga</h2>
-      <div class="grid-2-even">
-        <div class="item-card"><div class="item-dot" style="background:var(--purple);">E1</div><div><div style="font-family:'Bangers';font-size:20px;">Ensaio 1</div><div style="font-size:13px;color:#666;">12/09 · Sede Guitarríssima</div></div></div>
-        <div class="item-card"><div class="item-dot" style="background:var(--orange);">E2</div><div><div style="font-family:'Bangers';font-size:20px;">Ensaio 2</div><div style="font-size:13px;color:#666;">27/09 · Sede Guitarríssima</div></div></div>
-        <div class="item-card"><div class="item-dot" style="background:var(--orange);">E3</div><div><div style="font-family:'Bangers';font-size:20px;">Ensaio 3</div><div style="font-size:13px;color:#666;">03/10 · Sede Guitarríssima</div></div></div>
-        <div class="item-card"><div class="item-dot" style="background:var(--green);">E4</div><div><div style="font-family:'Bangers';font-size:20px;">Ensaio 4</div><div style="font-size:13px;color:#666;">17/10 · Sede Guitarríssima</div></div></div>
+    
+    <div class="notice-box">
+      <div><strong>Atenção às bandas:</strong> Cada banda tem um horário específico de ensaio. Confirme seu horário com a secretaria.</div>
+      <div>
+        <a class="btn-whats" href="https://wa.link/isvn9i" target="_blank">
+          <svg viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          Falar com a Secretaria
+        </a>
+      </div>
+    </div>
+
+    <div id="view-ensaios-home">
+      <div class="panel">
+        <div class="section-title">Grandes Ensaios da Liga</div>
+        <div id="ensaiosList" class="grid-2-even"></div>
+      </div>
+    </div>
+
+    <div id="view-ensaio-detail" class="hidden">
+      <button class="back-btn" onclick="goEnsaiosHome()">← Voltar aos Ensaios</button>
+
+      <div class="panel">
+        <h1 id="ensTitle" style="font-size:30px;text-align:left;color:var(--yellow);margin:0 0 4px;">Ensaio 1</h1>
+        <p class="lede" style="color:#666;text-align:left;margin-bottom:14px;max-width:none;" id="ensDate">12/09 (sáb)</p>
+
+        <div class="info-item">
+          <span><strong>Local:</strong> Sede da Guitarríssima — Rua Coronel Corte Real, 889 - Petrópolis, Porto Alegre.</span>
+        </div>
+      </div>
+
+      <div class="grid-detail-cols">
+        <div class="panel" style="margin-bottom:0;">
+          
+          <!-- VILÃO NO TOPO DO ENSAIO -->
+          <div class="silhouette-card">
+            <div class="silhouette-avatar">
+              <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
+            </div>
+            <div>
+              <div style="font-family:'Bangers', cursive; font-size:19px; letter-spacing:1px; color:var(--yellow); text-transform:uppercase;" id="ensVillainTitle">Ameaça: Vilão 1</div>
+              <div style="font-size:13px; color:#ccc; line-height:1.45; margin-top:3px;">Identidade revelada no álbum de figurinhas! Derrote esta atitude no ensaio.</div>
+            </div>
+          </div>
+
+          <div class="section-title">O que faremos no ensaio</div>
+          <div id="ensAgendaBox"></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:0;">
+          <div class="section-title">Fotos deste Ensaio</div>
+          <div class="photo-grid">
+            <div class="photo-slot">📷<span>Foto 1</span></div>
+            <div class="photo-slot">📷<span>Foto 2</span></div>
+            <div class="photo-slot">📷<span>Foto 3</span></div>
+            <div class="photo-slot">📷<span>Foto 4</span></div>
+            <div class="photo-slot">📷<span>Foto 5</span></div>
+            <div class="photo-slot">📷<span>Foto 6</span></div>
+          </div>
+          <p style="font-size:12px;color:#888;font-style:italic;margin:12px 0 0;">As fotos serão adicionadas aqui após a realização do ensaio.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <div id="view-sessoes" class="view"><div class="hero-stage-card"><h2 style="font-family:'Bangers';font-size:26px;">Sessões do Espetáculo</h2></div></div>
-  <div id="view-jogos" class="view"><div class="hero-stage-card"><h2 style="font-family:'Bangers';font-size:26px;">Joguinhos</h2></div></div>
+  <!-- ===================== 3. SESSÕES ===================== -->
+  <div id="view-sessoes" class="view">
+    <div id="view-sessoes-home">
+      <div class="panel">
+        <div class="section-title">Sessões do Espetáculo</div>
+        <div id="sessionList" class="grid-2-even"></div>
+      </div>
+    </div>
+
+    <div id="view-session" class="hidden">
+      <button class="back-btn" onclick="goSessionHome()">← Voltar às Sessões</button>
+
+      <div class="panel">
+        <h1 id="sessTitle" style="font-size:30px;text-align:left;margin:0 0 4px;">Sessão 1</h1>
+        <p class="lede" style="color:#555;margin-bottom:0;text-align:left;max-width:none;" id="sessSubtitle">24/10 · 16h</p>
+      </div>
+
+      <div class="grid-detail-cols" style="margin-bottom:20px;">
+        <div class="panel" style="margin-bottom:0;">
+          <div class="section-title">Ordem de apresentação</div>
+          <div id="lineupList"></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:0;">
+          <div class="section-title">Recapitulando a jornada</div>
+          <div class="recap-box">
+            Até aqui, os SuperSonoros já conquistaram os quatro superpoderes nos Grandes Ensaios:
+            <div class="chip-list">
+              <span class="power-chip" style="background:#8E5FC7;">Autenticidade</span>
+              <span class="power-chip" style="background:#D9A62B;">Escuta</span>
+              <span class="power-chip" style="background:#E8792B;">Disciplina</span>
+              <span class="power-chip" style="background:#3CB878;">Iniciativa</span>
+            </div>
+            <p style="margin:14px 0 0;">No palco, a integração total dessas atitudes destrói o Devorador de Sons!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-detail-cols">
+        <div class="panel" style="margin-bottom:0;">
+          <div class="section-title">Informações práticas</div>
+          <div class="info-item"><strong>Local:</strong> Teatro Unisinos — Av. Dr. Nilo Peçanha, 1600 - Boa Vista, Porto Alegre.</div>
+          <div class="info-item"><strong>Estacionamento:</strong> No local (estacionamento terceirizado da Unisinos).</div>
+          <div class="info-item"><strong>Check-in de alunos:</strong> Deixe seu artista com a equipe responsável com 40 minutos de antecedência.</div>
+        </div>
+
+        <div class="panel" style="margin-bottom:0;">
+          <div class="section-title">Compartilhe o momento</div>
+          <p style="font-size:14.5px;line-height:1.5;margin:0 0 14px;">Marque a Guitarríssima e use a hashtag oficial nos seus stories e posts do show!</p>
+          <div class="chip-list" style="margin-bottom:18px;">
+            <span class="power-chip" style="background:var(--blue);">#SUPERSONOROS</span>
+            <span class="power-chip" style="background:var(--red);">@guitarrissima</span>
+          </div>
+
+          <a class="btn ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSeuBO6u9RyqzhI3kh2CdQ-w1-kSxKYqdUPzkxQeM6ZiiEfbxw/viewform?usp=publish-editor" target="_blank">CLIQUE AQUI E AVALIE O ESPETÁCULO</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 4. JOGUINHOS ===================== -->
+  <div id="view-jogos" class="view">
+    <div class="panel">
+      <div class="section-title">Joguinhos da Jornada</div>
+
+      <div class="grid-3-games">
+        <div class="item-card" onclick="openGame('quiz')">
+          <div class="item-dot" style="background:var(--purple);">❓</div>
+          <div class="item-info">
+            <div class="item-name">Qual é o seu superpoder?</div>
+            <div class="item-meta">Quiz interativo da Liga</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="item-card" onclick="openGame('insignia')">
+          <div class="item-dot" style="background:var(--gold);">⭐</div>
+          <div class="item-info">
+            <div class="item-name">Monte sua insígnia</div>
+            <div class="item-meta">Crie e compartilhe seu brasão</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="item-card" onclick="openGame('batalha')">
+          <div class="item-dot" style="background:var(--red);">⚡</div>
+          <div class="item-info">
+            <div class="item-name">Batalha Musical</div>
+            <div class="item-meta">Enfrente o Devorador de Sons</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="footer-signature">
+    <div class="footer-label">Realizado por:</div>
+    <div class="footer-logo-card">
+      <img src="logo-gta.png" alt="Guitarríssima" class="logo-gta-footer">
+    </div>
+    <div class="footer-sub">Ser único é o seu superpoder.</div>
+  </footer>
 
 </div>
 
-<script>
-  const HEROES = [
-    {
-      badge: "Capítulo 1 · A Origem", badgeColor: "#FE0E31",
-      title: "O Chamado da Liga", titleColor: "#FE0E31",
-      img: "insigniavermelha.png",
-      quote: "“Ser único é o seu superpoder!”",
-      desc: "SuperSonoros é a liga dos artistas da Guitarríssima. Nenhum músico nasce herói por mágica: a verdadeira jornada é construída na atitude de cada ensaio.",
-      bg: "#FE0E31"
-    },
-    {
-      badge: "Ameaça 1 · Autenticidade", badgeColor: "#AF7AD4",
-      title: "A Sombra da Cópia", titleColor: "#8E5FC7",
-      img: "vilao1.png",
-      quote: "“Pra que arriscar seu som se você pode ser idêntico ao original?”",
-      desc: "Ele tenta roubar a sua identidade, convencendo você a apenas imitar. O artista vence quando usa suas referências sem nunca abrir mão da própria voz.",
-      bg: "#8E5FC7"
-    },
-    {
-      badge: "Ameaça 2 · Escuta", badgeColor: "#FDD12E",
-      title: "O Duelo Ensurdecedor", titleColor: "#FE7C02",
-      img: "vilao2.png",
-      quote: "“Toque mais alto! O importante é todo mundo ouvir só você!”",
-      desc: "Uma dupla que tenta transformar a banda em competição de volume. O herói vence na generosidade de escutar e dosar o som coletivo.",
-      bg: "#FE7C02"
-    },
-    {
-      badge: "Ameaça 3 · Disciplina", badgeColor: "#FE7C02",
-      title: "A Falsa Segurança", titleColor: "#E8792B",
-      img: "vilao3.png",
-      quote: "“Já acertou uma vez, pra que ensaiar de novo? No palco sai!”",
-      desc: "Ele adora o atalho e o 'quase'. É derrotado com o Repeteco: praticar com atenção até transformar a dúvida em segurança absoluta.",
-      bg: "#E8792B"
-    },
-    {
-      badge: "Ameaça 4 · Iniciativa", badgeColor: "#019742",
-      title: "A Dúvida de Véspera", titleColor: "#019742",
-      img: "vilao4.png",
-      quote: "“E se der um branco na frente de todos? Melhor não arriscar hoje...”",
-      desc: "Ela surge segundos antes do show para plantar medo. A vitória acontece no primeiro passo: tocar a primeira nota apesar do frio na barriga.",
-      bg: "#019742"
-    }
-  ];
+<!-- MODAL DE JOGOS -->
+<div class="modal-overlay" id="gameModal">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <iframe id="gameFrame"></iframe>
+  </div>
+</div>
 
-  function selectHero(idx){
-    document.querySelectorAll('.hero-thumb').forEach((t, i) => {
-      t.classList.toggle('active', i === idx);
-    });
-    const h = HEROES[idx];
-    document.getElementById('charBadge').textContent = h.badge;
-    document.getElementById('charBadge').style.background = h.badgeColor;
-    document.getElementById('charTitle').textContent = h.title;
-    document.getElementById('charTitle').style.color = h.titleColor;
-    document.getElementById('charQuote').textContent = h.quote;
-    document.getElementById('charDesc').textContent = h.desc;
-    document.getElementById('charImg').src = h.img;
-    document.getElementById('body').style.background = h.bg;
+<!-- MODAL DE DETALHES DO VILÃO (DOSSIÊ CLICÁVEL) -->
+<div class="modal-overlay" id="villainModal">
+  <div class="villain-modal-box" id="villainModalContent">
+    <button class="modal-close" onclick="closeVillainModal()">✕</button>
+    <div id="villainModalBody"></div>
+  </div>
+</div>
+
+<script>
+  /* ---------------- LOGO DINÂMICA ---------------- */
+  function updateBrandLogo(color) {
+    const logo = document.getElementById("mainLogo");
+    if (!logo) return;
+    if (color === "#8E5FC7" || color === "#3CB878" || color === "#2C4E9B") {
+      logo.src = "logo-super-vermelho.png";
+    } else {
+      logo.src = "logo-super.png";
+    }
   }
 
+  /* ---------------- TABS ---------------- */
   function switchTab(name){
     document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
     document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
     document.getElementById("view-"+name).classList.add("active");
-    event.target.classList.add("active");
-    if(name !== 'historia'){
-      document.getElementById('body').style.background = "#FE0E31";
+    const tabBtn = document.getElementById("tabBtn"+name.charAt(0).toUpperCase()+name.slice(1));
+    if(tabBtn) tabBtn.classList.add("active");
+    if(name==="ensaios") goEnsaiosHome();
+    if(name==="sessoes") goSessionHome();
+    if(name==="historia" || name==="jogos") {
+      document.getElementById("body").style.background = "#E63946";
+      updateBrandLogo("#E63946");
     }
   }
+
+  /* ---------------- DOSSIÊ COMPLETO DOS VILÕES (BASEADO NO CONCEITUAL) ---------------- */
+  const VILOES_DATA = {
+    copiao: {
+      name: "Copião",
+      arquetipo: "Apelido · Ensaio 1",
+      color: "#8E5FC7",
+      img: "vilao1.png",
+      quem: "Representa a perda da autenticidade. O verdadeiro artista aprende observando e se inspirando, mas o Copião substitui a identidade pela pura imitação. Ele não cria, apenas reproduz.",
+      motivacao: "Não suporta que exista algo único e original que ele mesmo não consiga inventar. Seu objetivo é fazer tantas cópias idênticas que todas as músicas pareçam iguais.",
+      prejuizo: "Estimula comparações impossíveis: querer tocar ou cantar exatamente igual a outro artista, apagando a história, o timbre e a personalidade de quem está no palco.",
+      posturas: ["'Copiar é mais fácil.'", "'Se já deu certo com ele, faz igual.'", "'Não inventa moda.'", "'O objetivo é ficar idêntico ao original.'"],
+      derrota: "Fazendo escolhas próprias. O Copião pode copiar uma nota ou um solo, mas nunca consegue copiar a alma e a história de quem está tocando!",
+      superpoder: "Autenticidade (Ser único é o seu superpoder)."
+    },
+    decibel: {
+      name: "Deci & Bel (As Irmãs Decibel)",
+      arquetipo: "Dupla · Ensaio 2",
+      color: "#D9A62B",
+      img: "vilao2.png",
+      quem: "Duas irmãs inseparáveis inspiradas nos decibéis. Deci é impulsiva e aumenta o volume antes de ouvir; Bel é competitiva e sempre responde ainda mais alto. Nenhuma escuta ninguém.",
+      motivacao: "Acreditam que o músico mais importante é aquele que toca mais alto e abafa os outros. Odeiam bandas com dinâmica equilibrada e sensibilidade coletiva.",
+      prejuizo: "Transformam grupos em ringues de disputa de volume. A clareza some e a música se torna um ruído caótico onde ninguém se entende.",
+      posturas: ["'Se eu tocar mais alto, vão me ouvir.'", "'O importante é você aparecer sozinho.'", "'Toca mais forte, não precisa prestar atenção nos outros.'"],
+      derrota: "Escutando. Percebendo quando é hora de solar, de acompanhar, de sustentar ou de fazer silêncio. Fazer música em grupo é conversar, não competir.",
+      superpoder: "Escuta (Tocar junto e transformar música em diálogo)."
+    },
+    ensaiador: {
+      name: "O Ensaiador",
+      arquetipo: "Função / Profissão · Ensaio 3",
+      color: "#E8792B",
+      img: "vilao3.png",
+      quem: "Representa a falsa sensação de preparo. Ele nunca manda desistir, apenas convence o aluno de que acertar uma única vez por sorte já é o bastante.",
+      motivacao: "Acredita em atalhos e prega que talento puro substitui a prática. Quer provar que dedicação e repetição consciente são perdas de tempo.",
+      prejuizo: "Produz artistas frágeis. Quem depende da sorte se desestabiliza diante do público ou de qualquer imprevisto que surja no palco.",
+      posturas: ["'Uma vez basta.'", "'Já tá bom, você já sabe.'", "'No palco sai na hora!'", "'Quem tem talento não precisa ensaiar tanto.'"],
+      derrota: "Com o método do Repeteco! Repetir com intenção até que a segurança substitua a sorte e dê verdadeira liberdade no palco.",
+      superpoder: "Disciplina (Construir confiança pela prática consciente)."
+    },
+    vespera: {
+      name: "Véspera",
+      arquetipo: "Nome Próprio Enigmático · Ensaio 4",
+      color: "#3CB878",
+      img: "vilao4.png",
+      quem: "Representa o autoboicote silencioso. Ela habita os momentos anteriores à ação: a véspera de subir no palco, o segundo antes de tocar a primeira nota ou de mostrar uma música.",
+      motivacao: "Sente inveja de quem realiza. Vive presa ao instante do medo e tenta paralisar o artista antes que ele dê o passo definitivo.",
+      prejuizo: "Não precisa estragar o ensaio todo; basta plantar uma semente de dúvida segundos antes de começar para fazer o artista travar ou desistir.",
+      posturas: ["'Será que você está realmente pronto?'", "'E se esquecer a letra na frente de todo mundo?'", "'E se der branco? Melhor nem subir hoje...'"],
+      derrota: "Dando o primeiro passo! Tocando a primeira nota. A confiança não aparece antes da ação: ela nasce enquanto agimos, mesmo com frio na barriga.",
+      superpoder: "Iniciativa (Coragem não é não ter medo, é agir apesar dele)."
+    },
+    devorador: {
+      name: "O Devorador de Sons",
+      arquetipo: "Criatura / Chefão Final · O Grande Show",
+      color: "#E63946",
+      img: "vilao1.png",
+      quem: "A personificação da consequência de todos os outros vilões reunidos. É o silêncio vazio, o desinteresse e a ausência do brilho artístico.",
+      motivacao: "Alimenta-se de música descuidada, sem identidade e desorganizada. Quanto mais músicas vazias são produzidas, mais forte ele se torna.",
+      prejuizo: "Comanda secretamente os quatro vilões para esvaziar a arte dos alunos da Guitarríssima e transformá-la em banquete fácil.",
+      posturas: ["Alimenta-se da falta de identidade, da falta de escuta, da preguiça e do medo de agir."],
+      derrota: "Música de qualidade autêntica! Ele não é derrotado com socos, mas com a união simultânea dos quatro superpoderes executados no palco.",
+      superpoder: "Integração (Todos os 4 superpoderes unidos no mesmo acorde)."
+    }
+  };
+
+  function openVillainModal(key){
+    const v = VILOES_DATA[key];
+    const body = document.getElementById("villainModalBody");
+    
+    let posturasHtml = v.posturas.map(p => `<li>${p}</li>`).join("");
+
+    body.innerHTML = `
+      <div class="villain-modal-header">
+        <div class="villain-modal-avatar">
+          <img src="${v.img}" alt="${v.name}" style="width:100%;height:100%;object-fit:contain;filter:invert(1);" />
+        </div>
+        <div>
+          <span style="background:${v.color};color:#fff;font-family:'Bangers',cursive;font-size:12px;padding:2px 8px;border-radius:999px;border:2px solid var(--ink);text-transform:uppercase;">${v.arquetipo}</span>
+          <h2 style="font-family:'Bangers',cursive;font-size:26px;margin:4px 0 2px;color:${v.color};-webkit-text-stroke:0.5px var(--ink);">${v.name}</h2>
+          <div style="font-size:12.5px;color:#666;">Dossiê Pedagógico Guitarríssima</div>
+        </div>
+      </div>
+
+      <div class="villain-detail-section">
+        <div class="villain-detail-title" style="color:var(--ink);">Quem é o vilão:</div>
+        <p style="margin:0;">${v.quem}</p>
+      </div>
+
+      <div class="villain-detail-section">
+        <div class="villain-detail-title" style="color:var(--red);">A Motivação Secreta:</div>
+        <p style="margin:0;">${v.motivacao}</p>
+      </div>
+
+      <div class="villain-detail-section">
+        <div class="villain-detail-title" style="color:#555;">Frases que ele sussurra:</div>
+        <ul style="margin:4px 0;padding-left:20px;font-style:italic;">${posturasHtml}</ul>
+      </div>
+
+      <div class="villain-detail-section" style="background:#FFF9E6;border-left:4px solid ${v.color};padding:10px 12px;border-radius:6px;">
+        <div class="villain-detail-title" style="color:${v.color};">Como os SuperSonoros o derrotam:</div>
+        <p style="margin:0 0 6px;">${v.derrota}</p>
+        <div style="font-size:13px;font-weight:900;color:var(--ink);">Superpoder Conquistado: <span style="color:${v.color};">${v.superpoder}</span></div>
+      </div>
+    `;
+
+    document.getElementById("villainModal").classList.add("show");
+  }
+
+  function closeVillainModal(){
+    document.getElementById("villainModal").classList.remove("show");
+  }
+
+  /* ---------------- DADOS DOS ENSAIOS ---------------- */
+  const ENSAIOS = [
+    { 
+      id:1, name:"Ensaio 1", date:"12/09 (sáb)", color:"#8E5FC7", villain:"Copião", 
+      img:"vilao1.png",
+      agenda: `
+        <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Autenticidade (descobrir a própria voz e criar identidade)</p>
+        <ul class="agenda-list">
+          <li><strong>Integração do grupo:</strong> A professora de performance se apresenta e conduz uma dinâmica rápida de entrosamento entre os alunos.</li>
+          <li><strong>Nome da banda:</strong> Definição oficial do nome do grupo logo após a apresentação.</li>
+          <li><strong>Escolha da música:</strong> Alinhamento da música que o grupo vai tocar, combinando com a identidade e o estilo da banda.</li>
+          <li><strong>Professores de produção:</strong> Apresentação e direcionamento com os professores que conduzirão a produção musical da banda.</li>
+        </ul>
+      `
+    },
+    { 
+      id:2, name:"Ensaio 2", date:"27/09 (dom)", color:"#D9A62B", villain:"Deci & Bel", 
+      img:"vilao2.png",
+      agenda: `
+        <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Escuta (tocar junto e equilibrar o som do grupo)</p>
+        <ul class="agenda-list">
+          <li><strong>Definições da banda:</strong> Finalizar o que tiver ficado pendente sobre o nome do grupo.</li>
+          <li><strong>Planejamento do figurino:</strong> Conversar sobre a mensagem da música e combinar as ideias de visual que combinem com a banda.</li>
+          <li><strong>Definir o que usar no show:</strong>
+            <ul class="agenda-sublist">
+              <li>Roupas e calçados (parte de cima e de baixo).</li>
+              <li>Acessórios pessoais (pulseiras, chapéu, colares, etc.).</li>
+              <li>Adereços para os instrumentos ou palco (adesivos, luzes, cartazes, panos decorativos, bichinhos).</li>
+            </ul>
+          </li>
+          <li><strong>Foto oficial:</strong> Registro da foto individual de cada aluno.</li>
+        </ul>
+      `
+    },
+    { 
+      id:3, name:"Ensaio 3", date:"03/10 (sáb)", color:"#E8792B", villain:"O Ensaiador", 
+      img:"vilao3.png",
+      agenda: `
+        <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Disciplina (o método do Repeteco)</p>
+        <ul class="agenda-list">
+          <li><strong>Treino intensivo:</strong> Prática com o método do Repeteco para consolidar as passagens da música.</li>
+          <li><strong>Alinhamento dinâmico:</strong> Ajustes de entradas, finalizações e postura de palco.</li>
+        </ul>
+      `
+    },
+    { 
+      id:4, name:"Ensaio 4", date:"17/10 (sáb)", color:"#3CB878", villain:"Véspera", 
+      img:"vilao4.png",
+      agenda: `
+        <p style="margin:0 0 10px;font-size:14.5px;"><strong>Superpoder trabalhado:</strong> Iniciativa (coragem para subir ao palco)</p>
+        <ul class="agenda-list">
+          <li><strong>Passagem geral:</strong> Ensaio corrido simulando as condições reais do palco do espetáculo.</li>
+          <li><strong>Preparação final:</strong> Ajustes finais com a equipe e orientações para o grande dia.</li>
+        </ul>
+      `
+    }
+  ];
+
+  function renderEnsaios(){
+    const list = document.getElementById("ensaiosList");
+    list.innerHTML = "";
+    ENSAIOS.forEach(e=>{
+      const card = document.createElement("div");
+      card.className = "item-card";
+      card.onclick = ()=>openEnsaio(e.id);
+      card.innerHTML =
+        '<div class="item-dot" style="background:'+e.color+';">E'+e.id+'</div>'+
+        '<div class="item-info"><div class="item-name">'+e.name+'</div>'+
+        '<div class="item-meta">'+e.date+' · Sede Guitarríssima</div></div>'+
+        '<div class="arrow">›</div>';
+      list.appendChild(card);
+    });
+  }
+
+  function openEnsaio(id){
+    const e = ENSAIOS.find(x=>x.id===id);
+    document.getElementById("ensTitle").textContent = e.name;
+    document.getElementById("ensDate").textContent = e.date + " · Sede Guitarríssima";
+    document.getElementById("ensAgendaBox").innerHTML = e.agenda;
+    document.getElementById("ensVillainTitle").textContent = "Ameaça: " + e.villain;
+    
+    const vImg = document.getElementById("ensVillainImg");
+    vImg.src = e.img;
+    vImg.alt = "Silhueta " + e.villain;
+
+    document.getElementById("body").style.background = e.color;
+    updateBrandLogo(e.color);
+
+    document.getElementById("view-ensaios-home").classList.add("hidden");
+    document.getElementById("view-ensaio-detail").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+
+  function goEnsaiosHome(){
+    document.getElementById("body").style.background = "#E63946";
+    updateBrandLogo("#E63946");
+
+    document.getElementById("view-ensaio-detail").classList.add("hidden");
+    document.getElementById("view-ensaios-home").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+
+  /* ---------------- DADOS DAS SESSÕES ---------------- */
+  const SESSIONS = [
+    { id:1, name:"Sessão 1", date:"24/10 (sáb)", time:"16h", color:"#8E5FC7",
+      lineup:["[Banda 1]","[Banda 2]","[Intermezzo]","[Banda 3]","[Banda 4]"] },
+    { id:2, name:"Sessão 2", date:"24/10 (sáb)", time:"20h", color:"#2C4E9B",
+      lineup:["[Banda 5]","[Banda 6]","[Intermezzo]","[Banda 7]","[Banda 8]"] },
+    { id:3, name:"Sessão 3", date:"25/10 (dom)", time:"14h", color:"#E8792B",
+      lineup:["[Banda 9]","[Banda 10]","[Intermezzo]","[Banda 11]","[Banda 12]"] },
+    { id:4, name:"Sessão 4", date:"25/10 (dom)", time:"18h", color:"#3CB878",
+      lineup:["[Banda 13]","[Banda 14]","[Intermezzo]","[Banda 15]","[Banda 16]"] },
+  ];
+
+  function renderSessions(){
+    const list = document.getElementById("sessionList");
+    list.innerHTML = "";
+    SESSIONS.forEach(s=>{
+      const card = document.createElement("div");
+      card.className = "item-card";
+      card.onclick = ()=>openSession(s.id);
+      card.innerHTML =
+        '<div class="item-dot" style="background:'+s.color+';">S'+s.id+'</div>'+
+        '<div class="item-info"><div class="item-name">'+s.name+'</div>'+
+        '<div class="item-meta">'+s.date+' · '+s.time+'</div></div>'+
+        '<div class="arrow">›</div>';
+      list.appendChild(card);
+    });
+  }
+
+  function openSession(id){
+    const s = SESSIONS.find(x=>x.id===id);
+    document.getElementById("sessTitle").textContent = s.name;
+    document.getElementById("sessSubtitle").textContent = s.date + " · Início às " + s.time + " · Teatro Unisinos";
+    
+    document.getElementById("body").style.background = s.color;
+    updateBrandLogo(s.color);
+
+    const box = document.getElementById("lineupList");
+    box.innerHTML = "";
+    s.lineup.forEach((band,i)=>{
+      const row = document.createElement("div");
+      row.className = "lineup-row";
+      row.innerHTML = "<span class=\"lineup-order\">#" + (i+1) + "</span><span class=\"lineup-name\">" + band + "</span>";
+      box.appendChild(row);
+    });
+
+    document.getElementById("view-sessoes-home").classList.add("hidden");
+    document.getElementById("view-session").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+
+  function goSessionHome(){
+    document.getElementById("body").style.background = "#E63946";
+    updateBrandLogo("#E63946");
+
+    document.getElementById("view-session").classList.add("hidden");
+    document.getElementById("view-sessoes-home").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+
+  /* ---------------- JOGOS ---------------- */
+  const GAMES = {
+    quiz: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
+      *{box-sizing:border-box;}
+      html,body{margin:0;padding:0;}
+      body{font-family:Arial,sans-serif;background:#2C4E9B;color:#171512;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;}
+      .box-wrap{width:100%;max-width:380px;text-align:center;}
+      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:18px;margin:0 0 10px;text-transform:uppercase;}
+      .panel{background:#FBF6EA;border:3.5px solid #171512;border-radius:14px;box-shadow:4px 4px 0 #171512;padding:14px;text-align:center;}
+      .dot{width:22px;height:22px;border-radius:50%;border:2px solid #171512;display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:bold;background:#fff;margin:0 2px;}
+      .dot.done{background:#E63946;color:#fff;}
+      .opt{text-align:left;background:#fff;border:2px solid #171512;border-radius:8px;padding:9px 12px;margin-bottom:7px;font-weight:600;font-size:13px;cursor:pointer;}
+      .opt:last-child{margin-bottom:0;}
+      .opt:active{background:#F4C531;}
+      .btn{width:100%;padding:10px;font-weight:bold;border:2.5px solid #171512;border-radius:8px;background:#F4C531;cursor:pointer;font-size:13px;text-transform:uppercase;margin-top:10px;}
+      .badge{width:64px;height:64px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fff;border:3px solid #171512;}
+    </style></head><body>
+    <div class="box-wrap">
+      <h1>QUAL É O SEU SUPERPODER?</h1>
+      <div class="panel" id="app"></div>
+    </div>
+    <script>
+      var Q=[
+        {t:"Você trava numa parte difícil da música. O que faz?",o:[["Repito com calma até sair com segurança","disciplina"],["Pergunto pro colega e alinho com ele","escuta"],["Coloco meu jeito próprio e adapto a ideia","autenticidade"],["Toco mesmo com receio de errar","iniciativa"]]},
+        {t:"Na hora de criar ou tocar junto, você prefere...",o:[["Equilibrar os instrumentos com a banda","escuta"],["Inventar algo original que é a sua cara","autenticidade"],["Praticar com o Repeteco antes","disciplina"],["Apresentar logo sem adiar","iniciativa"]]},
+        {t:"Antes de subir no palco pela primeira vez, você pensa...",o:[["Vou dar o primeiro passo agora mesmo","iniciativa"],["Já repeti bastante, confio no treino","disciplina"],["Vou colocar minha identidade nessa canção","autenticidade"],["Vou ouvir atentamente a banda","escuta"]]},
+        {t:"O Copião tenta te convencer a imitar um ídolo. Você diz:",o:[["Eu prefiro colocar a minha própria voz","autenticidade"],["O que importa é repetir com dedicação","disciplina"],["Vou ouvir os colegas pra criar junto","escuta"],["Não tenho medo de ser eu mesmo","iniciativa"]]},
+        {t:"Qual frase resume sua atitude?",o:[["Repito até a música não depender da sorte","disciplina"],["Fazer música é conversar e escutar","escuta"],["Ser único é o meu verdadeiro superpoder","autenticidade"],["A confiança aparece depois que eu começo","iniciativa"]]}
+      ];
+      var R={
+        autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1 (vs Copião)",d:"Seu superpoder: confiar na própria identidade e nunca apagar quem você é para virar uma cópia!"},
+        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2 (vs Deci & Bel)",d:"Seu superpoder: perceber tudo ao redor — tocar junto com generosidade e transformar som em conversa."},
+        disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3 (vs Ensaiador)",d:"Seu superpoder: o Repeteco consciente que transforma esforço diário em segurança real."},
+        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4 (vs Véspera)",d:"Seu superpoder: coragem para dar o primeiro acorde e agir apesar de qualquer dúvida!"}
+      };
+      var cur=0, sc={autenticidade:0,escuta:0,disciplina:0,iniciativa:0};
+      function dots(){var h="";for(var i=0;i<Q.length;i++){h+='<span class="dot'+(i<cur?" done":"")+'">'+(i+1)+'</span>';}return h;}
+      function renderQ(){
+        var q=Q[cur];
+        var optsHtml = "";
+        for(var i=0; i<q.o.length; i++){
+          optsHtml += '<div class="opt" onclick="pick(\\'' + q.o[i][1] + '\\')">' + q.o[i][0] + '</div>';
+        }
+        document.getElementById("app").innerHTML =
+          '<div style="margin-bottom:8px;">'+dots()+'</div><h3 style="font-size:14px;margin:8px 0 10px;line-height:1.35;">'+q.t+'</h3>' + optsHtml;
+      }
+      function pick(k){
+        sc[k]++; cur++;
+        if(cur>=Q.length){ result(); } else { renderQ(); }
+      }
+      function result(){
+        var w="autenticidade",m=-1;
+        for(var k in sc){if(sc[k]>m){m=sc[k];w=k;}}
+        var r=R[w];
+        document.getElementById("app").innerHTML =
+          '<div class="badge" style="background:'+r.c+';">'+r.n.charAt(0)+'</div>'+
+          '<h2 style="margin:2px 0 4px;font-size:18px;">'+r.n+'</h2><p style="color:#666;font-weight:bold;font-size:11.5px;margin:0 0 8px;">Trabalhado no '+r.e+'</p>'+
+          '<p style="text-align:left;background:#F4EFE1;padding:8px 10px;border-radius:6px;border-left:3px solid #171512;font-size:12.5px;line-height:1.4;margin:0;">'+r.d+'</p>'+
+          '<button class="btn" onclick="restart()">Refazer Quiz</button>';
+      }
+      function restart(){cur=0;sc={autenticidade:0,escuta:0,disciplina:0,iniciativa:0};renderQ();}
+      renderQ();
+    <\/script>
+    </body></html>`,
+
+    insignia: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
+      *{box-sizing:border-box;}
+      body{font-family:Arial,sans-serif;background:#E8792B;color:#171512;margin:0;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;}
+      .box-wrap{width:100%;max-width:380px;text-align:center;}
+      h1{color:#F4C531;text-shadow:2px 2px 0 #171512;font-size:18px;margin:0 0 8px;}
+      .panel{background:#FBF6EA;border:3.5px solid #171512;border-radius:14px;box-shadow:4px 4px 0 #171512;padding:12px;text-align:center;margin-bottom:8px;}
+      .badgeWrap{width:140px;height:140px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;}
+      .badgeImg{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));}
+      .name{font-weight:900;font-size:15px;text-transform:uppercase;margin-top:3px;color:#171512;letter-spacing:0.5px;}
+      .row{display:flex;gap:8px;justify-content:center;margin-bottom:8px;}
+      .chip{width:32px;height:32px;border-radius:50%;border:2px solid #171512;cursor:pointer;box-shadow:2px 2px 0 #171512;transition:transform .1s ease;}
+      .chip.sel{outline:3px solid #171512;transform:scale(1.15);}
+      .input-wrap{width:100%;margin-top:2px;}
+      input{width:100%;box-sizing:border-box;padding:8px 10px;border:2px solid #171512;border-radius:8px;font-size:13px;text-align:center;font-weight:bold;}
+      .lbl{font-weight:900;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#666;margin:4px 0 6px;}
+      .btn-export{width:100%;padding:10px;font-weight:bold;border:2.5px solid #171512;border-radius:8px;background:#F4C531;color:#171512;cursor:pointer;font-size:12.5px;text-transform:uppercase;margin-top:8px;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+      .btn-export:active{transform:translate(2px,2px);}
+      canvas{display:none;}
+    </style></head><body>
+    <div class="box-wrap">
+      <h1>MONTE SUA INSÍGNIA</h1>
+      <div class="panel">
+        <div class="badgeWrap">
+          <img id="badgeImg" src="insigniavermelha.png" alt="Insígnia Guitarríssima" class="badgeImg" />
+        </div>
+        <div class="name" id="nameOut">HERÓI DO SOM</div>
+      </div>
+      <div class="panel" style="text-align:left;">
+        <div class="lbl" style="text-align:center;">1. ESCOLHA A COR DA SUA INSÍGNIA</div>
+        <div class="row" id="colorsBox"></div>
+
+        <div class="lbl" style="text-align:center;margin-top:6px;">2. DIGITE SEU CODINOME</div>
+        <div class="input-wrap">
+          <input type="text" id="heroName" placeholder="Seu nome heróico" maxlength="16">
+        </div>
+
+        <button class="btn-export" onclick="exportBadge()">📲 Baixar / Compartilhar Insígnia</button>
+      </div>
+    </div>
+
+    <!-- CANVAS OCULTO PARA EXPORTAR ARTE -->
+    <canvas id="exportCanvas" width="900" height="900"></canvas>
+
+    <script>
+      var INSIGNIAS = [
+        { color: "#E63946", name: "Vermelha", file: "insigniavermelha.png" },
+        { color: "#2C4E9B", name: "Azul",     file: "insigniaazul.png" },
+        { color: "#8E5FC7", name: "Roxa",     file: "insigniaroxa.png" },
+        { color: "#E8792B", name: "Laranja",  file: "insignialaranja.png" },
+        { color: "#3CB878", name: "Verde",    file: "insigniaverde.png" },
+        { color: "#E06292", name: "Rosa",     file: "insigniarosa.png" }
+      ];
+
+      var curInsignia = INSIGNIAS[0];
+
+      function setBadge(item){
+        curInsignia = item;
+        var img = document.getElementById("badgeImg");
+        img.onerror = function(){
+          if(this.src.indexOf('.png') !== -1 && this.src.indexOf('.png.jpg') === -1){
+            this.src = item.file.replace('.png', '.png.jpg');
+          }
+        };
+        img.src = item.file;
+        renderColors();
+      }
+
+      function renderColors(){
+        var box = document.getElementById("colorsBox");
+        box.innerHTML = "";
+        INSIGNIAS.forEach(function(item){
+          var d = document.createElement("div");
+          d.className = "chip" + (item.file === curInsignia.file ? " sel" : "");
+          d.style.background = item.color;
+          d.title = item.name;
+          d.onclick = function(){ setBadge(item); };
+          box.appendChild(d);
+        });
+      }
+
+      document.getElementById("heroName").addEventListener("input", function(e){
+        document.getElementById("nameOut").textContent = e.target.value.trim() ? e.target.value.toUpperCase() : "HERÓI DO SOM";
+      });
+
+      function exportBadge(){
+        var canvas = document.getElementById("exportCanvas");
+        var ctx = canvas.getContext("2d");
+        var heroText = document.getElementById("nameOut").textContent;
+        var imgSource = document.getElementById("badgeImg");
+
+        ctx.fillStyle = curInsignia.color;
+        ctx.fillRect(0, 0, 900, 900);
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+        for (var x = 20; x < 900; x += 30) {
+          for (var y = 20; y < 900; y += 30) {
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        ctx.lineWidth = 18;
+        ctx.strokeStyle = "#171512";
+        ctx.strokeRect(9, 9, 882, 882);
+
+        try {
+          var imgSize = 560;
+          ctx.drawImage(imgSource, (900 - imgSize) / 2, 90, imgSize, imgSize);
+        } catch(e){}
+
+        ctx.fillStyle = "#FBF6EA";
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "#171512";
+        ctx.fillRect(100, 680, 700, 110);
+        ctx.strokeRect(100, 680, 700, 110);
+
+        ctx.fillStyle = "#171512";
+        ctx.font = "bold 52px Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(heroText, 450, 735);
+
+        ctx.fillStyle = "#F4C531";
+        ctx.font = "bold 26px Arial, sans-serif";
+        ctx.shadowColor = "#171512";
+        ctx.shadowOffsetX = 3;
+        ctx.shadowOffsetY = 3;
+        ctx.fillText("SUPERSONOROS · GUITARRÍSSIMA", 450, 835);
+        ctx.shadowColor = "transparent";
+
+        canvas.toBlob(function(blob){
+          var safeName = heroText.toLowerCase().replace(/[^a-z0-9]/g, "-");
+          var file = new File([blob], "insignia-" + safeName + ".png", { type: "image/png" });
+
+          if(navigator.canShare && navigator.canShare({ files: [file] })){
+            navigator.share({
+              files: [file],
+              title: "Minha Insígnia SuperSonoros",
+              text: "Minha insígnia oficial da Liga SuperSonoros na Guitarríssima!"
+            }).catch(function(){});
+          } else {
+            var a = document.createElement("a");
+            a.download = "insignia-" + safeName + ".png";
+            a.href = URL.createObjectURL(blob);
+            a.click();
+          }
+        }, "image/png");
+      }
+
+      setBadge(INSIGNIAS[0]);
+    <\/script>
+    </body></html>`,
+
+    batalha: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
+      *{box-sizing:border-box;}
+      body{font-family:Arial,sans-serif;background:#171512;color:#fff;margin:0;padding:12px;text-align:center;}
+      .box{background:#23201d;border:3.5px solid #F4C531;border-radius:14px;padding:14px;max-width:380px;margin:0 auto;}
+      h1{color:#FF5A79;font-size:16px;margin:0 0 8px;text-transform:uppercase;}
+      .hp-bar{background:#444;border-radius:10px;height:16px;overflow:hidden;margin-bottom:8px;border:2px solid #fff;}
+      .hp-fill{background:#E63946;height:100%;width:100%;transition:width .2s;}
+      .boss-sprite{font-size:44px;margin:4px 0;}
+      .prompt{background:#fff;color:#171512;padding:8px 10px;border-radius:8px;font-weight:900;font-size:12.5px;margin-bottom:10px;}
+      .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+      .btn-atk{padding:9px 4px;border:2px solid #171512;border-radius:8px;font-weight:900;font-size:11px;cursor:pointer;text-transform:uppercase;color:#fff;}
+      .status{font-size:12px;font-weight:bold;margin-top:8px;min-height:16px;color:#F4C531;}
+    </style></head><body>
+    <div class="box">
+      <h1>Devorador de Sons</h1>
+      <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
+      <div class="boss-sprite" id="boss">👾</div>
+      <div class="prompt" id="prompt">Use o poder correto!</div>
+      <div class="grid">
+        <button class="btn-atk" style="background:#8E5FC7;" onclick="attack('autenticidade')">Autenticidade</button>
+        <button class="btn-atk" style="background:#D9A62B;" onclick="attack('escuta')">Escuta</button>
+        <button class="btn-atk" style="background:#E8792B;" onclick="attack('disciplina')">Disciplina</button>
+        <button class="btn-atk" style="background:#3CB878;" onclick="attack('iniciativa')">Iniciativa</button>
+      </div>
+      <div class="status" id="status">Prepare seus acordes!</div>
+    </div>
+    <script>
+      let bossHp=100, curNeeded="", lastIndex=-1;
+      const TARGETS=[
+        {need:"autenticidade",text:"O vilão tenta fazer você copiar os outros!"},
+        {need:"escuta",text:"A banda perdeu a sintonia! Escute o grupo!"},
+        {need:"disciplina",text:"Solo difícil! Treine com repeteco!"},
+        {need:"iniciativa",text:"O palco está silencioso! Dê o primeiro acorde!"}
+      ];
+      function nextTurn(){
+        if(bossHp<=0){
+          document.getElementById("boss").textContent="💥🎉";
+          document.getElementById("prompt").textContent="VITÓRIA! O SOM FOI SALVO!";
+          document.getElementById("status").textContent="Os SuperSonoros venceram com a união dos 4 poderes!";
+          return;
+        }
+        let nextIdx;
+        do {
+          nextIdx = Math.floor(Math.random() * TARGETS.length);
+        } while (nextIdx === lastIndex);
+        lastIndex = nextIdx;
+
+        const t = TARGETS[nextIdx];
+        curNeeded = t.need;
+        document.getElementById("prompt").textContent = t.text;
+      }
+      function attack(p){
+        if(bossHp<=0) return;
+        if(p===curNeeded){
+          bossHp-=25;
+          if(bossHp<0) bossHp=0;
+          document.getElementById("hp").style.width=bossHp+"%";
+          document.getElementById("status").textContent="ACORDE PERFEITO! -25% HP";
+          document.getElementById("boss").textContent="⚡👾⚡";
+          setTimeout(()=>{ if(bossHp>0) document.getElementById("boss").textContent="👾"; },250);
+        } else {
+          document.getElementById("status").textContent="Nota errada! Tente outro poder!";
+        }
+        setTimeout(nextTurn, 450);
+      }
+      nextTurn();
+    <\/script>
+    </body></html>`
+  };
+
+  function openGame(key){
+    const frame = document.getElementById("gameFrame");
+    if(key === 'quiz') {
+      frame.style.height = "380px";
+    } else if(key === 'insignia') {
+      frame.style.height = "520px";
+    } else {
+      frame.style.height = "440px";
+    }
+    frame.srcdoc = GAMES[key];
+    document.getElementById("gameModal").classList.add("show");
+  }
+  function closeGame(){
+    document.getElementById("gameModal").classList.remove("show");
+    document.getElementById("gameFrame").srcdoc = "";
+  }
+
+  /* Fechar modal ao clicar fora da caixa */
+  window.addEventListener('click', function(e) {
+    const vModal = document.getElementById('villainModal');
+    if (e.target === vModal) closeVillainModal();
+    const gModal = document.getElementById('gameModal');
+    if (e.target === gModal) closeGame();
+  });
+
+  /* Inicialização */
+  renderEnsaios();
+  renderSessions();
 </script>
 </body>
 </html>
